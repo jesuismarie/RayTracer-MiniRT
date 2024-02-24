@@ -1,6 +1,7 @@
-
 *.o
 *.a
 *.out
+build
+miniRT
 .vscode
 .DS_Store
