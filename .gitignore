@@ -5,3 +5,5 @@ build
 miniRT
 .vscode
 .DS_Store
+lib/minilibx-linux/Makefile.gen
+lib/minilibx-linux/test/Makefile.gen
