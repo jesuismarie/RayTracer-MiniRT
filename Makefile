@@ -1,10 +1,10 @@
 NAME			= miniRT
 
-BUILD			= ./build
+BUILD			= build
 
-SRC				= ./sources
+SRC				= sources
 
-DIRS			= parse
+DIRS			= parse utils vector constructor ray_tracing
 
 SRCSDIRS		= $(foreach dir, $(DIRS), $(addprefix $(SRC)/, $(dir))) $(SRC)
 
@@ -12,11 +12,12 @@ OBJS			= $(foreach dir, $(SRCSDIRS), \
 				$(patsubst $(dir)/%.c, $(BUILD)/%.o, \
 				$(shell find $(dir) -maxdepth 1 -name '*.c')))
 
-INCS			= -I./includes -I./lib/libft/includes -I./lib/ft_printf/includes -I./lib/minilibx-linux -I./lib/minilibx_opengl
+INCS			= -I./includes -I./lib/libft/includes -I./lib/ft_printf/includes \
+				-I./lib/minilibx_opengl
 
-HEADER			= ./includes/minirt.h ./includes/define.h ./includes/structures.h
+HEADER			= ./includes/minirt.h ./includes/defines.h ./includes/structures.h
 
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIB				= -L./lib/libft -lft -L./lib/ft_printf -lftprintf
 
@@ -27,6 +28,8 @@ FMS				= -framework OpenGL -framework AppKit
 CC				= cc
 
 ifeq ($(shell uname -s), Linux)
+	INCS		= -I./includes -I./lib/libft/includes -I./lib/ft_printf/includes \
+				-I./lib/minilibx-linux
 	MINILIBX	= lib/minilibx-linux
 	FMS			= -L $(MINILIBX) -lmlx -lm -lX11 -lXext
 endif
@@ -47,7 +50,7 @@ $(BUILD)/%.o:	$(SRC)/%.c $(HEADER) Makefile
 all:			mlx lib $(BUILD) $(NAME)
 
 ${NAME}:		${OBJS}
-	@$(CC) $(FLAGS) $(OBJS) $(INCS) -o ${NAME} $(LIB)
+	@$(CC) $(FLAGS) $(OBJS) $(INCS) $(LIB) $(FMS) -o ${NAME}
 	@echo "${ORANGE}Ray Tracer created 🧩${RESET}"
 
 $(BUILD):
@@ -58,7 +61,7 @@ mlx:
 	@make -C $(MINILIBX) > /dev/null 2>&1 & i=0; \
 	while ps -p $$! > /dev/null; do \
 		printf "${GREEN}✦ ${RESET}"; \
-		sleep 0.2; \
+		sleep 0.3; \
 	done
 	@echo "${YELLOW} Done 🧩${RESET}"
 
@@ -68,7 +71,7 @@ lib:
 	@make -C lib/libft > /dev/null 2>&1 & i=0; \
 	while ps -p $$! > /dev/null; do \
 		printf "${GREEN}✦ ${RESET}"; \
-		sleep 0.2; \
+		sleep 0.3; \
 	done
 	@echo "${YELLOW} Done 🧩${RESET}"
 
@@ -88,4 +91,4 @@ fclean:
 
 re:			fclean all
 
-.PHONY:		all clean fclean re lib
+.PHONY:		all clean fclean re lib mlx
