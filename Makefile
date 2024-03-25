@@ -4,7 +4,7 @@ BUILD			= build
 
 SRC				= sources
 
-DIRS			= parse utils vector constructor ray_tracing
+DIRS			= parse constructor vector graphics ray_tracing control utils
 
 SRCSDIRS		= $(foreach dir, $(DIRS), $(addprefix $(SRC)/, $(dir))) $(SRC)
 
@@ -19,7 +19,7 @@ HEADER			= ./includes/minirt.h ./includes/defines.h ./includes/structures.h
 
 FLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
 
-LIB				= -L./lib/libft -lft -L./lib/ft_printf -lftprintf
+LIB				= -L./lib/libft -lft -L./lib/ft_printf -lftprintf -L $(MINILIBX) -lmlx
 
 MINILIBX		= lib/minilibx_opengl
 
