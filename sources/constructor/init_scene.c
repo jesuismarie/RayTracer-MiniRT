@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 18:42:40 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/26 14:23:28 by mnazarya         ###   ########.fr       */
+/*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
+/*   Updated: 2024/03/27 20:50:48 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	main(int argc, char **argv)
+void	init_scene(t_scene **scene)
 {
-	t_scene	*scene;
+	t_color		col;
 
-	if (argc != 2)
-		return (print_err("Wrong count of arguments"));
-	win_init(argv, &scene);
-	img_init(scene);
-	mlx_hook(scene->mlx->mlx_win, 2, 1l, &keys, scene);
-	mlx_hook(scene->mlx->mlx_win, 17, 1l << 15, &close_win, scene);
-	mlx_loop(scene->mlx->mlx);
-	return (0);
+	//replace
+	col.r = 0;
+	col.g = 255;
+	col.b = 255;
+	(*scene)->cam = new_camera(new_vector(0, 0, 0), new_vector(0, 0, -1), 70);
+	(*scene)->amb = new_amb_light(col, 0.5);
+	(*scene)->figure = ft_calloc(1, sizeof(t_figure));
+	(*scene)->figure->sph = new_sphere(new_vector(3, 2, -32), col, 3, -1);
+	// !!
+	(*scene)->width = WIDTH;
+	(*scene)->height = HEIGHT;
 }

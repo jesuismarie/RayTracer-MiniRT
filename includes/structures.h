@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/25 20:57:01 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:38:22 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef enum e_figure_type	t_figure_type;
 typedef struct s_img		t_img;
 typedef struct s_mlx		t_mlx;
 typedef struct s_point		t_point;
-typedef struct s_intersect	t_intersect;
+typedef struct s_equition	t_equition;
 typedef struct s_vector		t_vector;
 typedef struct s_color		t_color;
 typedef struct s_amb_light	t_amb_light;
@@ -60,7 +60,7 @@ struct s_point
 	int	color;
 };
 
-struct s_intersect
+struct s_equition
 {
 	float	a;
 	float	b;
@@ -69,8 +69,6 @@ struct s_intersect
 	float	x1;
 	float	x2;
 };
-
-
 
 struct s_vector
 {
@@ -94,8 +92,8 @@ struct s_amb_light
 
 struct s_camera
 {
-	t_vector	dir;
 	t_vector	position;
+	t_vector	dir;
 	int			fov;
 };
 
@@ -164,7 +162,6 @@ struct s_vplane
 	float	x_angle;
 	float	y_angle;
 };
-
 
 struct s_scene
 {

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/25 20:43:39 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:40:33 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	rgb_to_hex(t_figure *obj)
 		rgb = obj->cyl->color;
 	else if (obj->type == CONE)
 		rgb = obj->cone->color;
-	color = (rgb.r << 16) | (rgb.g << 16) | (rgb.b << 16);
+	color = (rgb.r << 16) | (rgb.g << 8) | rgb.b;
 	return (color);
 }
 
