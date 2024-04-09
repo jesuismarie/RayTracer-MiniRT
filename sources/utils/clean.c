@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:44:49 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/25 14:59:10 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/03/31 19:23:23 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	clean_figures(t_scene **scene)
 	while ((*scene)->figure)
 	{
 		obj_tmp = (*scene)->figure->next;
-		if ((*scene)->figure->type == PLANE)
-			free((*scene)->figure->pln);
-		else if ((*scene)->figure->type == SPHERE)
+		if ((*scene)->figure->type == SPHERE)
 			free((*scene)->figure->sph);
+		else if ((*scene)->figure->type == PLANE)
+			free((*scene)->figure->pln);
 		else if ((*scene)->figure->type == CYLINDER)
 			free((*scene)->figure->cyl);
 		else if ((*scene)->figure->type == CONE)
@@ -46,5 +46,6 @@ void	clear_scene(t_scene **scene)
 	free((*scene)->cam);
 	clean_figures(scene);
 	free((*scene)->mlx);
+	free((*scene)->view);
 	free(*scene);
 }

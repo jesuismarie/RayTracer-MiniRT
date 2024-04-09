@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/27 21:11:42 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:36:04 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 /*---------------------------------- PARSER ----------------------------------*/
 /*----------------------------------------------------------------------------*/
 
-
 /*----------------------------------------------------------------------------*/
 /*---------------------------- INIT & CONSTRUCTOR ----------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -35,8 +34,10 @@ void		init_scene(t_scene **scene);
 void		win_init(char **argv, t_scene **scene);
 void		img_init(t_scene *scene);
 t_camera	*new_camera(t_vector pos, t_vector dir, int fov);
+t_light		*new_light(t_vector coord, t_color col, float brightness);
 t_amb_light	*new_amb_light(t_color col, float ratio);
-t_sphere	*new_sphere(t_vector center, t_color col, float r, float spec);
+t_sphere	*new_sphere(t_vector center, float r);
+t_cylinder	*new_cylinder(t_vector center, t_vector axis, float r, float h);
 
 /*----------------------------------------------------------------------------*/
 /*---------------------------------- VECTOR ----------------------------------*/
@@ -53,12 +54,17 @@ float		vector_scalar_prod(t_vector v1, t_vector v2);
 /*--------------------------------- GRAPHICS ---------------------------------*/
 /*----------------------------------------------------------------------------*/
 int			rgb_to_hex(t_figure *obj);
+t_color		new_color(t_amb_light *amb_light);
+t_color		multiply_rgbs(t_color a, t_color b);
+t_color		add_rgb_light(t_color a, t_color b);
 void		my_mlx_pixel_put(t_scene *scene, int x, int y, int color);
 
 /*----------------------------------------------------------------------------*/
 /*------------------------------- RAY TRACING --------------------------------*/
 /*----------------------------------------------------------------------------*/
-float		sphere_intersection(t_scene *scene, t_vector ray, t_sphere *sphere);
+float		sphere_intersection(t_scene *scene, t_vector ray, t_figure **obj);
+float		cylinder_intersection(t_scene *scene, t_vector ray, \
+			t_figure **obj);
 void		object_intersection(t_scene *scene, t_vector ray, int *color);
 t_vplane	*get_view_plane(t_scene *scene);
 void		trace_ray(t_scene *scene);
@@ -73,7 +79,6 @@ int			close_win(t_scene *scene);
 /*---------------------------------- UTILS -----------------------------------*/
 /*----------------------------------------------------------------------------*/
 void		clear_scene(t_scene **scene);
-int			print_err(char *err);
 void		error_exit(int condition, char *err);
 
 #endif

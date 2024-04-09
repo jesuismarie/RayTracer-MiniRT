@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/27 20:38:22 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:54:09 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 typedef enum e_figure_type	t_figure_type;
 typedef struct s_img		t_img;
 typedef struct s_mlx		t_mlx;
-typedef struct s_point		t_point;
 typedef struct s_equition	t_equition;
 typedef struct s_vector		t_vector;
 typedef struct s_color		t_color;
@@ -27,6 +26,7 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_cone		t_cone;
+typedef struct s_intersect	t_intersect;
 typedef struct s_figure		t_figure;
 typedef struct s_vplane		t_vplane;
 typedef struct s_scene		t_scene;
@@ -55,11 +55,6 @@ struct s_mlx
 	t_img	data;
 };
 
-struct s_point
-{
-	int	color;
-};
-
 struct s_equition
 {
 	float	a;
@@ -68,6 +63,8 @@ struct s_equition
 	float	discr;
 	float	x1;
 	float	x2;
+	float	m1;
+	float	m2;
 };
 
 struct s_vector
@@ -86,67 +83,73 @@ struct s_color
 
 struct s_amb_light
 {
-	t_color	light;
 	float	ratio;
+	t_color	light;
 };
 
 struct s_camera
 {
-	t_vector	position;
-	t_vector	dir;
 	int			fov;
+	t_vector	pos;
+	t_vector	norm;
 };
 
 struct s_light
 {
+	float		brightness;
 	t_vector	coordinate;
 	t_color		color;
-	float		brightness;
 	t_light		*next;
 };
 
 struct s_sphere
 {
 	t_vector	center;
-	t_color		color;
 	float		radius;
-	float		spec;
 };
 
 struct s_plane
 {
 	t_vector	pos;
 	t_vector	point;
-	t_color		color;
-	float		spec;
 };
 
 struct s_cylinder
 {
 	t_vector	center;
 	t_vector	axis;
-	t_color		color;
 	float		radius;
 	float		height;
-	float		spec;
 };
 
 struct s_cone
 {
 	t_vector	coordinate;
 	t_vector	axis;
-	t_color		color;
 	float		radius;
 	float		height;
-	float		spec;
+};
+
+struct s_intersect
+{
+	int			is_inside;
+	int			color;
+	float		dist;
+	t_color		rgb;
+	t_vector	hit_pos;
+	t_vector	hit_norm;
+	t_vector	light_dir;
 };
 
 struct s_figure
 {
+	float			spec;
+	t_color			color;
 	t_sphere		*sph;
 	t_plane			*pln;
 	t_cylinder		*cyl;
 	t_cylinder		*cone;
+	t_intersect		point;
 	t_figure_type	type;
 	t_figure		*next;
 };
@@ -165,11 +168,12 @@ struct s_vplane
 
 struct s_scene
 {
-	t_amb_light	*amb;
+	t_mlx		*mlx;
 	t_light		*light;
 	t_camera	*cam;
+	t_vplane	*view;
 	t_figure	*figure;
-	t_mlx		*mlx;
+	t_amb_light	*amb;
 	float		height;
 	float		width;
 };
