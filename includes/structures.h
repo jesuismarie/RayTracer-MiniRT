@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/04 20:54:09 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:32:23 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_scene		t_scene;
 
 enum e_figure_type
 {
+	LIGHT,
 	SPHERE,
 	CYLINDER,
 	PLANE,
@@ -79,6 +80,7 @@ struct s_color
 	int	r;
 	int	g;
 	int	b;
+	int	t;
 };
 
 struct s_amb_light
@@ -133,7 +135,6 @@ struct s_cone
 struct s_intersect
 {
 	int			is_inside;
-	int			color;
 	float		dist;
 	t_color		rgb;
 	t_vector	hit_pos;
@@ -148,7 +149,7 @@ struct s_figure
 	t_sphere		*sph;
 	t_plane			*pln;
 	t_cylinder		*cyl;
-	t_cylinder		*cone;
+	t_cone			*cone;
 	t_intersect		point;
 	t_figure_type	type;
 	t_figure		*next;

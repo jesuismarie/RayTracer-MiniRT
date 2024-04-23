@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:03:16 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/04 21:19:56 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:08:48 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,5 @@ float	sphere_intersection(t_scene *scene, t_vector ray, t_figure **obj)
 	(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
 		(*obj)->sph->center);
 	normalize_vector(&(*obj)->point.hit_norm);
-	// add spec, diffuse
-	// (*obj)->color = multiply_rgbs((*obj)->color, (*obj)->point.rgb);
 	return ((*obj)->point.dist);
 }
-
-	// --------------- intersection first version ---------------
-	// dot.a = 1;
-	// dot.b = 2 * vector_scalar_prod(vec, ray);
-	// dot.c = vector_scalar_prod(vec, vec) - ((*obj)->sph->radius \
-	// 	* (*obj)->sph->radius);
-	// dot.x1 = ((dot.b * (-1)) - sqrt(dot.discr)) / (2 * dot.a);
-	// dot.x2 = ((dot.b * (-1)) + sqrt(dot.discr)) / (2 * dot.a);
-	// find_hit_distance(obj, dot);
-	// (*obj)->point.hit_pos = vector_sub(vector_prod(ray, \
-	// 	(*obj)->point.dist), (*obj)->sph->center);
-	// normalize_vector(&(*obj)->point.hit_pos);
-	// (*obj)->point.light_dir = vector_sub(scene->light->coordinate, \
-	// 	vector_prod(ray, (*obj)->point.dist));
-	// normalize_vector(&(*obj)->point.light_dir);

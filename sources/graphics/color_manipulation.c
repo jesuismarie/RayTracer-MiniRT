@@ -6,27 +6,27 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:58 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/02 20:35:41 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:22:14 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	rgb_to_hex(t_figure *obj)
+int	rgb_to_hex(t_color rgb)
 {
 	int	color;
 
-	color = (obj->color.r << 16) | (obj->color.g << 8) | obj->color.b;
+	color = (rgb.r << 16) | (rgb.g << 8) | rgb.b;
 	return (color);
 }
 
-t_color	new_color(t_amb_light *amb_light)
+t_color	calc_rgb_light(t_color col, float ratio)
 {
 	t_color	rgb;
 
-	rgb.r = amb_light->light.r * amb_light->ratio;
-	rgb.g = amb_light->light.g * amb_light->ratio;
-	rgb.b = amb_light->light.b * amb_light->ratio;
+	rgb.r = col.r * ratio;
+	rgb.g = col.g * ratio;
+	rgb.b = col.b * ratio;
 	if (rgb.r > 255)
 		rgb.r = 255;
 	if (rgb.g > 255)
