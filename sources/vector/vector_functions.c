@@ -6,13 +6,13 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:28:50 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/02/26 00:02:19 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_vector	new_vector(float x, float y, float z)
+t_vector	new_vector(double x, double y, double z)
 {
 	t_vector	new_vect;
 
@@ -38,7 +38,7 @@ t_vector	vector_sum(t_vector v1, t_vector v2)
 	return (v1);
 }
 
-t_vector	vector_prod(t_vector vect, float n)
+t_vector	vector_prod(t_vector vect, double n)
 {
 	vect.x *= n;
 	vect.y *= n;
@@ -46,10 +46,10 @@ t_vector	vector_prod(t_vector vect, float n)
 	return (vect);
 }
 
-float	vector_len(t_vector vect)
+double	vector_len(t_vector vect)
 {
-	float	len;
+	double	len;
 
-	len = sqrt((vect.x * vect.x) + (vect.y * vect.y) + (vect.z * vect.z));
+	len = sqrtf((vect.x * vect.x) + (vect.y * vect.y) + (vect.z * vect.z));
 	return (len);
 }

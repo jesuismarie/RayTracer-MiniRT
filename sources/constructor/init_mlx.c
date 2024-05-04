@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:15:04 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/20 16:18:16 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:36:17 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	win_init(t_scene **scene)
 	(*scene)->mlx->mlx = mlx_init();
 }
 
-void	img_init(char **argv, t_scene *scene)
+void	img_init(t_scene *scene)
 {
 	static int	i = 0;
 
@@ -34,7 +34,7 @@ void	img_init(char **argv, t_scene *scene)
 	trace_ray(scene);
 	if (!i++)
 		(scene)->mlx->mlx_win = mlx_new_window((scene)->mlx->mlx, \
-			WIDTH, HEIGHT, ft_strchr(argv[1], '/')); // + 1
+			WIDTH, HEIGHT, "miniRT");
 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
 		scene->mlx->data.img, 0, 0);
 }

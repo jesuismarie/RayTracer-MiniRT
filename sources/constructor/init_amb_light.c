@@ -6,13 +6,13 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:45:20 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/30 17:32:06 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_amb_light	*new_amb_light(t_color col, float ratio)
+t_amb_light	*new_amb_light(t_color col, double ratio)
 {
 	t_amb_light	*amb_light;
 

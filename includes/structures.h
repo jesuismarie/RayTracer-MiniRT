@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/22 14:32:23 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ struct s_mlx
 
 struct s_equition
 {
-	float	a;
-	float	b;
-	float	c;
-	float	discr;
-	float	x1;
-	float	x2;
-	float	m1;
-	float	m2;
+	double	a;
+	double	b;
+	double	c;
+	double	discr;
+	double	x1;
+	double	x2;
+	double	m1;
+	double	m2;
 };
 
 struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 };
 
 struct s_color
@@ -85,7 +85,7 @@ struct s_color
 
 struct s_amb_light
 {
-	float	ratio;
+	double	ratio;
 	t_color	light;
 };
 
@@ -98,7 +98,7 @@ struct s_camera
 
 struct s_light
 {
-	float		brightness;
+	double		brightness;
 	t_vector	coordinate;
 	t_color		color;
 	t_light		*next;
@@ -107,7 +107,7 @@ struct s_light
 struct s_sphere
 {
 	t_vector	center;
-	float		radius;
+	double		radius;
 };
 
 struct s_plane
@@ -120,31 +120,30 @@ struct s_cylinder
 {
 	t_vector	center;
 	t_vector	axis;
-	float		radius;
-	float		height;
+	double		radius;
+	double		height;
 };
 
 struct s_cone
 {
 	t_vector	coordinate;
 	t_vector	axis;
-	float		radius;
-	float		height;
+	double		radius;
+	double		height;
 };
 
 struct s_intersect
 {
 	int			is_inside;
-	float		dist;
+	double		dist;
 	t_color		rgb;
 	t_vector	hit_pos;
 	t_vector	hit_norm;
-	t_vector	light_dir;
 };
 
 struct s_figure
 {
-	float			spec;
+	double			spec;
 	t_color			color;
 	t_sphere		*sph;
 	t_plane			*pln;
@@ -159,12 +158,12 @@ struct s_vplane
 {
 	int		mlx_x;
 	int		mlx_y;
-	float	width;
-	float	height;
-	float	x_pixel;
-	float	y_pixel;
-	float	x_angle;
-	float	y_angle;
+	double	width;
+	double	height;
+	double	x_pixel;
+	double	y_pixel;
+	double	x_angle;
+	double	y_angle;
 };
 
 struct s_scene
@@ -175,8 +174,8 @@ struct s_scene
 	t_vplane	*view;
 	t_figure	*figure;
 	t_amb_light	*amb;
-	float		height;
-	float		width;
+	double		height;
+	double		width;
 };
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:15:21 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/02 20:23:27 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_light	*new_light(t_vector coord, t_color col, float brightness)
+t_light	*new_light(t_vector coord, t_color col, double brightness)
 {
 	t_light	*light;
 

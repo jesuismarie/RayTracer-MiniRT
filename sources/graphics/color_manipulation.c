@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:58 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/22 15:22:14 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	rgb_to_hex(t_color rgb)
 	return (color);
 }
 
-t_color	calc_rgb_light(t_color col, float ratio)
+t_color	calc_rgb_light(t_color col, double ratio)
 {
 	t_color	rgb;
 

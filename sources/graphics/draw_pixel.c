@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/23 16:27:53 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:31:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	my_mlx_pixel_put(t_scene *scene, int x, int y, int color)
 	}
 }
 
-void	update_pixel_color(t_scene *scene, t_figure *obj, int *color)
+void	update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
+	t_vector ray)
 {
-	t_light	*tmp;
-	t_color	col;
+	t_color		col;
+	t_light		*tmp;
 
 	*color = 0;
 	if (!obj)
@@ -40,7 +41,7 @@ void	update_pixel_color(t_scene *scene, t_figure *obj, int *color)
 	tmp = scene->light;
 	while (tmp)
 	{
-		if (in_shadow(scene, vector_sub(tmp->coordinate, obj->point.hit_pos)))
+		if (compute_shadow(scene, ray, &obj, tmp))
 			col = add_rgb_light(diffuse_light(tmp, obj->point), col);
 		tmp = tmp->next;
 	}
