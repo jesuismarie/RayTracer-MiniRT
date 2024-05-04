@@ -7,3 +7,4 @@ miniRT
 .DS_Store
 lib/minilibx-linux/Makefile.gen
 lib/minilibx-linux/test/Makefile.gen
+lib/minilibx-linux/test/mlx-test
