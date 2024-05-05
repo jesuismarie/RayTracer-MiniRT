@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:44:36 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ struct s_sphere
 struct s_plane
 {
 	t_vector	pos;
-	t_vector	point;
+	t_vector	norm;
 };
 
 struct s_cylinder

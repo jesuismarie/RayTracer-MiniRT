@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/03 16:36:14 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/05 17:43:19 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, t_figure **ob
 			dist = sphere_intersection(light->coordinate, ray, &tmp);
 		else if (tmp->type == CYLINDER)
 			dist = cylinder_intersection(light->coordinate, ray, &tmp);
+		else if (tmp->type == PLANE)
+			dist = plane_intersection(light->coordinate, ray, &tmp);
 		if (dist > __FLT_EPSILON__ && dist < min)
 		{
 			min = dist;
@@ -54,6 +56,13 @@ int	compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, t_light *light)
 	if ((*obj)->type == SPHERE)
 		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
 			(*obj)->sph->center);
+	if ((*obj)->type == PLANE)
+	{
+		if (vector_scalar_prod((*obj)->pln->norm, ray) < 0)
+			(*obj)->point.hit_norm = (*obj)->pln->norm;
+		else
+			(*obj)->point.hit_norm = vector_prod((*obj)->pln->norm, -1);
+	}
 	normalize_vector(&(*obj)->point.hit_norm);
 	if (!in_shadow(scene, vector_sub((*obj)->point.hit_pos, \
 		light->coordinate), light, &tmp) && tmp == *obj)
@@ -80,7 +89,5 @@ t_color	diffuse_light(t_light *light, t_intersect point)
 // {
 // }
 
-		// else if (tmp->type == PLANE)
-		// 	dist = plane_intersection(scene, ray, &tmp)
 		// else if (tmp->type == CONE)
 		// 	dist = cone_intersection(scene, ray, &tmp)

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:02:31 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 16:32:29 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/05 17:32:11 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	object_intersection(t_scene *scene, t_vector ray, int *color)
 			dist = sphere_intersection(scene->cam->pos, ray, &tmp);
 		else if (tmp->type == CYLINDER)
 			dist = cylinder_intersection(scene->cam->pos, ray, &tmp);
+		else if (tmp->type == PLANE)
+			dist = plane_intersection(scene->cam->pos, ray, &tmp);
 		if (dist > __FLT_EPSILON__ && dist < min)
 		{
 			min = dist;
@@ -38,7 +40,5 @@ void	object_intersection(t_scene *scene, t_vector ray, int *color)
 	update_pixel_color(scene, obj, color, ray);
 }
 
-		// else if (tmp->type == PLANE)
-		// 	dist = plane_intersection(scene, ray, &tmp)
 		// else if (tmp->type == CONE)
 		// 	dist = cone_intersection(scene, ray, &tmp)

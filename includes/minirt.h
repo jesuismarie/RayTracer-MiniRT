@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 16:32:17 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/05 17:33:00 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_camera		*new_camera(t_vector pos, t_vector dir, int fov);
 t_light			*new_light(t_vector coord, t_color col, double brightness);
 t_amb_light		*new_amb_light(t_color col, double ratio);
 t_sphere		*new_sphere(t_vector center, double r);
+t_plane			*new_plane(t_vector pos, t_vector norm);
 t_cylinder		*new_cylinder(t_vector center, t_vector axis, double r, \
 					double h);
 
@@ -75,6 +76,7 @@ t_vector		look_at(t_scene	*scene, double ray_x, double ray_y);
 void			trace_ray(t_scene *scene);
 double			sphere_intersection(t_vector pos, t_vector ray, \
 					t_figure **obj);
+double			plane_intersection(t_vector pos, t_vector ray, t_figure **obj);
 double			cylinder_intersection(t_vector pos, t_vector ray, \
 					t_figure **obj);
 void			object_intersection(t_scene *scene, t_vector ray, int *color);
