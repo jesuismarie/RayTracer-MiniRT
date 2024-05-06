@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/05 17:43:19 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:30:24 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, t_figure **ob
 
 	min = INFINITY;
 	tmp = scene->figure;
-	normalize_vector(&ray);
 	while (tmp)
 	{
 		if (tmp->type == LIGHT)
@@ -49,23 +48,15 @@ static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, t_figure **ob
 int	compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, t_light *light)
 {
 	t_figure	*tmp;
+	t_vector	light_ray;
 
 	tmp = NULL;
 	(*obj)->point.hit_pos = vector_sum(scene->cam->pos, vector_prod(ray, \
 		(*obj)->point.dist));
-	if ((*obj)->type == SPHERE)
-		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
-			(*obj)->sph->center);
-	if ((*obj)->type == PLANE)
-	{
-		if (vector_scalar_prod((*obj)->pln->norm, ray) < 0)
-			(*obj)->point.hit_norm = (*obj)->pln->norm;
-		else
-			(*obj)->point.hit_norm = vector_prod((*obj)->pln->norm, -1);
-	}
-	normalize_vector(&(*obj)->point.hit_norm);
-	if (!in_shadow(scene, vector_sub((*obj)->point.hit_pos, \
-		light->coordinate), light, &tmp) && tmp == *obj)
+	set_hit_normal(obj, ray);
+	light_ray = vector_sub((*obj)->point.hit_pos, light->coordinate);
+	normalize_vector(&light_ray);
+	if (!in_shadow(scene, light_ray, light, &tmp) && tmp == *obj)
 		return (1);
 	return (0);
 }
