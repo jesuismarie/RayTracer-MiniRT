@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/05 16:44:36 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:40:19 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ enum e_figure_type
 	CONE
 };
 
-struct s_img
+struct s_img // don't touch
 {
 	void	*img;
 	char	*addr;
@@ -49,14 +49,14 @@ struct s_img
 	int		end;
 };
 
-struct s_mlx
+struct s_mlx // don't touch
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_img	data;
 };
 
-struct s_equition
+struct s_equition // don't touch
 {
 	double	a;
 	double	b;
@@ -132,7 +132,7 @@ struct s_cone
 	double		height;
 };
 
-struct s_intersect
+struct s_intersect // don't touch
 {
 	int			is_inside;
 	double		dist;
@@ -143,18 +143,18 @@ struct s_intersect
 
 struct s_figure
 {
-	double			spec;
+	double			spec; // additional
 	t_color			color;
 	t_sphere		*sph;
 	t_plane			*pln;
 	t_cylinder		*cyl;
 	t_cone			*cone;
-	t_intersect		point;
+	t_intersect		point; // don't touch
 	t_figure_type	type;
 	t_figure		*next;
 };
 
-struct s_vplane
+struct s_vplane // don't touch
 {
 	int		mlx_x;
 	int		mlx_y;
@@ -168,12 +168,12 @@ struct s_vplane
 
 struct s_scene
 {
-	t_mlx		*mlx;
 	t_light		*light;
-	t_camera	*cam;
-	t_vplane	*view;
 	t_figure	*figure;
+	t_camera	*cam;
 	t_amb_light	*amb;
+	t_mlx		*mlx; // don't touch
+	t_vplane	*view;
 	double		height;
 	double		width;
 };
