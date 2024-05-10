@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/06 15:30:24 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:48:36 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,25 @@ t_color	diffuse_light(t_light *light, t_intersect point)
 	return (calc_rgb_light(light->color, intens));
 }
 
-// t_color	specular_light(t_light *light, t_point *point)
-// {
-// }
+t_color	specular_light(t_scene *scene, t_light *light, t_figure *obj)
+{
+	double		spec;
+	t_vector	l;
+	t_vector	vec;
+	t_vector	reflected;
+
+	spec = 0;
+	l = vector_sub(light->coordinate, obj->point.hit_pos);
+	normalize_vector(&l);
+	vec = vector_sub(scene->cam->pos, obj->point.hit_pos);
+	normalize_vector(&vec);
+	reflected = vector_sub(vector_prod(obj->point.hit_norm, \
+		2 * vector_scalar_prod(l, obj->point.hit_norm)), l);
+	normalize_vector(&reflected);
+	if (vector_scalar_prod(reflected, vec) > 0)
+		spec = light->brightness * pow(vector_cos(reflected, vec), obj->spec);
+	return (calc_rgb_light(light->color, spec));
+}
 
 		// else if (tmp->type == CONE)
-		// 	dist = cone_intersection(scene, ray, &tmp)
+		// 	dist = cone_intersection(scene, ray, &tmp);

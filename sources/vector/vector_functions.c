@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:28:50 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:39:25 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ double	vector_len(t_vector vect)
 {
 	double	len;
 
-	len = sqrtf((vect.x * vect.x) + (vect.y * vect.y) + (vect.z * vect.z));
+	len = sqrt((vect.x * vect.x) + (vect.y * vect.y) + (vect.z * vect.z));
 	return (len);
 }

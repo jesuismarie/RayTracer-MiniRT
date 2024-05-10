@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 16:31:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:51:51 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
 	while (tmp)
 	{
 		if (compute_shadow(scene, ray, &obj, tmp))
+		{
 			col = add_rgb_light(diffuse_light(tmp, obj->point), col);
+			col = add_rgb_light(specular_light(scene, tmp, obj), col);
+		}
 		tmp = tmp->next;
 	}
 	*color = rgb_to_hex(multiply_rgbs(col, obj->point.rgb));

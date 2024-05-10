@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/06 15:25:36 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/09 22:50:37 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_vector		vector_sub(t_vector vect1, t_vector vect2);
 t_vector		vector_sum(t_vector vect1, t_vector vect2);
 t_vector		vector_prod(t_vector vect, double n);
 t_vector		vector_cross(t_vector v1, t_vector v2);
+double			vector_cos(t_vector v1, t_vector v2);
 double			vector_len(t_vector vect);
 void			normalize_vector(t_vector *vect);
 double			vector_scalar_prod(t_vector v1, t_vector v2);
@@ -61,6 +62,7 @@ t_color			calc_rgb_light(t_color col, double ratio);
 t_color			multiply_rgbs(t_color a, t_color b);
 t_color			add_rgb_light(t_color a, t_color b);
 t_color			diffuse_light(t_light *light, t_intersect point);
+t_color			specular_light(t_scene *scene, t_light *light, t_figure *obj);
 void			update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
 					t_vector ray);
 int				compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, \
