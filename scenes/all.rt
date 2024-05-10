@@ -28,7 +28,7 @@ sp    4.5,6.5,-32     8.5                               147,255,216
 # co    pos         axis (in range [-1,1] for each x,y,z axis)    d (divide by 2 to init radius)    height    color
 co      -5,0,-30    0,1,0                                         5                                 10        10,50,200
 
-# Can be additional option in shpere, cone, plane and cylinder speculiar (if not given, then 0.5)
+# Can be additional option in shpere, cone, plane and cylinder speculiar (if not given, then 500)
 # example:
 #    pos          normal     spec      color
-pl   0,-15,0      0,-1,0     0.8      125,125,125
+pl   0,-15,0      0,-1,0     300      125,125,125
