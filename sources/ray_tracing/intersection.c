@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:02:31 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/02 16:00:44 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/05 17:32:11 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,31 @@
 
 void	object_intersection(t_scene *scene, t_vector ray, int *color)
 {
-	float		res;
+	double		min;
+	double		dist;
 	t_figure	*tmp;
+	t_figure	*obj;
 
+	obj = NULL;
+	min = INFINITY;
 	tmp = scene->figure;
 	while (tmp)
 	{
-		if (tmp->type == SPHERE)
-			res = sphere_intersection(scene, ray, &tmp);
+		if (tmp->type == SPHERE || tmp->type == LIGHT)
+			dist = sphere_intersection(scene->cam->pos, ray, &tmp);
 		else if (tmp->type == CYLINDER)
-			res = cylinder_intersection(scene, ray, &tmp);
-		// else if (tmp->type == PLANE)
-		// else if (tmp->type == CONE)
-		if (res)
-			*color = rgb_to_hex(tmp);
-		else
-			*color = 0;
+			dist = cylinder_intersection(scene->cam->pos, ray, &tmp);
+		else if (tmp->type == PLANE)
+			dist = plane_intersection(scene->cam->pos, ray, &tmp);
+		if (dist > __FLT_EPSILON__ && dist < min)
+		{
+			min = dist;
+			obj = tmp;
+		}
 		tmp = tmp->next;
 	}
+	update_pixel_color(scene, obj, color, ray);
 }
+
+		// else if (tmp->type == CONE)
+		// 	dist = cone_intersection(scene, ray, &tmp)

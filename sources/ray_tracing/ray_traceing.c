@@ -6,17 +6,34 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:53:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/04/01 19:15:02 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:22:56 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
+t_vector	look_at(t_scene	*scene, double ray_x, double ray_y)
+{
+	t_vector	up;
+	t_vector	new;
+	t_vector	right;
+	t_vector	ray_dir;
+
+	up = new_vector(0, 1, 0);
+	right = vector_cross(scene->cam->norm, up);
+	normalize_vector(&right);
+	new = vector_cross(right, scene->cam->norm);
+	ray_dir = vector_sum(vector_sum(vector_prod(right, ray_x), \
+		vector_prod(new, ray_y)), scene->cam->norm);
+	normalize_vector(&ray_dir);
+	return (ray_dir);
+}
+
 void	trace_ray(t_scene *scene)
 {
 	int			color;
-	float		ray_x;
-	float		ray_y;
+	double		ray_x;
+	double		ray_y;
 	t_vector	ray;
 
 	scene->view->y_angle = scene->height / 2;
@@ -28,8 +45,7 @@ void	trace_ray(t_scene *scene)
 		while (scene->view->x_angle <= scene->width / 2)
 		{
 			ray_x = scene->view->x_pixel * scene->view->x_angle;
-			ray = new_vector(ray_x, ray_y, -1);
-			normalize_vector(&ray);
+			ray = look_at(scene, ray_x, ray_y);
 			object_intersection(scene, ray, &color);
 			my_mlx_pixel_put(scene, scene->view->mlx_x, \
 				scene->view->mlx_y, color);

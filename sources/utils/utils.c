@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_sphere.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 21:07:01 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
+/*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
+/*   Updated: 2024/05/06 15:25:06 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_sphere	*new_sphere(t_vector center, double r)
+void	set_hit_normal(t_figure **obj, t_vector ray)
 {
-	t_sphere	*sph;
-
-	sph = ft_calloc(1, sizeof(t_sphere));
-	error_exit(!sph, MALLOC_ERR);
-	sph->center = center;
-	sph->radius = r;
-	return (sph);
+	if ((*obj)->type == SPHERE)
+		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
+			(*obj)->sph->center);
+	else if ((*obj)->type == PLANE)
+	{
+		if (vector_scalar_prod((*obj)->pln->norm, ray) < 0)
+			(*obj)->point.hit_norm = (*obj)->pln->norm;
+		else
+			(*obj)->point.hit_norm = vector_prod((*obj)->pln->norm, -1);
+	}
+	normalize_vector(&(*obj)->point.hit_norm);
 }
