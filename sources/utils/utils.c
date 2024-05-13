@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/06 15:25:06 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/13 21:19:24 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,19 @@ void	set_hit_normal(t_figure **obj, t_vector ray)
 		else
 			(*obj)->point.hit_norm = vector_prod((*obj)->pln->norm, -1);
 	}
+	else if ((*obj)->type == CYLINDER)
+	{
+		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
+			(*obj)->cyl->center);
+	}
 	normalize_vector(&(*obj)->point.hit_norm);
+}
+
+t_vector	reflect_ray(t_vector ray, t_vector norm)
+{
+	t_vector	reflected;
+
+	reflected = vector_prod(norm, 2 * vector_scalar_prod(ray, norm));
+	reflected = vector_sub(reflected, ray);
+	return (reflected);
 }

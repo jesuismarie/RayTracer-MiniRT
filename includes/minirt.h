@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/09 22:50:37 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:45:41 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int				close_win(t_scene *scene);
 /*----------------------------------------------------------------------------*/
 /*---------------------------------- UTILS -----------------------------------*/
 /*----------------------------------------------------------------------------*/
+t_vector		reflect_ray(t_vector ray, t_vector norm);
 void			set_hit_normal(t_figure **obj, t_vector ray);
 void			clear_scene(t_scene **scene);
 void			error_exit(int condition, char *err);
