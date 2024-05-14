@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/13 21:13:47 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:55:07 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,63 +30,42 @@ static void	find_hit_distance(t_figure **obj, t_equition dot)
 	}
 }
 
-static double	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj)
+static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
+	t_equition *dot)
 {
+	t_vector	v;
+	t_vector	u;
 	t_vector	vec;
-	t_equition	dot;
 
 	vec = vector_sub(pos, (*obj)->cyl->center);
-	dot.a = pow(ray.x, 2) + pow(ray.y, 2);
-	dot.b = 2 * (ray.x * vec.x + ray.y * vec.y);
-	dot.c = pow(vec.x, 2) + pow(vec.y, 2) - pow((*obj)->cyl->radius, 2);
-	dot.discr = pow(dot.b, 2) - 4 * dot.a * dot.c;
-	if (dot.discr < 0)
+	v = vector_sub(ray, vector_prod((*obj)->cyl->axis, \
+		vector_scalar_prod((*obj)->cyl->axis, ray)));
+	u = vector_sub(vec, vector_prod((*obj)->cyl->axis, \
+		vector_scalar_prod((*obj)->cyl->axis, vec)));
+	dot->a = vector_scalar_prod(v, v);
+	dot->b = 2 * vector_scalar_prod(v, u);
+	dot->c = vector_scalar_prod(u, u) - pow((*obj)->cyl->radius, 2);
+	dot->discr = pow(dot->b, 2) - 4 * dot->a * dot->c;
+	if (dot->discr < 0)
 		return (0);
-	dot.x1 = ((dot.b * (-1)) - sqrt(dot.discr)) / (2 * dot.a);
-	dot.x2 = ((dot.b * (-1)) + sqrt(dot.discr)) / (2 * dot.a);
-	find_hit_distance(obj, dot);
-	return ((*obj)->point.dist);
+	dot->x1 = ((dot->b * (-1)) - sqrt(dot->discr)) / (2 * dot->a);
+	dot->x2 = ((dot->b * (-1)) + sqrt(dot->discr)) / (2 * dot->a);
+	find_hit_distance(obj, *dot);
+	if (dot->x1 < __FLT_EPSILON__ && dot->x2 < __FLT_EPSILON__)
+		return (0);
+	return (1);
 }
 
 double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 {
-	double	inter_z;
+	t_equition	dot;
 
-	if (!solve_cylinder(pos, ray, obj))
+	if (!solve_cylinder(pos, ray, obj, &dot))
 		return (0);
-	inter_z = pos.z + (*obj)->point.dist * ray.z;
-	if (inter_z < (*obj)->cyl->center.z \
-		|| inter_z > (*obj)->cyl->center.z + (*obj)->cyl->height)
-		return (0);
+	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
+		(*obj)->point.dist));
 	return ((*obj)->point.dist);
 }
-
-// static int	check_cyl_intersect(t_vector pos, t_vector ray, 
-// 	t_equition *dot, t_figure **obj)
-// {
-// 	t_vector	u;
-// 	t_vector	v;
-// 	t_vector	vec;
-
-// 	vec = vector_sub(pos, (*obj)->cyl->center);
-// 	v = vector_prod((*obj)->cyl->axis, 
-// 		vector_scalar_prod((*obj)->cyl->axis, ray));
-// 	v = vector_sub(ray, v);
-// 	u = vector_prod((*obj)->cyl->axis, 
-// 		vector_scalar_prod((*obj)->cyl->axis, vec));
-// 	u = vector_sub(vec, u);
-// 	dot->a = vector_scalar_prod(v, v);
-// 	dot->b = 2 * vector_scalar_prod(v, u);
-// 	dot->c = vector_scalar_prod(u, u) - pow((*obj)->cyl->radius, 2);
-// 	dot->discr = (dot->b * dot->b) - (4 * dot->a * dot->c);
-// 	if (dot->discr < 0)
-// 		return (0);
-// 	dot->x1 = ((dot->b * (-1)) - sqrt(dot->discr)) / (2 * dot->a);
-// 	dot->x2 = ((dot->b * (-1)) + sqrt(dot->discr)) / (2 * dot->a);
-// 	if (dot->x1 < __FLT_EPSILON__ && dot->x2 < __FLT_EPSILON__)
-// 		return (0);
-// 	return (1);
-// }
 
 // static double	calculate_norm(t_figure **obj, 
 // 	t_equition dot)
