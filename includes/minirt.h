@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/13 16:45:41 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:09:15 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <defines.h>
 # include <ft_printf.h>
 # include <structures.h>
+# include <parse.h>
 
 /*----------------------------------------------------------------------------*/
 /*---------------------------------- PARSER ----------------------------------*/
@@ -31,7 +32,7 @@
 /*---------------------------- INIT & CONSTRUCTOR ----------------------------*/
 /*----------------------------------------------------------------------------*/
 void			init_scene(t_scene **scene);
-void			win_init(t_scene **scene);
+void			win_init(t_scene *scene);
 void			img_init(t_scene *scene);
 t_camera		*new_camera(t_vector pos, t_vector dir, int fov);
 t_light			*new_light(t_vector coord, t_color col, double brightness);

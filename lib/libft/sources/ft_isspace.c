@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_join_free.c                                     :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 15:51:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/14 20:24:06 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/05/14 20:04:25 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/05/14 20:05:08 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char	*ft_join_free(char *s1, char *s2)
+int	ft_isspace(int arg)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
-
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (0);
-	i = 0;
-	while (s1 && s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2 && s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	if (s1)
-		free(s1);
-	return (str);
+	return (arg == 32 || (arg >= 9 && arg <= 13));
 }

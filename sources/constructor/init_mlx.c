@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:15:04 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 12:36:17 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:45:51 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	win_init(t_scene **scene)
+void	win_init(t_scene *scene)
 {
-	*scene = ft_calloc(1, sizeof(t_scene));
 	error_exit(!scene, MALLOC_ERR);
-	(*scene)->mlx = ft_calloc(1, sizeof(t_mlx));
-	error_exit(!(*scene)->mlx, MALLOC_ERR);
-	(*scene)->mlx->mlx = mlx_init();
+	scene->mlx = ft_calloc(1, sizeof(t_mlx));
+	error_exit(!scene->mlx, MALLOC_ERR);
+	scene->mlx->mlx = mlx_init();
 }
 
 void	img_init(t_scene *scene)
