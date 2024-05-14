@@ -6,13 +6,13 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:22:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/31 19:13:26 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_cylinder	*new_cylinder(t_vector center, t_vector axis, float r, float h)
+t_cylinder	*new_cylinder(t_vector center, t_vector axis, double r, double h)
 {
 	t_cylinder	*cyl;
 

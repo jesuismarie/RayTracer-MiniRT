@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:58:11 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/25 17:14:22 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:53 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # endif
 
 # define WIDTH	1000
-# define HEIGHT	800
+# define HEIGHT	700
 
 # define MALLOC_ERR	"Can't allocate memory"
 
