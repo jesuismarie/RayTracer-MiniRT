@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/13 16:45:41 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/18 18:27:35 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_sphere		*new_sphere(t_vector center, double r);
 t_plane			*new_plane(t_vector pos, t_vector norm);
 t_cylinder		*new_cylinder(t_vector center, t_vector axis, double r, \
 					double h);
+t_cone			*new_cone(t_vector coord, t_vector axis, double r, double h);
 
 /*----------------------------------------------------------------------------*/
 /*---------------------------------- VECTOR ----------------------------------*/
@@ -49,7 +50,7 @@ t_vector		vector_sub(t_vector vect1, t_vector vect2);
 t_vector		vector_sum(t_vector vect1, t_vector vect2);
 t_vector		vector_prod(t_vector vect, double n);
 t_vector		vector_cross(t_vector v1, t_vector v2);
-double			vector_cos(t_vector v1, t_vector v2);
+// double			vector_cos(t_vector v1, t_vector v2);
 double			vector_len(t_vector vect);
 void			normalize_vector(t_vector *vect);
 double			vector_scalar_prod(t_vector v1, t_vector v2);
@@ -68,7 +69,6 @@ void			update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
 int				compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, \
 					t_light *light);
 void			my_mlx_pixel_put(t_scene *scene, int x, int y, int color);
-// unsigned int	my_mlx_pixel_get(t_scene *scene, int x, int y);
 
 /*----------------------------------------------------------------------------*/
 /*------------------------------- RAY TRACING --------------------------------*/
@@ -81,6 +81,9 @@ double			sphere_intersection(t_vector pos, t_vector ray, \
 double			plane_intersection(t_vector pos, t_vector ray, t_figure **obj);
 double			cylinder_intersection(t_vector pos, t_vector ray, \
 					t_figure **obj);
+double			cone_intersection(t_vector pos, t_vector ray, t_figure **obj);
+double			check_intersection(t_vector pos, t_vector ray, \
+					t_figure **obj, int light);
 void			object_intersection(t_scene *scene, t_vector ray, int *color);
 
 /*----------------------------------------------------------------------------*/

@@ -6,13 +6,14 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/13 16:45:28 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/18 18:29:33 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, t_figure **obj)
+static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, \
+	t_figure **obj)
 {
 	double		min;
 	double		dist;
@@ -27,12 +28,7 @@ static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, t_figure **ob
 			tmp = tmp->next;
 			continue ;
 		}
-		if (tmp->type == SPHERE)
-			dist = sphere_intersection(light->coordinate, ray, &tmp);
-		else if (tmp->type == CYLINDER)
-			dist = cylinder_intersection(light->coordinate, ray, &tmp);
-		else if (tmp->type == PLANE)
-			dist = plane_intersection(light->coordinate, ray, &tmp);
+		dist = check_intersection(light->coordinate, ray, &tmp, 0);
 		if (dist > __FLT_EPSILON__ && dist < min)
 		{
 			min = dist;
@@ -91,9 +87,7 @@ t_color	specular_light(t_scene *scene, t_light *light, t_figure *obj)
 	reflected = reflect_ray(l, obj->point.hit_norm);
 	normalize_vector(&reflected);
 	if (vector_scalar_prod(reflected, vec) > 0)
-		spec = light->brightness * pow(vector_cos(reflected, vec), obj->spec);
+		spec = light->brightness * pow(vector_scalar_prod(reflected, vec), \
+			obj->spec);
 	return (calc_rgb_light(light->color, spec));
 }
-
-		// else if (tmp->type == CONE)
-		// 	dist = cone_intersection(scene, ray, &tmp);

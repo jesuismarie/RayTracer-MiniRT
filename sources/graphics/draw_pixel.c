@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/10 16:51:51 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:56:06 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,3 @@ void	update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
 	}
 	*color = rgb_to_hex(multiply_rgbs(col, obj->point.rgb));
 }
-
-// unsigned int	my_mlx_pixel_get(t_scene *scene, int x, int y)
-// {
-// 	char	*dst;
-
-// 	dst = scene->mlx->data.addr + (y * scene->mlx->data.l + x * 
-// 			(scene->mlx->data.bpp / 8));
-// 	return (*(unsigned int *)dst);
-// }

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/09 13:40:19 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/18 18:37:36 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_color		t_color;
 typedef struct s_amb_light	t_amb_light;
 typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
+typedef struct s_pattern	t_pattern;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
@@ -104,8 +105,17 @@ struct s_light
 	t_light		*next;
 };
 
+struct s_pattern
+{
+	double	width;
+	double	height;
+	t_color	col1;
+	t_color	col2;
+};
+
 struct s_sphere
 {
+	int			checkerboard;
 	t_vector	center;
 	double		radius;
 };
@@ -126,10 +136,12 @@ struct s_cylinder
 
 struct s_cone
 {
-	t_vector	coordinate;
+	t_vector	top;
 	t_vector	axis;
 	double		radius;
 	double		height;
+	double		cos;
+	double		sin;
 };
 
 struct s_intersect // don't touch
