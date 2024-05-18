@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cone_intersection.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
+/*   Updated: 2024/05/16 19:25:44 by mnazarya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minirt.h>
+
+static void	find_hit_distance(t_figure **obj, t_equition dot)
+{
+	(*obj)->point.dist = 0;
+	(*obj)->point.is_inside = 1;
+	if (dot.x1 > __FLT_EPSILON__ || dot.x2 > __FLT_EPSILON__)
+	{
+		if (dot.x1 > __FLT_EPSILON__ && dot.x2 > __FLT_EPSILON__)
+		{
+			(*obj)->point.dist = fmin(dot.x1, dot.x2);
+			(*obj)->point.is_inside = 0;
+		}
+		else if (dot.x1 > __FLT_EPSILON__)
+			(*obj)->point.dist = dot.x1;
+		else
+			(*obj)->point.dist = dot.x2;
+	}
+}
+
+static int	solve_cone(t_vector pos, t_vector ray, t_figure **obj, \
+	t_equition *dot)
+{
+	double		dot_v;
+	double		dot_u;
+	t_vector	v;
+	t_vector	u;
+	t_vector	vec;
+
+	vec = vector_sub(pos, (*obj)->cone->top);
+	dot_v = vector_scalar_prod((*obj)->cone->axis, ray);
+	dot_u = vector_scalar_prod((*obj)->cone->axis, vec);
+	v = vector_sub(ray, vector_prod((*obj)->cone->axis, dot_v));
+	u = vector_sub(vec, vector_prod((*obj)->cone->axis, dot_u));
+	dot->a = pow((*obj)->cone->cos, 2) * vector_scalar_prod(v, v) \
+		- pow((*obj)->cone->sin, 2) * pow(dot_v, 2);
+	dot->b = 2 * (pow((*obj)->cone->cos, 2) * vector_scalar_prod(v, u)) \
+		- 2 * pow((*obj)->cone->sin, 2) * dot_v * dot_u;
+	dot->c = pow((*obj)->cone->cos, 2) * vector_scalar_prod(u, u) \
+		- pow((*obj)->cone->sin, 2) * pow(dot_u, 2);
+	dot->discr = pow(dot->b, 2) - 4 * dot->a * dot->c;
+	if (dot->discr < 0)
+		return (0);
+	dot->x1 = ((dot->b * (-1)) - sqrt(dot->discr)) / (2 * dot->a);
+	dot->x2 = ((dot->b * (-1)) + sqrt(dot->discr)) / (2 * dot->a);
+	if (dot->x1 < __FLT_EPSILON__ && dot->x2 < __FLT_EPSILON__)
+		return (0);
+	return (1);
+}
+
+double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
+{
+	double		hypotenuse;
+	t_equition	dot;
+
+	hypotenuse = sqrt(pow((*obj)->cone->radius, 2) \
+		+ pow((*obj)->cone->height, 2));
+	(*obj)->cone->cos = (*obj)->cone->height / hypotenuse;
+	(*obj)->cone->sin = (*obj)->cone->radius / hypotenuse;
+	if (!solve_cone(pos, ray, obj, &dot))
+		return (0);
+	find_hit_distance(obj, dot);
+	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
+		(*obj)->point.dist));
+	return ((*obj)->point.dist);
+}

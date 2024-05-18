@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/13 21:19:24 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/18 18:19:33 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	set_hit_normal(t_figure **obj, t_vector ray)
 {
+	t_vector	vec;
+
 	if ((*obj)->type == SPHERE)
 		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
 			(*obj)->sph->center);
@@ -28,6 +30,13 @@ void	set_hit_normal(t_figure **obj, t_vector ray)
 	{
 		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
 			(*obj)->cyl->center);
+	}
+	else if ((*obj)->type == CONE)
+	{
+		vec = vector_sub((*obj)->point.hit_pos, (*obj)->cone->top);
+		(*obj)->point.hit_norm = vector_sub(vec, \
+			vector_prod((*obj)->cone->axis, vector_scalar_prod(vec, \
+				(*obj)->cone->axis)));
 	}
 	normalize_vector(&(*obj)->point.hit_norm);
 }
