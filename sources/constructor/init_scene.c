@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/16 18:56:25 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:42:20 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_scene(t_scene **scene)
 	col1.r = 0;
 	col1.g = 255;
 	col1.b = 255;
-	col2.r = 255;
+	col2.r = 0;
 	col2.g = 255;
 	col2.b = 0;
 	col3.r = 255;
@@ -63,6 +63,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->color = col3;
 	(*scene)->figure->next->type = SPHERE;
 	(*scene)->figure->next->sph = new_sphere(new_vector(2, 0, -30), 3);
+	(*scene)->figure->next->sph->checkerboard = 1;
 	// -------------- Sphere 2 --------------
 	(*scene)->figure->next->next = ft_calloc(1, sizeof(t_figure));
 	(*scene)->figure->next->next->spec = 500;

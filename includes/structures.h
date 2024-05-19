@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 18:37:36 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:11:58 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ struct s_pattern
 {
 	double	width;
 	double	height;
-	t_color	col1;
-	t_color	col2;
+	t_color	col;
 };
 
 struct s_sphere
