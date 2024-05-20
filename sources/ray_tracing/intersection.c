@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:02:31 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 18:30:07 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:55:49 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	object_intersection(t_scene *scene, t_vector ray, int *color)
 	t_figure	*obj;
 
 	obj = NULL;
+	*color = 0;
 	min = INFINITY;
 	tmp = scene->figure;
 	while (tmp)

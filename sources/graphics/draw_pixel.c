@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 21:20:31 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:55:58 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	my_mlx_pixel_put(t_scene *scene, int x, int y, int color)
 void	update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
 	t_vector ray)
 {
-	t_color		col;
-	t_light		*tmp;
+	t_color	col;
+	t_light	*tmp;
+	t_color	spec;
 
-	*color = 0;
 	if (!obj)
 		return ;
 	obj->point.rgb = obj->color;
@@ -46,9 +46,10 @@ void	update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
 		if (compute_shadow(scene, ray, &obj, tmp))
 		{
 			col = add_rgb_light(diffuse_light(tmp, obj->point), col);
-			col = add_rgb_light(specular_light(scene, tmp, obj), col);
+			spec = specular_light(scene, tmp, obj);
 		}
 		tmp = tmp->next;
 	}
-	*color = rgb_to_hex(multiply_rgbs(col, obj->point.rgb));
+	*color = rgb_to_hex(add_rgb_light(multiply_rgbs(col, \
+		obj->point.rgb), spec));
 }

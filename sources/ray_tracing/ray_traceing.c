@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:53:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 16:22:56 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:40:53 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_vector	look_at(t_scene	*scene, double ray_x, double ray_y)
 	t_vector	ray_dir;
 
 	up = new_vector(0, 1, 0);
+	if (fabs(vector_scalar_prod(scene->cam->norm, up)) > 0.999)
+		up = new_vector(0, 0, 1);
 	right = vector_cross(scene->cam->norm, up);
 	normalize_vector(&right);
 	new = vector_cross(right, scene->cam->norm);
