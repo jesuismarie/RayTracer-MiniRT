@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:02:31 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/20 20:55:49 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:19:43 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	object_intersection(t_scene *scene, t_vector ray, int *color)
 		}
 		tmp = tmp->next;
 	}
-	update_pixel_color(scene, obj, color, ray);
+	update_pixel_color(scene, ray, obj, color);
 }

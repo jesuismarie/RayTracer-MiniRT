@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/19 16:42:20 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:44:47 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	init_scene(t_scene **scene)
 	(*scene)->cam = new_camera(new_vector(0, 0, 0), new_vector(0, 0, -1), 70);
 	(*scene)->amb = new_amb_light(col, 0.2);
 	// -------------- Light --------------
-	(*scene)->light = new_light(new_vector(10, 5, -21), col, 0.6);
+	(*scene)->light = new_light(new_vector(15, 10, -1), col, 0.8);
 	(*scene)->figure = ft_calloc(1, sizeof(t_figure));
 	(*scene)->figure->type = LIGHT;
 	(*scene)->figure->color = col;
-	(*scene)->figure->sph = new_sphere(new_vector(10, 5, -21), 0.6);
+	(*scene)->figure->sph = new_sphere(new_vector(15, 10, -1), 0.8);
 	// -------------- Sphere 1 --------------
 	(*scene)->figure->next = ft_calloc(1, sizeof(t_figure));
 	(*scene)->figure->next->spec = 100;
@@ -69,7 +69,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->next->spec = 500;
 	(*scene)->figure->next->next->color = col2;
 	(*scene)->figure->next->next->type = SPHERE;
-	(*scene)->figure->next->next->sph = new_sphere(new_vector(7, 0, -30), 1);
+	(*scene)->figure->next->next->sph = new_sphere(new_vector(7, 0, -25), 1);
 	// -------------- Plane ---------------
 	(*scene)->figure->next->next->next = ft_calloc(1, sizeof(t_figure));
 	(*scene)->figure->next->next->next->spec = 500;
@@ -78,19 +78,19 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->next->next->pln = new_plane(new_vector(0, 0, -42), \
 		new_vector(0.4, 0, 0.6));
 	//--------------- Cylinder ------------
-	// (*scene)->figure->next->next->next->next = ft_calloc(1, sizeof(t_figure));
-	// (*scene)->figure->next->next->next->next->spec = 200;
-	// (*scene)->figure->next->next->next->next->color = col1;
-	// (*scene)->figure->next->next->next->next->type = CYLINDER;
-	// (*scene)->figure->next->next->next->next->cyl = \
-	// 	new_cylinder(new_vector(-8, 0, -22), new_vector(-0.5, -0.8, 0), 5, 7);
-	// -------------- Cone ----------------
 	(*scene)->figure->next->next->next->next = ft_calloc(1, sizeof(t_figure));
 	(*scene)->figure->next->next->next->next->spec = 200;
-	(*scene)->figure->next->next->next->next->color = col1;
-	(*scene)->figure->next->next->next->next->type = CONE;
-	(*scene)->figure->next->next->next->next->cone = \
-		new_cone(new_vector(-8, 0, -22), new_vector(0.5, -0.8, 0), 5, 10);
+	(*scene)->figure->next->next->next->next->color = col2;
+	(*scene)->figure->next->next->next->next->type = CYLINDER;
+	(*scene)->figure->next->next->next->next->cyl = \
+		new_cylinder(new_vector(-10, -7, -27), new_vector(0, 1, 0), 5, 15);
+	// -------------- Cone ----------------
+	(*scene)->figure->next->next->next->next->next = ft_calloc(1, sizeof(t_figure));
+	(*scene)->figure->next->next->next->next->next->spec = 200;
+	(*scene)->figure->next->next->next->next->next->color = col1;
+	(*scene)->figure->next->next->next->next->next->type = CONE;
+	(*scene)->figure->next->next->next->next->next->cone = \
+		new_cone(new_vector(10, 9, -22), new_vector(0, -1, 0), 3, 15);
 	// -------------- replace !!!!!!!!!
 	(*scene)->width = WIDTH;
 	(*scene)->height = HEIGHT;

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 18:19:33 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:11:18 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	set_hit_normal(t_figure **obj, t_vector ray)
 	}
 	else if ((*obj)->type == CONE)
 	{
-		vec = vector_sub((*obj)->point.hit_pos, (*obj)->cone->top);
+		vec = vector_sub((*obj)->point.hit_pos, (*obj)->cone->apex);
 		(*obj)->point.hit_norm = vector_sub(vec, \
 			vector_prod((*obj)->cone->axis, vector_scalar_prod(vec, \
 				(*obj)->cone->axis)));

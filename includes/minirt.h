@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 21:20:16 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:18:51 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ double			vector_scalar_prod(t_vector v1, t_vector v2);
 /*----------------------------------------------------------------------------*/
 /*--------------------------------- GRAPHICS ---------------------------------*/
 /*----------------------------------------------------------------------------*/
+t_color			new_color(int r, int g, int b);
 int				rgb_to_hex(t_color rgb);
 t_color			calc_rgb_light(t_color col, double ratio);
 t_color			multiply_rgbs(t_color a, t_color b);
@@ -65,8 +66,10 @@ t_color			add_rgb_light(t_color a, t_color b);
 t_color			apply_checkerboard(t_figure *obj);
 t_color			diffuse_light(t_light *light, t_intersect point);
 t_color			specular_light(t_scene *scene, t_light *light, t_figure *obj);
-void			update_pixel_color(t_scene *scene, t_figure *obj, int *color, \
-					t_vector ray);
+void			update_pixel_color(t_scene *scene, t_vector ray, t_figure *obj, \
+					int *color);
+t_color			compute_light(t_scene *scene, t_vector ray, t_figure *obj, \
+					t_color *spec);
 int				compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, \
 					t_light *light);
 void			my_mlx_pixel_put(t_scene *scene, int x, int y, int color);

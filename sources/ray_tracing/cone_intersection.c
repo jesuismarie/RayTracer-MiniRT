@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/16 19:25:44 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:30:12 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	solve_cone(t_vector pos, t_vector ray, t_figure **obj, \
 	t_vector	u;
 	t_vector	vec;
 
-	vec = vector_sub(pos, (*obj)->cone->top);
+	vec = vector_sub(pos, (*obj)->cone->apex);
 	dot_v = vector_scalar_prod((*obj)->cone->axis, ray);
 	dot_u = vector_scalar_prod((*obj)->cone->axis, vec);
 	v = vector_sub(ray, vector_prod((*obj)->cone->axis, dot_v));
@@ -63,6 +63,7 @@ static int	solve_cone(t_vector pos, t_vector ray, t_figure **obj, \
 double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 {
 	double		hypotenuse;
+	t_vector	center;
 	t_equition	dot;
 
 	hypotenuse = sqrt(pow((*obj)->cone->radius, 2) \
@@ -72,7 +73,15 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	if (!solve_cone(pos, ray, obj, &dot))
 		return (0);
 	find_hit_distance(obj, dot);
+	center = vector_sum((*obj)->cone->apex, \
+		vector_prod((*obj)->cone->axis, (*obj)->cone->height));
 	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
 		(*obj)->point.dist));
-	return ((*obj)->point.dist);
+	dot.m1 = vector_scalar_prod((*obj)->cone->axis, \
+		vector_sub((*obj)->point.hit_pos, (*obj)->cone->apex));
+	dot.m2 = vector_scalar_prod((*obj)->cone->axis, \
+		vector_sub((*obj)->point.hit_pos, center));
+	if (dot.m1 > 0 && dot.m2 < 0)
+		return ((*obj)->point.dist);
+	return (0);
 }

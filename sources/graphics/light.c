@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 18:29:33 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:16:45 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,26 @@ int	compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, t_light *light)
 	if (!in_shadow(scene, light_ray, light, &tmp) && tmp == *obj)
 		return (1);
 	return (0);
+}
+
+t_color	compute_light(t_scene *scene, t_vector ray, t_figure *obj, \
+	t_color *spec)
+{
+	t_color	col;
+	t_light	*tmp;
+
+	col = calc_rgb_light(scene->amb->light, scene->amb->ratio);
+	tmp = scene->light;
+	while (tmp)
+	{
+		if (compute_shadow(scene, ray, &obj, tmp))
+		{
+			col = add_rgb_light(diffuse_light(tmp, obj->point), col);
+			*spec = specular_light(scene, tmp, obj);
+		}
+		tmp = tmp->next;
+	}
+	return (col);
 }
 
 t_color	diffuse_light(t_light *light, t_intersect point)

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/18 20:11:58 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:10:53 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ struct s_color
 	int	r;
 	int	g;
 	int	b;
-	int	t;
 };
 
 struct s_amb_light
@@ -135,7 +134,7 @@ struct s_cylinder
 
 struct s_cone
 {
-	t_vector	top;
+	t_vector	apex;
 	t_vector	axis;
 	double		radius;
 	double		height;

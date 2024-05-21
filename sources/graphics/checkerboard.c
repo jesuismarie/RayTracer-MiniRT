@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:09:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/19 16:39:56 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:29:39 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_color	apply_checkerboard(t_figure *obj)
 	t_vector	pos;
 	t_pattern	checkerboard;
 
-	checkerboard.col.r = 255;
-	checkerboard.col.g = 255;
-	checkerboard.col.b = 255;
+	checkerboard.col.r = 0;
+	checkerboard.col.g = 0;
+	checkerboard.col.b = 0;
 	checkerboard.width = 5;
 	checkerboard.height = 10;
 	pos = obj->point.hit_norm;

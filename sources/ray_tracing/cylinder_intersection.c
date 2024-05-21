@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/14 20:55:07 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:37:05 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,71 +58,20 @@ static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
 
 double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 {
+	t_vector	top;
 	t_equition	dot;
 
 	if (!solve_cylinder(pos, ray, obj, &dot))
 		return (0);
+	top = vector_sum((*obj)->cyl->center, \
+		vector_prod((*obj)->cyl->axis, (*obj)->cyl->height));
 	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
 		(*obj)->point.dist));
-	return ((*obj)->point.dist);
+	dot.m1 = vector_scalar_prod((*obj)->cyl->axis, \
+		vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center));
+	dot.m2 = vector_scalar_prod((*obj)->cyl->axis, \
+		vector_sub((*obj)->point.hit_pos, top));
+	if (dot.m1 > 0 && dot.m2 < 0)
+		return ((*obj)->point.dist);
+	return (0);
 }
-
-// static double	calculate_norm(t_figure **obj, 
-// 	t_equition dot)
-// {
-// 	if (dot.m1 >= 0 && dot.m1 <= (*obj)->cyl->height 
-// 		&& dot.x1 < __FLT_EPSILON__ && dot.m2 >= 0 
-// 		&& dot.m2 <= (*obj)->cyl->height 
-// 		&& dot.x2 < __FLT_EPSILON__)
-// 	{
-// 		if (dot.x1 > dot.x2)
-// 		{
-// 			(*obj)->point.dist = dot.m1;
-// 			return (dot.x1);
-// 		}
-// 		else
-// 		{
-// 			(*obj)->point.dist = dot.m2;
-// 			return (dot.x2);
-// 		}
-// 	}
-// 	else if (dot.m1 >= 0 
-// 		&& dot.m1 <= (*obj)->cyl->height 
-// 		&& dot.x1 < __FLT_EPSILON__)
-// 	{
-// 		(*obj)->point.dist = dot.m1;
-// 		return (dot.x1);
-// 	}
-// 	(*obj)->point.dist = dot.m2;
-// 	return (dot.x2);
-// }
-
-// static void	calculate_intersection(t_vector pos, t_vector ray, 
-// 	t_figure **obj)
-// {
-// 	double		x;
-// 	t_vector	vec;
-// 	t_equition	dot;
-
-// 	if (!check_cyl_intersect(pos, ray, &dot, obj))
-// 		return ;
-// 	dot.m1 = vector_scalar_prod((*obj)->cyl->axis, 
-// 		vector_sub(vector_prod(ray, dot.x1), 
-// 		vector_sub((*obj)->cyl->center, pos)));
-// 	dot.m2 = vector_scalar_prod((*obj)->cyl->axis, 
-// 		vector_sub(vector_prod(ray, dot.x2), 
-// 		vector_sub((*obj)->cyl->center, pos)));
-// 	x = calculate_norm(obj, dot);
-// 	vec = vector_sub(pos, (*obj)->cyl->center);
-// 	(*obj)->point.hit_pos = vector_sub(vector_prod(ray, x), 
-// 		vector_prod((*obj)->cyl->axis, (*obj)->point.dist));
-// 	(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, vec);
-// 	normalize_vector(&(*obj)->point.hit_norm);
-// }
-
-// double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
-// {
-// 	(*obj)->point.dist = 0;
-// 	calculate_intersection(pos, ray, obj);
-// 	return ((*obj)->point.dist);
-// }
