@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 20:11:18 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:10:29 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	set_hit_normal(t_figure **obj, t_vector ray)
 {
-	t_vector	vec;
-
 	if ((*obj)->type == SPHERE)
 		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
 			(*obj)->sph->center);
@@ -29,14 +27,16 @@ void	set_hit_normal(t_figure **obj, t_vector ray)
 	else if ((*obj)->type == CYLINDER)
 	{
 		(*obj)->point.hit_norm = vector_sub((*obj)->point.hit_pos, \
-			(*obj)->cyl->center);
+			vector_sum((*obj)->cyl->center, vector_prod((*obj)->cyl->axis, \
+			vector_scalar_prod(vector_sub((*obj)->point.hit_pos, \
+			(*obj)->cyl->center), (*obj)->cyl->axis))));
 	}
 	else if ((*obj)->type == CONE)
 	{
-		vec = vector_sub((*obj)->point.hit_pos, (*obj)->cone->apex);
-		(*obj)->point.hit_norm = vector_sub(vec, \
-			vector_prod((*obj)->cone->axis, vector_scalar_prod(vec, \
-				(*obj)->cone->axis)));
+		(*obj)->point.hit_norm = vector_sub(vector_sub((*obj)->point.hit_pos, \
+			(*obj)->cone->apex), vector_prod((*obj)->cone->axis, \
+			vector_scalar_prod(vector_sub((*obj)->point.hit_pos, \
+			(*obj)->cone->apex), (*obj)->cone->axis)));
 	}
 	normalize_vector(&(*obj)->point.hit_norm);
 }
