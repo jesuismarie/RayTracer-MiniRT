@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:22:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:21:30 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_cylinder	*new_cylinder(t_vector center, t_vector axis, double r, double h)
 	cyl->axis = axis;
 	cyl->radius = r;
 	cyl->height = h;
+	cyl->cap = 0;
 	return (cyl);
 }

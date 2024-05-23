@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 20:10:53 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:20:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ struct s_plane
 
 struct s_cylinder
 {
+	int			cap;
 	t_vector	center;
 	t_vector	axis;
 	double		radius;
@@ -134,6 +135,7 @@ struct s_cylinder
 
 struct s_cone
 {
+	int			cap;
 	t_vector	apex;
 	t_vector	axis;
 	double		radius;

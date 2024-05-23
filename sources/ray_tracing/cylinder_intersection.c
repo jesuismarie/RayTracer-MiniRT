@@ -6,29 +6,11 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 20:37:05 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:36:49 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-static void	find_hit_distance(t_figure **obj, t_equition dot)
-{
-	(*obj)->point.dist = 0;
-	(*obj)->point.is_inside = 1;
-	if (dot.x1 > __FLT_EPSILON__ || dot.x2 > __FLT_EPSILON__)
-	{
-		if (dot.x1 > __FLT_EPSILON__ && dot.x2 > __FLT_EPSILON__)
-		{
-			(*obj)->point.dist = fmin(dot.x1, dot.x2);
-			(*obj)->point.is_inside = 0;
-		}
-		else if (dot.x1 > __FLT_EPSILON__)
-			(*obj)->point.dist = dot.x1;
-		else
-			(*obj)->point.dist = dot.x2;
-	}
-}
 
 static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
 	t_equition *dot)

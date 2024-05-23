@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 20:44:47 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:59:04 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->next->next->next->color = col2;
 	(*scene)->figure->next->next->next->next->type = CYLINDER;
 	(*scene)->figure->next->next->next->next->cyl = \
-		new_cylinder(new_vector(-10, -7, -27), new_vector(0, 1, 0), 5, 15);
+		new_cylinder(new_vector(-8, -12, -27), new_vector(0, 1, 0), 3, 10);
 	// -------------- Cone ----------------
 	(*scene)->figure->next->next->next->next->next = ft_calloc(1, sizeof(t_figure));
 	(*scene)->figure->next->next->next->next->next->spec = 200;
 	(*scene)->figure->next->next->next->next->next->color = col1;
 	(*scene)->figure->next->next->next->next->next->type = CONE;
 	(*scene)->figure->next->next->next->next->next->cone = \
-		new_cone(new_vector(10, 9, -22), new_vector(0, -1, 0), 3, 15);
+		new_cone(new_vector(10, 15, -22), new_vector(0, -1, 0), 3, 10);
 	// -------------- replace !!!!!!!!!
 	(*scene)->width = WIDTH;
 	(*scene)->height = HEIGHT;
