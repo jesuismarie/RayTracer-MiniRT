@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/23 15:52:32 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:44:11 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,27 @@ static int	solve_cone(t_vector pos, t_vector ray, t_figure **obj, \
 	return (1);
 }
 
+static int	solve_caps(t_vector pos, t_vector ray, t_vector center, \
+	t_figure **obj)
+{
+	t_vector	surf;
+
+	(*obj)->point.dist = caps_intersection(pos, ray, \
+		(*obj)->cone->axis, center);
+	if ((*obj)->point.dist > 0)
+	{
+		(*obj)->cone->cap = 1;
+		(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
+			(*obj)->point.dist));
+		surf = vector_sub((*obj)->point.hit_pos, center);
+		if (vector_scalar_prod(surf, surf) <= pow((*obj)->cone->radius, 2))
+			return (1);
+		return (0);
+	}
+	(*obj)->point.dist = 0;
+	return (0);
+}
+
 double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 {
 	double		hypotenuse;
@@ -64,6 +85,8 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	dot.m2 = vector_scalar_prod((*obj)->cone->axis, \
 		vector_sub((*obj)->point.hit_pos, center));
 	if (dot.m1 > 0 && dot.m2 < 0)
+		return ((*obj)->point.dist);
+	if (solve_caps(pos, ray, center, obj))
 		return ((*obj)->point.dist);
 	return (0);
 }

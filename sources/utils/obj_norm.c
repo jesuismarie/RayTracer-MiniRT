@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:24:29 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/23 16:08:37 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:48:03 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,27 @@ void	set_hit_normal(t_figure **obj, t_vector ray)
 {
 	if ((*obj)->type == SPHERE)
 		(*obj)->point.hit_norm = calculate_sph_norm(*obj);
-	else if ((*obj)->type == PLANE || ((*obj)->type == CYLINDER \
-		&& (*obj)->cyl->cap == 1))
+	else if ((*obj)->type == PLANE)
 		(*obj)->point.hit_norm = calculate_pln_norm(*obj, ray);
-	else if ((*obj)->type == CYLINDER)
+	else if ((*obj)->type == CYLINDER && (*obj)->cyl->cap == 0)
 		(*obj)->point.hit_norm = calculate_cyl_norm(*obj);
-	else if ((*obj)->type == CONE)
+	else if ((*obj)->type == CYLINDER && (*obj)->cyl->cap == 1)
+	{
+		if (vector_scalar_prod((*obj)->cyl->axis, ray) < 0)
+			(*obj)->point.hit_norm = (*obj)->cyl->axis;
+		else
+			(*obj)->point.hit_norm = vector_prod((*obj)->cyl->axis, -1);
+		(*obj)->cyl->cap = 0;
+	}
+	else if ((*obj)->type == CONE && (*obj)->cone->cap == 1)
+	{
+		if (vector_scalar_prod((*obj)->cone->axis, ray) < 0)
+			(*obj)->point.hit_norm = (*obj)->cone->axis;
+		else
+			(*obj)->point.hit_norm = vector_prod((*obj)->cone->axis, -1);
+		(*obj)->cone->cap = 0;
+	}
+	else if ((*obj)->type == CONE && (*obj)->cone->cap == 0)
 		(*obj)->point.hit_norm = calculate_cone_norm(*obj);
 	normalize_vector(&(*obj)->point.hit_norm);
 }

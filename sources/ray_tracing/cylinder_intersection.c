@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/23 16:36:49 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/24 14:01:42 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,33 @@ static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
 	return (1);
 }
 
+static int	solve_caps(t_vector pos, t_vector ray, t_vector top, t_figure **obj)
+{
+	t_vector	surf;
+	t_equition	dot;
+
+	dot.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, top);
+	dot.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, \
+		(*obj)->cyl->center);
+	if (dot.x1 < dot.x2)
+		(*obj)->cyl->flag = 1;
+	find_hit_distance(obj, dot);
+	if ((*obj)->point.dist > 0)
+	{
+		(*obj)->cyl->cap = 1;
+		(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
+			(*obj)->point.dist));
+		surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center);
+		if ((*obj)->cyl->flag)
+			surf = vector_sub((*obj)->point.hit_pos, top);
+		if (vector_scalar_prod(surf, surf) <= pow((*obj)->cyl->radius, 2))
+			return (1);
+		return (0);
+	}
+	(*obj)->point.dist = 0;
+	return (0);
+}
+
 double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 {
 	t_vector	top;
@@ -54,6 +81,8 @@ double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	dot.m2 = vector_scalar_prod((*obj)->cyl->axis, \
 		vector_sub((*obj)->point.hit_pos, top));
 	if (dot.m1 > 0 && dot.m2 < 0)
+		return ((*obj)->point.dist);
+	if (solve_caps(pos, ray, top, obj))
 		return ((*obj)->point.dist);
 	return (0);
 }
