@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/24 14:01:42 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/24 23:38:08 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
 	return (1);
 }
 
-static int	solve_caps(t_vector pos, t_vector ray, t_vector top, t_figure **obj)
+int	solve_caps(t_vector pos, t_vector ray, t_vector p1, t_figure **obj)
 {
 	t_vector	surf;
 	t_equition	dot;
 
-	dot.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, top);
+	dot.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, p1);
 	dot.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, \
 		(*obj)->cyl->center);
 	if (dot.x1 < dot.x2)
@@ -51,38 +51,39 @@ static int	solve_caps(t_vector pos, t_vector ray, t_vector top, t_figure **obj)
 	find_hit_distance(obj, dot);
 	if ((*obj)->point.dist > 0)
 	{
-		(*obj)->cyl->cap = 1;
 		(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
 			(*obj)->point.dist));
 		surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center);
 		if ((*obj)->cyl->flag)
-			surf = vector_sub((*obj)->point.hit_pos, top);
-		if (vector_scalar_prod(surf, surf) <= pow((*obj)->cyl->radius, 2))
+			surf = vector_sub((*obj)->point.hit_pos, p1);
+		if (vector_scalar_prod(surf, surf) < pow((*obj)->cyl->radius, 2))
+		{
+			(*obj)->cyl->cap = 1;
 			return (1);
-		return (0);
+		}
 	}
-	(*obj)->point.dist = 0;
 	return (0);
 }
 
 double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 {
-	t_vector	top;
+	t_vector	p1;
 	t_equition	dot;
 
 	if (!solve_cylinder(pos, ray, obj, &dot))
 		return (0);
-	top = vector_sum((*obj)->cyl->center, \
+	(*obj)->cyl->cap = 0;
+	p1 = vector_sum((*obj)->cyl->center, \
 		vector_prod((*obj)->cyl->axis, (*obj)->cyl->height));
 	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
 		(*obj)->point.dist));
 	dot.m1 = vector_scalar_prod((*obj)->cyl->axis, \
 		vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center));
 	dot.m2 = vector_scalar_prod((*obj)->cyl->axis, \
-		vector_sub((*obj)->point.hit_pos, top));
+		vector_sub((*obj)->point.hit_pos, p1));
 	if (dot.m1 > 0 && dot.m2 < 0)
 		return ((*obj)->point.dist);
-	if (solve_caps(pos, ray, top, obj))
+	if (solve_caps(pos, ray, p1, obj))
 		return ((*obj)->point.dist);
 	return (0);
 }

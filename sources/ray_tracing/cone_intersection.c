@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/24 13:44:11 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/24 23:38:05 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	(*obj)->cone->sin = (*obj)->cone->radius / hypotenuse;
 	if (!solve_cone(pos, ray, obj, &dot))
 		return (0);
+	(*obj)->cone->cap = 0;
 	find_hit_distance(obj, dot);
 	center = vector_sum((*obj)->cone->apex, \
 		vector_prod((*obj)->cone->axis, (*obj)->cone->height));
