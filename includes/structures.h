@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/24 13:15:14 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/26 21:35:37 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_color		t_color;
 typedef struct s_amb_light	t_amb_light;
 typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
+typedef struct s_bmp_header	t_bmp_header;
+typedef struct s_bmp_info	t_bmp_info;
+typedef struct s_bmp_map	t_bmp_map;
 typedef struct s_pattern	t_pattern;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
@@ -111,9 +114,39 @@ struct s_pattern
 	t_color	col;
 };
 
+struct s_bmp_header
+{
+	uint16_t	type;
+	uint32_t	size;
+	uint32_t	reserved;
+	uint32_t	data_offset;
+};
+
+struct s_bmp_info
+{
+	uint32_t	head_size;
+	int32_t		width;
+	int32_t		height;
+	uint16_t	planes;
+	uint16_t	bpp;
+	uint32_t	compression;
+	uint32_t	img_size;
+	int32_t		horiz_res;
+	int32_t		vert_res;
+	uint32_t	col_num;
+	uint32_t	imp_col_num;
+};
+
+struct s_bmp_map
+{
+	t_bmp_header	header;
+	t_bmp_info		info_header;
+};
+
 struct s_sphere
 {
 	int			checkerboard;
+	int			texture;
 	t_vector	center;
 	double		radius;
 };
