@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/23 15:53:22 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:04:44 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_color			calc_rgb_light(t_color col, double ratio);
 t_color			multiply_rgbs(t_color a, t_color b);
 t_color			add_rgb_light(t_color a, t_color b);
 t_color			apply_checkerboard(t_figure *obj);
+void			apply_texture(t_scene *scene, char *filename);
 t_color			diffuse_light(t_light *light, t_intersect point);
 t_color			specular_light(t_scene *scene, t_light *light, t_figure *obj);
 void			update_pixel_color(t_scene *scene, t_vector ray, t_figure *obj, \

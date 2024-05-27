@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/26 21:26:09 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:04:24 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	update_pixel_color(t_scene *scene, t_vector ray, t_figure *obj, \
 	obj->point.rgb = obj->color;
 	if (obj->type == SPHERE && obj->sph && obj->sph->checkerboard)
 		obj->point.rgb = apply_checkerboard(obj);
-	// if (obj->type == SPHERE && obj->sph && obj->sph->texture)
-	// 	obj->point.rgb = ;
+	if (obj->type == SPHERE && obj->sph && obj->sph->texture)
+		apply_texture(scene, "resources/bmp/earth.bmp");
 	*color = rgb_to_hex(obj->color);
 	spec = new_color(0, 0, 0);
 	if (obj && obj->type == LIGHT)
