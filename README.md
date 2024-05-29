@@ -216,10 +216,6 @@ MiniRT has the following dependencies:
 - Make
 - miniLibX (for window management and image rendering)
 
-## Contributing
-
-Contributions are welcome! Please refer to our [contribution guidelines](./CONTRIBUTING.md) for details on how to contribute to the project.
-
 ## License
 
 [**Apache 2.0 License**](./LICENSE)
