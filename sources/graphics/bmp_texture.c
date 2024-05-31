@@ -6,28 +6,19 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 00:11:21 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/27 22:05:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/31 22:11:24 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static void	check_bmp(int fd, t_bmp_map *texture)
-{
-	if (texture->header.type != 0x4D42)
-	{
-		ft_printf("Not a bmp file\n");
-		close(fd);
-		return ;
-	}
-}
-
-void	read_bmp(char *filename, t_bmp_map *texture)
+int	read_bmp(char *filename, t_bmp_map *texture)
 {
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
-	
+	if (fd < 0)
+		return (0);
 	read(fd, &texture->header.type, 2);
 	read(fd, &texture->header.size, 4);
 	read(fd, &texture->header.reserved, 4);
@@ -43,19 +34,37 @@ void	read_bmp(char *filename, t_bmp_map *texture)
 	read(fd, &texture->info_header.vert_res, 4);
 	read(fd, &texture->info_header.col_num, 4);
 	read(fd, &texture->info_header.imp_col_num, 4);
-	check_bmp(fd, texture);
+	return (1);
 }
 
-void	apply_texture(t_scene *scene, char *filename)
+static void	check_bmp(int fd, t_bmp_map texture)
 {
-	static int	i = 0;
-	t_bmp_map	texture;
-
-	if (scene->fd < 0 || read(scene->fd, NULL, 0) < 0)
+	if (texture.header.type != 0x4D42)
 	{
-		ft_printf("Can't open bmp\n");
+		ft_printf("Not a bmp file\n");
+		close(fd);
 		return ;
 	}
+}
+
+void	apply_texture(t_scene *scene)
+{
+	static int	i = -1;
+
 	if (++i == 0)
-		read_bmp(filename, &texture);
+	{
+		;
+		if (!read_bmp("resources/bmp/earth.bmp", &(scene->texture)))
+		{
+			ft_printf("Can't open bmp\n");
+			return ;
+		}
+		check_bmp(scene->fd, scene->texture);
+		lseek(scene->fd, scene->texture.header.data_offset, SEEK_SET);
+		if (scene->texture.info_header.img_size == 0)
+			scene->texture.info_header.img_size = \
+				scene->texture.info_header.width \
+				* abs( scene->texture.info_header.height) \
+				* scene->texture.info_header.bpp / 8;
+	}
 }
