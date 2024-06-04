@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 14:24:04 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:18:53 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_vector		rgb_to_norm_vec(t_color rgb);
 t_color			calc_rgb_light(t_color col, double ratio);
 t_color			multiply_rgbs(t_color a, t_color b);
 t_color			add_rgb_light(t_color a, t_color b);
-t_img			get_pattern(t_scene *scene, char *filename);
+t_img			get_pattern(t_scene *scene, char *filename, int flag);
 t_color			apply_checkerboard(t_figure *obj);
 t_color			apply_texture(t_scene *scene, t_figure *obj);
 t_vector		apply_bump(t_scene *scene, t_figure *obj);

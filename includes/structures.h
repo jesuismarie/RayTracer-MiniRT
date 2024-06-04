@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 13:45:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:08:32 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ struct s_vplane // don't touch
 
 struct s_scene
 {
+	int			f_texture;
+	int			f_bump;
 	t_img		texture;
 	t_img		bump;
 	t_light		*light;

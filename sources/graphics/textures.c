@@ -6,13 +6,13 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:52:20 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 14:28:37 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:02:06 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_img	get_pattern(t_scene *scene, char *filename)
+t_img	get_pattern(t_scene *scene, char *filename, int flag)
 {
 	t_img	texture;
 
@@ -23,7 +23,18 @@ t_img	get_pattern(t_scene *scene, char *filename)
 		texture.addr = mlx_get_data_addr(texture.img, &texture.bpp, \
 			&texture.l, &texture.end);
 	if (!texture.img || !texture.addr)
+	{
+		if (flag)
+			scene->f_bump = 0;
+		else
+			scene->f_texture = 0;
 		ft_printf("Failed to load texture file\n");
+		return (texture);
+	}
+	if (flag)
+		scene->f_bump = 1;
+	else
+		scene->f_texture = 1;
 	return (texture);
 }
 
@@ -33,6 +44,8 @@ t_color	apply_texture(t_scene *scene, t_figure *obj)
 	double		v;
 	t_vector	pos;
 
+	if (!(scene->f_texture))
+		return (obj->point.rgb);
 	pos = obj->point.hit_norm;
 	u = 150 * ((atan2(pos.x, pos.z) + M_PI) / 2 * M_PI) \
 		* scene->texture.width / scene->texture.height;
@@ -46,6 +59,8 @@ t_vector	apply_bump(t_scene *scene, t_figure *obj)
 	double		v;
 	t_vector	pos;
 
+	if (!(scene->f_bump))
+		return (new_vector(0, 0, 0));
 	pos = obj->point.hit_norm;
 	u = 150 * ((atan2(pos.x, pos.z) + M_PI) / 2 * M_PI) \
 		* scene->bump.width / scene->bump.height;

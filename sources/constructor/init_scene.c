@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 15:34:13 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:02:22 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	init_scene(t_scene **scene)
 	col3 = new_color(255, 0, 0);
 	norm = new_vector(0, -1, 0);
 	normalize_vector(&norm);
-	(*scene)->texture = get_pattern(*scene, "./resources/textures/texture.xpm");
-	(*scene)->bump = get_pattern(*scene, "./resources/textures/bump.xpm");
+	(*scene)->texture = get_pattern(*scene, "./resources/textures/texture.xpm", 0);
+	(*scene)->bump = get_pattern(*scene, "./resources/textures/bump.xpm", 1);
 	(*scene)->cam = new_camera(new_vector(0, 0, 0), new_vector(0, 0, -1), 70);
 	(*scene)->amb = new_amb_light(col, 0.2);
 	// -------------- Light --------------
