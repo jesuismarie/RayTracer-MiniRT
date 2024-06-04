@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:39:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 14:25:08 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 23:48:18 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ t_vector	rgb_to_norm_vec(t_color rgb)
 {
 	t_vector	norm;
 
-	norm.x = rgb.r;
-	norm.y = rgb.g;
-	norm.z = rgb.b;
+	norm.x = (rgb.r / 255.0) * 2 - 1;
+	norm.y = (rgb.g / 255.0) * 2 - 1;
+	norm.z = (rgb.b / 255.0) * 2 - 1;
 	normalize_vector(&norm);
 	return (norm);
 }

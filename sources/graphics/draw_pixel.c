@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 15:28:41 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 23:03:12 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	update_pixel_color(t_scene *scene, t_vector ray, t_figure *obj, \
 	if (obj->type == SPHERE && obj->sph && obj->sph->texture)
 		obj->point.rgb = apply_texture(scene, obj);
 	if (obj->type == SPHERE && obj->sph && obj->sph->bump)
-		obj->point.hit_norm = vector_sum(obj->point.hit_norm, \
-			apply_bump(scene, obj));
-	normalize_vector(&obj->point.hit_norm);
+		obj->point.hit_norm = apply_bump(scene, obj);
 	*color = rgb_to_hex(obj->color);
 	spec = new_color(0, 0, 0);
 	if (obj && obj->type == LIGHT)
