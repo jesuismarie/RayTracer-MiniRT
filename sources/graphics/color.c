@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:39:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 13:09:09 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:25:08 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,33 @@ t_color	new_color(int r, int g, int b)
 	col.g = g;
 	col.b = b;
 	return (col);
+}
+
+int	rgb_to_hex(t_color rgb)
+{
+	int	color;
+
+	color = (rgb.r << 16) | (rgb.g << 8) | rgb.b;
+	return (color);
+}
+
+t_color	hex_to_rgb(unsigned int col)
+{
+	t_color	rgb;
+
+	rgb.r = (col & 0x00ff0000) >> 16;
+	rgb.g = (col & 0x0000ff00) >> 8;
+	rgb.b = (col & 0x000000ff);
+	return (rgb);
+}
+
+t_vector	rgb_to_norm_vec(t_color rgb)
+{
+	t_vector	norm;
+
+	norm.x = rgb.r;
+	norm.y = rgb.g;
+	norm.z = rgb.b;
+	normalize_vector(&norm);
+	return (norm);
 }
