@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/30 22:59:20 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:45:59 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ enum e_figure_type
 
 struct s_img // don't touch
 {
+	int		width;
+	int		height;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -114,39 +116,11 @@ struct s_pattern
 	t_color	col;
 };
 
-struct s_bmp_header
-{
-	uint16_t	type;
-	uint32_t	size;
-	uint32_t	reserved;
-	uint32_t	data_offset;
-};
-
-struct s_bmp_info
-{
-	uint32_t	head_size;
-	int32_t		width;
-	int32_t		height;
-	uint16_t	planes;
-	uint16_t	bpp;
-	uint32_t	compression;
-	uint32_t	img_size;
-	int32_t		horiz_res;
-	int32_t		vert_res;
-	uint32_t	col_num;
-	uint32_t	imp_col_num;
-};
-
-struct s_bmp_map
-{
-	t_bmp_header	header;
-	t_bmp_info		info_header;
-};
-
 struct s_sphere
 {
 	int			checkerboard;
 	int			texture;
+	int			bump;
 	t_vector	center;
 	double		radius;
 };
@@ -214,8 +188,8 @@ struct s_vplane // don't touch
 
 struct s_scene
 {
-	int			fd;
-	t_bmp_map	texture;
+	t_img		texture;
+	t_img		bump;
 	t_light		*light;
 	t_figure	*figure;
 	t_camera	*cam;

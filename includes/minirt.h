@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/31 22:17:57 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:24:04 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,36 @@ t_vector		vector_sub(t_vector vect1, t_vector vect2);
 t_vector		vector_sum(t_vector vect1, t_vector vect2);
 t_vector		vector_prod(t_vector vect, double n);
 t_vector		vector_cross(t_vector v1, t_vector v2);
-// double			vector_cos(t_vector v1, t_vector v2);
 double			vector_len(t_vector vect);
 void			normalize_vector(t_vector *vect);
 double			vector_scalar_prod(t_vector v1, t_vector v2);
+t_vector		vector_rotate_cw(t_vector vect);
+t_vector		vector_rotate_ccw(t_vector vect);
 
 /*----------------------------------------------------------------------------*/
 /*--------------------------------- GRAPHICS ---------------------------------*/
 /*----------------------------------------------------------------------------*/
 t_color			new_color(int r, int g, int b);
 int				rgb_to_hex(t_color rgb);
+t_color			hex_to_rgb(unsigned int col);
+t_vector		rgb_to_norm_vec(t_color rgb);
 t_color			calc_rgb_light(t_color col, double ratio);
 t_color			multiply_rgbs(t_color a, t_color b);
 t_color			add_rgb_light(t_color a, t_color b);
+t_img			get_pattern(t_scene *scene, char *filename);
 t_color			apply_checkerboard(t_figure *obj);
-int				read_bmp(char *filename, t_bmp_map *texture);
-void			apply_texture(t_scene *scene);
+t_color			apply_texture(t_scene *scene, t_figure *obj);
+t_vector		apply_bump(t_scene *scene, t_figure *obj);
 t_color			diffuse_light(t_light *light, t_intersect point);
 t_color			specular_light(t_scene *scene, t_light *light, t_figure *obj);
 void			update_pixel_color(t_scene *scene, t_vector ray, t_figure *obj, \
 					int *color);
-t_color			compute_light(t_scene *scene, t_vector ray, t_figure *obj, \
+t_color			compute_light(t_scene *scene, t_figure *obj, \
 					t_color *spec);
-int				compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, \
+int				compute_shadow(t_scene *scene, t_figure **obj, \
 					t_light *light);
 void			my_mlx_pixel_put(t_scene *scene, int x, int y, int color);
+unsigned int	my_mlx_pixel_get(t_img img, int x, int y);
 
 /*----------------------------------------------------------------------------*/
 /*------------------------------- RAY TRACING --------------------------------*/

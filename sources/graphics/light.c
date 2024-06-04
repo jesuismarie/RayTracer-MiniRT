@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 13:16:45 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:26:48 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,12 @@ static int	in_shadow(t_scene *scene, t_vector ray, t_light	*light, \
 	return (1);
 }
 
-int	compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, t_light *light)
+int	compute_shadow(t_scene *scene, t_figure **obj, t_light *light)
 {
 	t_figure	*tmp;
 	t_vector	light_ray;
 
 	tmp = NULL;
-	(*obj)->point.hit_pos = vector_sum(scene->cam->pos, vector_prod(ray, \
-		(*obj)->point.dist));
-	set_hit_normal(obj, ray);
 	light_ray = vector_sub((*obj)->point.hit_pos, light->coordinate);
 	normalize_vector(&light_ray);
 	if (!in_shadow(scene, light_ray, light, &tmp) && tmp == *obj)
@@ -57,7 +54,7 @@ int	compute_shadow(t_scene *scene, t_vector ray, t_figure **obj, t_light *light)
 	return (0);
 }
 
-t_color	compute_light(t_scene *scene, t_vector ray, t_figure *obj, \
+t_color	compute_light(t_scene *scene, t_figure *obj, \
 	t_color *spec)
 {
 	t_color	col;
@@ -67,7 +64,7 @@ t_color	compute_light(t_scene *scene, t_vector ray, t_figure *obj, \
 	tmp = scene->light;
 	while (tmp)
 	{
-		if (compute_shadow(scene, ray, &obj, tmp))
+		if (compute_shadow(scene, &obj, tmp))
 		{
 			col = add_rgb_light(diffuse_light(tmp, obj->point), col);
 			*spec = specular_light(scene, tmp, obj);
