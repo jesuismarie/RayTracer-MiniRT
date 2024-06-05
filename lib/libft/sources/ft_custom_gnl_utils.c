@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:28:05 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/05/14 20:28:21 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/05/14 22:56:25 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_gnl_strlen(const char *s)
 	return (index);
 }
 
-char	*ft_gnl_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, const char *s2)
 {
 	char		*new_str;
 	size_t		f_index;

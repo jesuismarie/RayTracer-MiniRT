@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/05/14 21:35:21 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:12:56 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_tokenize_wrapper	t_tokenize_wrapper;
 typedef struct s_tokenize_space_helper		t_tokenize_space_helper;
 
 #include <stdbool.h>
+#include <stdio.h>
 
 #define P_CAMERA_D "C"
 #define P_LIGHT_D "L"
@@ -77,4 +78,11 @@ double			file_atof(char **str);
 char 			*ft_parse(t_scene *scene, char **argv);
 void			ft_print_list(t_token *list);
 char 			*ft_ignore_comment(char *line);
+bool 			ft_create_object(t_scene *scene, t_list_token	*list, char **error);
+bool 			ft_validate_object(t_list_token *list, char **error);
+bool			ft_validate_camera(t_list_token *list, char **error);
+
+bool			ft_create_camera(t_scene *list, t_list_token	*token, char **error);
+
+
 #endif
