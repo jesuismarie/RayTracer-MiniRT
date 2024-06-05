@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/09 13:40:19 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:08:32 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ typedef struct s_color		t_color;
 typedef struct s_amb_light	t_amb_light;
 typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
+typedef struct s_bmp_header	t_bmp_header;
+typedef struct s_bmp_info	t_bmp_info;
+typedef struct s_bmp_map	t_bmp_map;
+typedef struct s_pattern	t_pattern;
 typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
@@ -42,6 +46,8 @@ enum e_figure_type
 
 struct s_img // don't touch
 {
+	int		width;
+	int		height;
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -80,7 +86,6 @@ struct s_color
 	int	r;
 	int	g;
 	int	b;
-	int	t;
 };
 
 struct s_amb_light
@@ -104,8 +109,18 @@ struct s_light
 	t_light		*next;
 };
 
+struct s_pattern
+{
+	double	width;
+	double	height;
+	t_color	col;
+};
+
 struct s_sphere
 {
+	int			checkerboard;
+	int			texture;
+	int			bump;
 	t_vector	center;
 	double		radius;
 };
@@ -118,6 +133,8 @@ struct s_plane
 
 struct s_cylinder
 {
+	int			cap;
+	int			flag;
 	t_vector	center;
 	t_vector	axis;
 	double		radius;
@@ -126,10 +143,13 @@ struct s_cylinder
 
 struct s_cone
 {
-	t_vector	coordinate;
+	int			cap;
+	t_vector	apex;
 	t_vector	axis;
 	double		radius;
 	double		height;
+	double		cos;
+	double		sin;
 };
 
 struct s_intersect // don't touch
@@ -168,6 +188,10 @@ struct s_vplane // don't touch
 
 struct s_scene
 {
+	int			f_texture;
+	int			f_bump;
+	t_img		texture;
+	t_img		bump;
 	t_light		*light;
 	t_figure	*figure;
 	t_camera	*cam;

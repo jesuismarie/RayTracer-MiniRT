@@ -6,19 +6,11 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:43:58 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/01 13:34:59 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/04 00:03:09 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-int	rgb_to_hex(t_color rgb)
-{
-	int	color;
-
-	color = (rgb.r << 16) | (rgb.g << 8) | rgb.b;
-	return (color);
-}
 
 t_color	calc_rgb_light(t_color col, double ratio)
 {

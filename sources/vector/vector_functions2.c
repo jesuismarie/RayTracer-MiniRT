@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 22:58:55 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/09 16:40:22 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:55:27 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,4 @@ t_vector	vector_cross(t_vector v1, t_vector v2)
 	res.y = v1.z * v2.x - v1.x * v2.z;
 	res.z = v1.x * v2.y - v1.y * v2.x;
 	return (res);
-}
-
-double	vector_cos(t_vector v1, t_vector v2)
-{
-	double	cos;
-
-	cos = vector_scalar_prod(v1, v2) / (vector_len(v1) * vector_len(v2));
-	return (cos);
 }
