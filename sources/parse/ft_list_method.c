@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:55:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/05/14 21:16:07 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:49:53 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,17 @@ void	ft_print_list(t_token *list)
 		printf("Type: %u, Token: %s\n", current->type, current->token);
 		current = current->next;
 	}
+}
+
+t_token *ft_jump(t_token *list, int step)
+{
+    if (!list)
+        return (NULL);
+    int i = 0;
+    while (list && i < step)
+    {
+        list = list->next;
+        ++i;
+    }
+    return (list);
 }

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_f(const char *s)
 {
 	int	c;
 
@@ -77,7 +77,7 @@ int	ft_putstr(char *s)
 		write(1, "(null)", 6);
 		return (6);
 	}
-	count = ft_strlen(s);
+	count = ft_strlen_f(s);
 	write(1, s, count);
 	return (count);
 }

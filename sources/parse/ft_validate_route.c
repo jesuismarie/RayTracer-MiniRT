@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:27:27 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/05 18:19:59 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/06 01:31:01 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ bool ft_create_object(t_scene *scene, t_list_token	*list, char **error)
     return true;
 }
 
-#include <stdio.h>
 bool ft_validate_object(t_list_token *list, char **error)
 {
 	t_ptoken_type ptype;
@@ -50,17 +49,27 @@ bool ft_validate_object(t_list_token *list, char **error)
 	ptype = ft_get_ptype(list->head->token);
 	if (ptype == P_CAMERA)
 		return (ft_validate_camera(list, error));
-	// else if (ptype == P_AMB_LIGHT)
-	// 	return (ft_validate_amb_light(ptype, error));
-	// else if (ptype == P_LIGHT)
-	// 	return (ft_validate_light(ptype, error));
-	// else if (ptype == PLANE)
-	// 	return (ft_validate_plane(ptype, error));
-	// else if (ptype == P_CYLINDER)
-	// 	return (ft_validate_cylinder(ptype, error));
-	// else if (ptype == P_SPHERE)
-	// 	return (ft_validate_sphere(ptype, error));
-	// else if (ptype == P_CONE)
-	// 	return (ft_validate_cone(ptype, error));
-    return true;
+	else if (ptype == P_AMB_LIGHT)
+		return true;
+		// return (ft_validate_amb_light(ptype, error));
+	else if (ptype == P_LIGHT)
+		return true;
+		// return (ft_validate_light(ptype, error));
+	else if (ptype == PLANE)
+		return true;
+		// return (ft_validate_plane(ptype, error));
+	else if (ptype == P_CYLINDER)
+		return true;
+		// return (ft_validate_cylinder(ptype, error));
+	else if (ptype == P_SPHERE)
+		return true;
+		// return (ft_validate_sphere(ptype, error));
+	else if (ptype == P_CONE)
+		return true;
+	else
+	{
+		set_error(error, ft_format_error(__func__, ""));
+        return (false);
+	}
+    return false;
 }

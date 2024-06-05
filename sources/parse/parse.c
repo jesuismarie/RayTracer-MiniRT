@@ -6,15 +6,11 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/05 18:18:58 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/06 01:26:38 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-
-
-
 	// P_UNKNOWN,
 	// P_CAMERA,
 	// P_LIGHT,
@@ -23,11 +19,20 @@
 	// P_CYLINDER,
 	// P_SPHERE,
 	// P_CONE
+t_list_token	*ft_tokenize(char *input);
+
+
+
 bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) {
 	
 	if (ft_validate_object(list, error))
 		ft_create_object(scene, list, error);
-	return true;
+	else
+	{
+		set_error(error, ft_format_error(__func__, ""));
+        return (false);
+	}
+	return (true);
 }
 
 bool ft_create_objects(t_scene *scene, t_list_token	*list, char **error)
@@ -55,8 +60,9 @@ char *ft_parse(t_scene *scene, char **argv)
 		line = ft_ignore_comment(line);
 		if (line && !line[0])
 			continue ;
-		list = ft_tokenize_space(line);
+		list = ft_tokenize(line);
 		ft_print_list(list->head);
+
 		if (ft_create_objects(scene, list, &error))
 			break ;
 	}
