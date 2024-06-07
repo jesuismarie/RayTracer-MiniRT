@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:13:19 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:43:02 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,46 +98,17 @@ struct s_tokenize_wrap
 	int						is_one_sym;
 };
 
-
-
-t_list_token	*ft_tokenize_space(char *input);
-t_ptoken_type	ft_get_ptype(char *type);
-void	        ft_init_token(t_token *node, int type, char *elem);
-t_list_token	*ft_init_list(void);
-void	        ft_push_back(t_list_token *list, int type, const char *token);
-double			file_atof(char **str);
-char 			*ft_parse(t_scene *scene, char **argv);
-void			ft_print_list(t_token *list);
-char 			*ft_ignore_comment(char *line);
-bool 			ft_create_object(t_scene *scene, t_list_token	*list, char **error);
-bool 			ft_validate_object(t_list_token *list, char **error);
-bool			ft_validate_camera(t_list_token *list, char **error);
-bool			ft_create_camera(t_scene *list, t_list_token	*token, char **error);
-int				ft_tokenize_delim_helper(t_tokenize_wrap *wrap, t_ptoken_type *type);
-char			*ft_tokenize_with_delims(char *str, t_ptoken_type *type);
-void			ft_tokenize_delim_util(t_tokenize_wrap *wrap, t_ptoken_type *type);
-int				ft_strcmp_std(char *s1, char *s2);
-bool 			is_digit_float(char *str);
-t_token 		*ft_jump(t_token *list, int step);
-
-bool 			ft_validate_camera(t_list_token *list, char **error);
-bool 			ft_validate_vector(t_token *list, char **error);
-double			ft_atof(char *str);
-t_list_token	*ft_tokenize(char *input);
-// bool			is_in_range(double num, double min, double max);
-// bool 		ft_pars_semi(t_list_token *list, char **error);
-// bool 		ft_pars_args(t_list_token *list, char **error);
-// int 			ft_semi_count(t_list_token *list);
-// int 			ft_args_count(t_list_token *list, char **error);
-// char    		*ft_format_error(const char *format, char *msg);
-
-
-
 /**
- * PATH: ft_error.c
+ * PATH: ft_pars_error.c
 */
 void 			set_error(char **error, char *new_error);
 char   		 	*ft_format_error(const char *format, char *msg);
+
+/**
+ * PATH: ft_comment.c
+*/
+char 			*ft_ignore_comment(char *line);
+
 /**
  * PATH: ft_create_camera.c
 */
@@ -155,6 +126,74 @@ bool			ft_is_within_range(double value, double lower_bound, double upper_bound);
 bool			ft_is_in_range_int(int num, int min, int max);
 
 
+/**
+ * PATH: ft_list_method.c
+*/
+t_list_token	*ft_init_list(void);
+void	        ft_push_back(t_list_token *list, int type, const char *token);
+void	        ft_init_token(t_token *node, int type, char *elem);
+t_token 		*ft_jump(t_token *list, int step);
+void			ft_print_list(t_token *list);
 
+/**
+ * PATH: ft_ptype.c
+*/
+t_ptoken_type	ft_get_ptype(char *type);
+
+
+/**
+ * PATH: ft_tokenize.c
+*/
+t_list_token	*ft_tokenize(char *input);
+void			ft_tokenize_helper(t_tokenize_wrapper *wrapper);
+t_list_token	*ft_tokenize_space(char *input);
+char			*ft_tokenize_with_space(char *expr);
+int				ft_tokenize_space_helper(t_tokenize_space_helper *wrapper);
+
+/**
+ * PATH: ft_tokeniz_delim.c
+*/
+int				ft_tokenize_delim_helper(t_tokenize_wrap *wrap, t_ptoken_type *type);
+char			*ft_tokenize_with_delims(char *str, t_ptoken_type *type);
+
+
+/**
+ * ft_parse.c
+*/
+char 			*ft_parse(t_scene *scene, char **argv);
+bool			ft_parse_object(t_scene *scene, t_list_token	*list, char **error);
+
+
+/**
+ * PATH: ft_validate.c
+*/
+bool			ft_validate_camera(t_list_token *list, char **error);
+bool			ft_range_camera(t_token *list, char **error);
+
+/**
+ * ft_validate_route.c
+*/
+bool			ft_validate_object(t_list_token *list, char **error);
+bool			ft_create_object(t_scene *scene, t_list_token	*list, char **error);
+
+/**
+ * PATH: ft_validate_vector.c
+*/
+bool			ft_validate_vector(t_token *list, char **error);
+
+/**
+ * PATH: ft_validate_args.c
+*/
+bool			ft_pars_semi(t_list_token *list, char **error);
+bool			ft_pars_args(t_list_token *list, char **error);
+int				ft_semi_count(t_list_token *list);
+int				ft_args_count(t_list_token *list, char **error);
+
+/**
+ * PATH: ft_pars_util.c
+*/
+double			ft_atof(char *str);
+int				ft_strcmp_std(char *s1, char *s2);
+bool			is_digit_float(char *str);
 
 #endif

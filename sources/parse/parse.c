@@ -6,13 +6,14 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 21:53:37 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:43:56 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) {
+bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) 
+{
 	
 	if (ft_validate_object(list, error))
 		ft_create_object(scene, list, error);
@@ -22,11 +23,6 @@ bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) {
         return (false);
 	}
 	return (true);
-}
-
-bool ft_create_objects(t_scene *scene, t_list_token	*list, char **error)
-{
-	return ft_parse_object(scene, list, error);
 }
 
 char *ft_parse(t_scene *scene, char **argv)
@@ -52,7 +48,7 @@ char *ft_parse(t_scene *scene, char **argv)
 		list = ft_tokenize(line);
 		ft_print_list(list->head);
 
-		if (ft_create_objects(scene, list, &error))
+		if (ft_parse_object(scene, list, &error))
 			break ;
 	}
 	return error;

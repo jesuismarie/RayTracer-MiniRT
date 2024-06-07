@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:48 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/06 01:59:05 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:41:36 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,28 @@ double ft_atof(char *str)
         }
     }
     return ((double)(whole_part + decimal_part) * neg);
+}
+
+bool is_digit_float(char *str)
+{
+    bool has_digits = false;
+    bool has_decimal_point = false;
+
+	if (str && *str == '\0')
+		return (false);
+    if (*str == '+' || *str == '-')
+    	str++;
+    while (str && *str != '\0')
+	{
+        if (ft_isdigit(*str))
+            has_digits = true;
+        else if (*str == '.') {
+            if (has_decimal_point)
+                return (false);
+            has_decimal_point = true;
+        } else
+            return (false);
+        str++;
+    }
+    return (has_digits);
 }
