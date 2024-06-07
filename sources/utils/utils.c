@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/07 12:56:40 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:46:06 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double	caps_intersection(t_vector pos, t_vector ray, t_vector norm, \
 	t_vector	vec;
 
 	dot = vector_scalar_prod(norm, ray);
-	if (fabs(dot) < 1e-6)
+	if (fabs(dot) < __FLT_EPSILON__)
 		return (-1);
 	vec = vector_sub(center, pos);
 	dist = vector_scalar_prod(norm, vec) / dot;

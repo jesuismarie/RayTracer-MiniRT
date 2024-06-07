@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/07 13:02:08 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/08 00:00:32 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	t_equition	dot;
 
 	(*obj)->cyl->cap = 0;
+	(*obj)->cyl->flag = 0;
 	solve_cylinder(pos, ray, obj, &dot);
 	p1 = vector_sum((*obj)->cyl->center, \
 		vector_prod((*obj)->cyl->axis, (*obj)->cyl->height));
@@ -84,5 +85,6 @@ double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 		return ((*obj)->point.dist);
 	if (solve_caps(pos, ray, p1, obj))
 		return ((*obj)->point.dist);
+	(*obj)->point.dist = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/07 13:08:05 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:10:10 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	solve_cone(t_vector pos, t_vector ray, t_figure **obj, \
 	t_vector	u;
 	t_vector	vec;
 
+	(*obj)->point.dist = 0;
 	vec = vector_sub(pos, (*obj)->cone->apex);
 	dot_v = vector_scalar_prod((*obj)->cone->axis, ray);
 	dot_u = vector_scalar_prod((*obj)->cone->axis, vec);
@@ -71,7 +72,6 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	t_vector	center;
 	t_equition	dot;
 
-	(*obj)->point.dist = 0;
 	hypotenuse = sqrt(pow((*obj)->cone->radius, 2) \
 		+ pow((*obj)->cone->height, 2));
 	(*obj)->cone->cos = (*obj)->cone->height / hypotenuse;
@@ -90,5 +90,6 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 		return ((*obj)->point.dist);
 	if (solve_caps(pos, ray, center, obj))
 		return ((*obj)->point.dist);
+	(*obj)->point.dist = 0;
 	return (0);
 }
