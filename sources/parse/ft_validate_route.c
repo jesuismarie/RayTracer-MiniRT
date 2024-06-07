@@ -6,19 +6,11 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:27:27 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/06 01:31:01 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:51:02 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-bool ft_create_camera(t_scene *list, t_list_token	*token, char **error)
-{
-    (void)list;
-    (void)token;
-    (void)error;
-    return true;
-}
 
 bool ft_create_object(t_scene *scene, t_list_token	*list, char **error)
 {

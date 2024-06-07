@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/06 01:43:30 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:13:19 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef struct s_tokenize_wrap		t_tokenize_wrap;
 #include <stdbool.h>
 #include <stdio.h>
 
+
+#define EPSILON 1e-9
+
+
 #define P_CAMERA_D "C"
 #define P_LIGHT_D "L"
 #define P_SPHERE_D "sp"
@@ -33,6 +37,8 @@ typedef struct s_tokenize_wrap		t_tokenize_wrap;
 #define P_PLANE_D "pl"
 #define P_CYLINDER_D "cy"
 #define P_CONE_D "co"
+
+
 
 enum e_ptoken_type
 {
@@ -116,13 +122,39 @@ t_token 		*ft_jump(t_token *list, int step);
 
 bool 			ft_validate_camera(t_list_token *list, char **error);
 bool 			ft_validate_vector(t_token *list, char **error);
-void 			set_error(char **error, char *new_error);
-char   		 	*ft_format_error(const char *format, char *msg);
 double			ft_atof(char *str);
-// bool 			ft_pars_semi(t_list_token *list, char **error);
-// bool 			ft_pars_args(t_list_token *list, char **error);
+t_list_token	*ft_tokenize(char *input);
+// bool			is_in_range(double num, double min, double max);
+// bool 		ft_pars_semi(t_list_token *list, char **error);
+// bool 		ft_pars_args(t_list_token *list, char **error);
 // int 			ft_semi_count(t_list_token *list);
 // int 			ft_args_count(t_list_token *list, char **error);
 // char    		*ft_format_error(const char *format, char *msg);
+
+
+
+/**
+ * PATH: ft_error.c
+*/
+void 			set_error(char **error, char *new_error);
+char   		 	*ft_format_error(const char *format, char *msg);
+/**
+ * PATH: ft_create_camera.c
+*/
+bool			ft_create_camera(t_scene *scene, t_list_token	*list, char **error);
+t_camera		ft_parse_camera(t_list_token *list);
+bool			ft_validate_camera_args(t_camera camera, char **error);
+bool			ft_validate_fov(int fov, char **error);
+bool			ft_validate_dir(t_vector dir, char **error);
+
+/**
+ * PATH: ft_math_operation.c
+*/
+bool			ft_is_near_equal(double num, double num2);
+bool			ft_is_within_range(double value, double lower_bound, double upper_bound);
+bool			ft_is_in_range_int(int num, int min, int max);
+
+
+
 
 #endif

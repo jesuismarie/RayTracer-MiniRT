@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_comment.c                                       :+:      :+:    :+:   */
+/*   ft_math_operation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 21:23:49 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 21:58:24 by gehovhan         ###   ########.fr       */
+/*   Created: 2024/06/07 21:52:17 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/06/07 22:12:52 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "minirt.h"
 
-char *ft_ignore_comment(char *line)
+bool ft_is_within_range(double value, double lower_bound, double upper_bound)
 {
-	size_t len;
+    return (value >= lower_bound - EPSILON && value <= upper_bound + EPSILON);
+}
 
-	len = 0;
-	while (line && line[len] && line[len] != '#')
-		++len;
-	return ft_substr(line, 0, len);
+bool ft_is_near_equal(double num, double num2)
+{
+	return (fabs(num - num2) < EPSILON);
+}
+
+bool ft_is_in_range_int(int num, int min, int max)
+{
+    return (num >= min && num <= max);
 }

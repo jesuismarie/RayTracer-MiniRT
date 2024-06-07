@@ -6,44 +6,11 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:25:23 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/06 02:06:38 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:14:24 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-
-
-void set_error(char **error, char *new_error)
-{
-    if (!error)
-        return ;
-    // if (*error)
-    //     free(*error);
-    char *str;
-
-    str = NULL;
-    if (new_error)
-        str = ft_strdup(new_error);
-    str = ft_gnl_strjoin(new_error, *error);
-    if (*error)
-    {
-        free(*error);
-        *error = NULL;
-    }
-    *error = str;
-}
-
-char    *ft_format_error(const char *format, char *msg)
-{
-    char    *res = 0;
-
-    res = ft_gnl_strjoin(res, format);
-    if (*res) 
-        res = ft_gnl_strjoin(res, ": ");
-    res = ft_gnl_strjoin(res, msg);
-    return res;
-}
-
 
 int ft_args_count(t_list_token *list, char **error)
 {
@@ -150,14 +117,11 @@ bool ft_validate_vector(t_token *list, char **error)
     return (true);
 }
 
-bool is_in_range(double num) {
-    return (num >= -1.0 && num <= 1.0);
-}
-
 bool ft_range_camera(t_token *list, char **error)
 {
-    t_token *tmp;
     int     i;
+    double  coord;
+    t_token *tmp;
 
     if (!list)
         return (true);
@@ -167,15 +131,13 @@ bool ft_range_camera(t_token *list, char **error)
     {
         if (tmp->type != P_SEMI)
         {
-            double coord = ft_atof(tmp->token);
-            printf("tok: %s\n", tmp->token);
-            if (!is_in_range(coord))
+            coord = ft_atof(tmp->token);
+            if (!ft_is_within_range(coord, -1.0, 1.0))
             {
-                set_error(error, ft_format_error(__func__, "ssss"));
+                set_error(error, ft_format_error(__func__, ""));
                 return (false);
             }
         }
-
         tmp = tmp->next;
     }
     return (true);
@@ -206,13 +168,14 @@ bool ft_validate_camera(t_list_token *list, char **error)
         set_error(error, ft_format_error(__func__, ""));
         return (false);
     }
-    
+
     tmp = ft_jump(tmp->next, 4);
     if (tmp && tmp->next && tmp->next->type == P_SEMI)
     {
         set_error(error, ft_format_error(__func__, ""));
         return (false);
     }
+
     tmp = ft_jump(tmp, 1);
     if (tmp && tmp->next && tmp->next->type == P_SEMI)
     {
@@ -220,5 +183,4 @@ bool ft_validate_camera(t_list_token *list, char **error)
         return (false);
     }
     return (true);
-    
 }

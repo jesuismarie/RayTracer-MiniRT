@@ -6,22 +6,11 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/06 01:26:38 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:53:37 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
-	// P_UNKNOWN,
-	// P_CAMERA,
-	// P_LIGHT,
-	// P_AMB_LIGHT,
-	// P_PLANE,
-	// P_CYLINDER,
-	// P_SPHERE,
-	// P_CONE
-t_list_token	*ft_tokenize(char *input);
-
-
 
 bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) {
 	
