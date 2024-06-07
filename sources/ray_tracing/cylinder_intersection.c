@@ -6,19 +6,20 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/24 23:38:08 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/07 13:02:08 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
+static void	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
 	t_equition *dot)
 {
 	t_vector	v;
 	t_vector	u;
 	t_vector	vec;
 
+	(*obj)->point.dist = 0;
 	vec = vector_sub(pos, (*obj)->cyl->center);
 	v = vector_sub(ray, vector_prod((*obj)->cyl->axis, \
 		vector_scalar_prod((*obj)->cyl->axis, ray)));
@@ -29,13 +30,10 @@ static int	solve_cylinder(t_vector pos, t_vector ray, t_figure **obj, \
 	dot->c = vector_scalar_prod(u, u) - pow((*obj)->cyl->radius, 2);
 	dot->discr = pow(dot->b, 2) - 4 * dot->a * dot->c;
 	if (dot->discr < 0)
-		return (0);
+		return ;
 	dot->x1 = ((dot->b * (-1)) - sqrt(dot->discr)) / (2 * dot->a);
 	dot->x2 = ((dot->b * (-1)) + sqrt(dot->discr)) / (2 * dot->a);
 	find_hit_distance(obj, *dot);
-	if (dot->x1 < __FLT_EPSILON__ && dot->x2 < __FLT_EPSILON__)
-		return (0);
-	return (1);
 }
 
 int	solve_caps(t_vector pos, t_vector ray, t_vector p1, t_figure **obj)
@@ -46,6 +44,8 @@ int	solve_caps(t_vector pos, t_vector ray, t_vector p1, t_figure **obj)
 	dot.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, p1);
 	dot.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, \
 		(*obj)->cyl->center);
+	if (dot.x1 == -1 && dot.x2 == -1)
+		return (0);
 	if (dot.x1 < dot.x2)
 		(*obj)->cyl->flag = 1;
 	find_hit_distance(obj, dot);
@@ -70,9 +70,8 @@ double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	t_vector	p1;
 	t_equition	dot;
 
-	if (!solve_cylinder(pos, ray, obj, &dot))
-		return (0);
 	(*obj)->cyl->cap = 0;
+	solve_cylinder(pos, ray, obj, &dot);
 	p1 = vector_sum((*obj)->cyl->center, \
 		vector_prod((*obj)->cyl->axis, (*obj)->cyl->height));
 	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \

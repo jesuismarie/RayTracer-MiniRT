@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 12:21:25 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/05 17:41:15 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:48:42 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ double	plane_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	double		dot;
 	t_vector	vec;
 
+	(*obj)->point.dist = 0;
 	dot = vector_scalar_prod((*obj)->pln->norm, ray);
 	if (fabs(dot) < __FLT_EPSILON__)
 		return (0);

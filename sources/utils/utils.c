@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/23 15:52:37 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:56:40 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	find_hit_distance(t_figure **obj, t_equition dot)
 {
-	(*obj)->point.dist = 0;
 	(*obj)->point.is_inside = 1;
 	if (dot.x1 > __FLT_EPSILON__ || dot.x2 > __FLT_EPSILON__)
 	{
@@ -38,14 +37,14 @@ double	caps_intersection(t_vector pos, t_vector ray, t_vector norm, \
 	t_vector	vec;
 
 	dot = vector_scalar_prod(norm, ray);
-	if (fabs(dot) < __FLT_EPSILON__)
-		return (0);
+	if (fabs(dot) < 1e-6)
+		return (-1);
 	vec = vector_sub(center, pos);
 	dist = vector_scalar_prod(norm, vec) / dot;
 	if (dist < 0)
 	{
 		dist = 0;
-		return (0);
+		return (-1);
 	}
 	return (dist);
 }
