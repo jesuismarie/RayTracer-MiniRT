@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:56 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:25:05 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) 
 {
-	
 	if (ft_validate_object(list, error))
 		ft_create_object(scene, list, error);
 	else
-	{
-		set_error(error, ft_format_error(__func__, ""));
-        return (false);
-	}
+        return (set_error(error, ft_format_error(__func__, "")));
 	return (true);
 }
 

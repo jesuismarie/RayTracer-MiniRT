@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:48 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:41:36 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:16:29 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,20 @@ bool is_digit_float(char *str)
         str++;
     }
     return (has_digits);
+}
+
+bool ft_is_integer(const char *str)
+{
+   if (str && *str == '\0')
+		return (false);
+    if (*str == '+' || *str == '-')
+    	str++;
+
+    while (*str)
+    {
+        if (!ft_isdigit(*str))
+            return (false);
+        str++;
+    }
+    return (true);
 }

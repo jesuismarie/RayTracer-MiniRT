@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:25:23 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:53 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:00:48 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ bool ft_range_camera(t_token *list, char **error)
         {
             coord = ft_atof(tmp->token);
             if (!ft_is_within_range(coord, -1.0, 1.0))
-            {
-                set_error(error, ft_format_error(__func__, ""));
-                return (false);
-            }
+                return (set_error(error, ft_format_error(__func__, "")));
         }
         tmp = tmp->next;
     }
@@ -42,40 +39,21 @@ bool ft_validate_camera(t_list_token *list, char **error)
 {
     t_token *tmp = list->head;
 
-    if (!list->head || !list->head->next || list->head->next->type == P_SEMI || list->head->type != P_CAMERA || !ft_pars_args(list, error) || !ft_pars_semi(list, error))
-    {
-        set_error(error, ft_format_error(__func__, ""));
-        return (false);
-    }
+    if (!list->head || !list->head->next || list->head->next->type == P_SEMI || list->head->type != P_CAMERA || \
+        !ft_pars_args(list, error, CAMERA_MAX_ARGS) || !ft_pars_semi(list, error, CAMERA_MAX_COLONS))
+        return (set_error(error, ft_format_error(__func__, "")));
     if (!ft_validate_vector(tmp->next, error))
-    {
-        set_error(error, ft_format_error(__func__, ""));
-        return (false);
-    }
+        return (set_error(error, ft_format_error(__func__, "")));
     tmp = ft_jump(tmp->next, 4);
     if (tmp && tmp->next && tmp->next->type == P_SEMI)
-    {
-        set_error(error, ft_format_error(__func__, ""));
-        return (false);
-    }
+        return (set_error(error, ft_format_error(__func__, "")));
     if (tmp && (!ft_validate_vector(tmp->next, error) || !ft_range_camera(tmp->next, error)))
-    {
-        set_error(error, ft_format_error(__func__, ""));
-        return (false);
-    }
-
+        return (set_error(error, ft_format_error(__func__, "")));
     tmp = ft_jump(tmp->next, 4);
     if (tmp && tmp->next && tmp->next->type == P_SEMI)
-    {
-        set_error(error, ft_format_error(__func__, ""));
-        return (false);
-    }
-
+        return (set_error(error, ft_format_error(__func__, "")));
     tmp = ft_jump(tmp, 1);
     if (tmp && tmp->next && tmp->next->type == P_SEMI)
-    {
-        set_error(error, ft_format_error(__func__, ""));
-        return (false);
-    }
+        return (set_error(error, ft_format_error(__func__, "")));
     return (true);
 }

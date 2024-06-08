@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:02 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:47:19 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_tokenize_wrapper	t_tokenize_wrapper;
 typedef struct s_tokenize_space_helper		t_tokenize_space_helper;
 typedef struct s_tokenize_wrapper	t_tokenize_wrapper;
 typedef struct s_tokenize_wrap		t_tokenize_wrap;
+typedef enum s_check_type			t_check_type;
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -38,6 +39,14 @@ typedef struct s_tokenize_wrap		t_tokenize_wrap;
 #define P_CYLINDER_D "cy"
 #define P_CONE_D "co"
 
+
+#define CAMERA_MAX_ARGS 7
+#define AMB_MAX_ARGS 4
+#define LIGHT_MAX_ARGS 7
+
+#define CAMERA_MAX_COLONS 4
+#define AMB_MAX_COLONS 2
+#define LIGHT_MAX_COLONS 4
 
 
 enum e_ptoken_type
@@ -98,10 +107,16 @@ struct s_tokenize_wrap
 	int						is_one_sym;
 };
 
+enum s_check_type
+{
+	FLOAT,
+	INT
+};
+
 /**
  * PATH: ft_pars_error.c
 */
-void 			set_error(char **error, char *new_error);
+bool 			set_error(char **error, char *new_error);
 char   		 	*ft_format_error(const char *format, char *msg);
 
 /**
@@ -113,10 +128,31 @@ char 			*ft_ignore_comment(char *line);
  * PATH: ft_create_camera.c
 */
 bool			ft_create_camera(t_scene *scene, t_list_token	*list, char **error);
-t_camera		ft_parse_camera(t_list_token *list);
+bool			ft_parse_camera(t_list_token *list, t_camera *camera, char **error);
 bool			ft_validate_camera_args(t_camera camera, char **error);
 bool			ft_validate_fov(int fov, char **error);
 bool			ft_validate_dir(t_vector dir, char **error);
+
+/**
+ * ft_validate_amb_light.c
+*/
+bool ft_validate_amb_light(t_list_token	*list, char **error);
+bool ft_create_amb_light(t_scene *scene, t_list_token	*list, char **error);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * PATH: ft_math_operation.c
@@ -124,6 +160,7 @@ bool			ft_validate_dir(t_vector dir, char **error);
 bool			ft_is_near_equal(double num, double num2);
 bool			ft_is_within_range(double value, double lower_bound, double upper_bound);
 bool			ft_is_in_range_int(int num, int min, int max);
+bool			ft_is_within_range_weak(double value, double lower_bound, double upper_bound);
 
 
 /**
@@ -184,8 +221,8 @@ bool			ft_validate_vector(t_token *list, char **error);
 /**
  * PATH: ft_validate_args.c
 */
-bool			ft_pars_semi(t_list_token *list, char **error);
-bool			ft_pars_args(t_list_token *list, char **error);
+bool			ft_pars_semi(t_list_token *list, char **error, int max_colon_count);
+bool			ft_pars_args(t_list_token *list, char **error, int max_arg);
 int				ft_semi_count(t_list_token *list);
 int				ft_args_count(t_list_token *list, char **error);
 
@@ -195,5 +232,16 @@ int				ft_args_count(t_list_token *list, char **error);
 double			ft_atof(char *str);
 int				ft_strcmp_std(char *s1, char *s2);
 bool			is_digit_float(char *str);
+bool			ft_is_integer(const char *str);
 
+
+
+bool ft_validate_color(t_color color, char **error);
+bool ft_validate_light(t_list_token *list, char **error);
+bool ft_create_light(t_scene *scene, t_list_token *list, char **error);
+bool ft_validate_color_args(t_token *start, t_token *end, char **error);
+
+t_color ft_parse_color(t_token *start);
+t_vector ft_parse_pos(t_token *start);
+bool ft_parse_dir(t_token *start, t_vector *vec, char **error);
 #endif

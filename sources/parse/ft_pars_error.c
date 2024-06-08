@@ -6,18 +6,18 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:54:13 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:27 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/08 14:39:01 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void set_error(char **error, char *new_error)
+bool set_error(char **error, char *new_error)
 {
     char *str;
 
     if (!error)
-        return ;
+        return true;
     str = NULL;
     if (new_error)
         str = ft_strdup(new_error);
@@ -28,6 +28,7 @@ void set_error(char **error, char *new_error)
         *error = NULL;
     }
     *error = str;
+    return (false);
 }
 
 char    *ft_format_error(const char *format, char *msg)
