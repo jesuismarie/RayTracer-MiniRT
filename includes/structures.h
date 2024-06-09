@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 17:08:32 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/09 20:09:12 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,31 +118,38 @@ struct s_pattern
 
 struct s_sphere
 {
+	double		spec_p;
 	int			checkerboard;
 	int			texture;
 	int			bump;
 	t_vector	center;
 	double		radius;
+	t_color		color_p;
 };
 
 struct s_plane
 {
+	double		spec_p;
 	t_vector	pos;
 	t_vector	norm;
+	t_color		color_p;
 };
 
 struct s_cylinder
 {
+	double		spec_p;
 	int			cap;
 	int			flag;
 	t_vector	center;
 	t_vector	axis;
 	double		radius;
 	double		height;
+	t_color		color_p;
 };
 
 struct s_cone
 {
+	double		spec_p;
 	int			cap;
 	t_vector	apex;
 	t_vector	axis;
@@ -150,6 +157,7 @@ struct s_cone
 	double		height;
 	double		cos;
 	double		sin;
+	t_color		color_p;
 };
 
 struct s_intersect // don't touch

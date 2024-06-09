@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:36:34 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 16:00:18 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/09 20:28:44 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ int ft_semi_count(t_list_token *list)
 }
 
 
-bool ft_pars_args(t_list_token *list, char **error, int max_count)
+bool ft_pars_args(t_list_token *list, char **error, int min_count, int max_count)
 {
     int count = ft_args_count(list, error);
     if (count == -1)
-        return (set_error(error, ft_format_error(__func__, "")));
-    if (count != max_count)
-        return (set_error(error, ft_format_error(__func__, "")));
+        return (set_error(error, ft_format_error(__func__, "2")));
+    printf("%d %d\n", count, max_count);
+    if (count < min_count || count > max_count)
+        return (set_error(error, ft_format_error(__func__, "3")));
     return (true);
 }
 

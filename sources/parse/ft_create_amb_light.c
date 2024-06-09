@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:46:32 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 19:04:15 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/09 20:30:59 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_amb_light ft_parse_amb(t_list_token *list)
     tmp = ft_jump(list->head, 1);
     amb_obj.ratio = ft_atof(tmp->token);
     amb_obj.light = ft_parse_color(tmp);
-    return amb_obj;
+    return (amb_obj);
 }
 
 bool ft_create_amb_light(t_scene *scene, t_list_token *list, char **error)
@@ -31,9 +31,8 @@ bool ft_create_amb_light(t_scene *scene, t_list_token *list, char **error)
     if (!ft_validate_color(amb_obj.light, error))
         return (set_error(error, ft_format_error(__func__, "")));
     scene->amb = new_amb_light(amb_obj.light, amb_obj.ratio);
-    return true;
+    return (true);
 }
-
 
 bool ft_validate_amb_light(t_list_token	*list, char **error)
 {
@@ -42,8 +41,10 @@ bool ft_validate_amb_light(t_list_token	*list, char **error)
     double ratio;
 
     tmp = list->head;
-    if (!list->head || !list->head->next || list->head->next->type == P_SEMI || list->head->type != P_AMB_LIGHT || \
-    !ft_pars_args(list, error, AMB_MAX_ARGS) || !ft_pars_semi(list, error, AMB_MAX_COLONS))
+    if (!list->head || !list->head->next || list->head->next->type == P_SEMI \
+        || list->head->type != P_AMB_LIGHT \
+        || !ft_pars_args(list, error, AMB_MAX_ARGS, AMB_MAX_ARGS) \
+        || !ft_pars_semi(list, error, AMB_MAX_COLONS))
         return (set_error(error, ft_format_error(__func__, "")));
     tmp = ft_jump(tmp, 1);
     ratio = ft_atof(tmp->token);
@@ -57,6 +58,6 @@ bool ft_validate_amb_light(t_list_token	*list, char **error)
     if (!ft_validate_color_args(prev, tmp, error))
         return (set_error(error, ft_format_error(__func__, "")));
     if (tmp && tmp->next && tmp->next->type == P_SEMI)
-        return (set_error(error, ft_format_error(__func__, "5")));
+        return (set_error(error, ft_format_error(__func__, "")));
     return (true);
 }

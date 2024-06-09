@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:25:23 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 16:00:48 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/09 20:30:13 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool ft_validate_camera(t_list_token *list, char **error)
     t_token *tmp = list->head;
 
     if (!list->head || !list->head->next || list->head->next->type == P_SEMI || list->head->type != P_CAMERA || \
-        !ft_pars_args(list, error, CAMERA_MAX_ARGS) || !ft_pars_semi(list, error, CAMERA_MAX_COLONS))
+        !ft_pars_args(list, error, CAMERA_MAX_ARGS, CAMERA_MAX_ARGS) || !ft_pars_semi(list, error, CAMERA_MAX_COLONS))
         return (set_error(error, ft_format_error(__func__, "")));
     if (!ft_validate_vector(tmp->next, error))
         return (set_error(error, ft_format_error(__func__, "")));

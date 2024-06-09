@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 17:47:19 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/09 21:15:21 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ typedef enum s_check_type			t_check_type;
 #define CAMERA_MAX_COLONS 4
 #define AMB_MAX_COLONS 2
 #define LIGHT_MAX_COLONS 4
+#define PLANE_MAX_COLONS 6
+#define SPHERE_MAX_COLONS 4
+
+#define PLANE_MAX_ARGS 9
+#define SPHERE_MAX_ARGS 7
+// #define PLANE_MAX_ARGS_OPS 10
+
 
 
 enum e_ptoken_type
@@ -138,6 +145,7 @@ bool			ft_validate_dir(t_vector dir, char **error);
 */
 bool ft_validate_amb_light(t_list_token	*list, char **error);
 bool ft_create_amb_light(t_scene *scene, t_list_token	*list, char **error);
+bool ft_validate_plane(t_list_token *list, char **error);
 
 
 
@@ -222,7 +230,7 @@ bool			ft_validate_vector(t_token *list, char **error);
  * PATH: ft_validate_args.c
 */
 bool			ft_pars_semi(t_list_token *list, char **error, int max_colon_count);
-bool			ft_pars_args(t_list_token *list, char **error, int max_arg);
+bool			ft_pars_args(t_list_token *list, char **error, int min_count, int max_count);
 int				ft_semi_count(t_list_token *list);
 int				ft_args_count(t_list_token *list, char **error);
 
@@ -244,4 +252,17 @@ bool ft_validate_color_args(t_token *start, t_token *end, char **error);
 t_color ft_parse_color(t_token *start);
 t_vector ft_parse_pos(t_token *start);
 bool ft_parse_dir(t_token *start, t_vector *vec, char **error);
+
+
+t_figure	*ft_push_back_obj(t_figure *start, t_figure *obj);
+t_figure 	*new_figure(void *obj, t_figure_type type);
+t_figure	*ft_get_last_obj(t_figure* start);
+bool 		ft_create_plane(t_scene *scene, t_list_token	*list, char **error);
+bool 		ft_parse_plane(t_list_token *list, t_plane *plane, char **error);
+bool 		ft_validate_plane_args(t_plane plane, char **error);
+bool		ft_skip_optional_arg(t_list_token *list, t_token **start, char **error, int max_ops_arg);
+
+bool ft_validate_sphere(t_list_token *list, char **error);
+bool ft_create_sphere(t_scene *scene, t_list_token	*list, char **error);
+// bool ft_parse_optional_arg(t_plane *plane, t_list_token *list, t_token **start, char **error);
 #endif

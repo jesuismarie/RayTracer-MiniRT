@@ -6,18 +6,38 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 15:25:05 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:53:29 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
+// figures []
+
 bool ft_parse_object(t_scene *scene, t_list_token	*list, char **error) 
 {
-	if (ft_validate_object(list, error))
-		ft_create_object(scene, list, error);
-	else
-        return (set_error(error, ft_format_error(__func__, "")));
+	// printf("sssss\n");
+	// t_ptoken_type ptype;
+
+	if (!ft_validate_object(list, error))
+		return (set_error(error, ft_format_error(__func__, "888")));
+	if (!ft_create_object(scene, list, error))
+		return (set_error(error, ft_format_error(__func__, "222")));
+	// ptype = ft_get_ptype(list->head->token);
+	// t_figure *last_obj = ft_get_last_obj(scene->figure);
+
+	// else if (ptype == P_LIGHT)
+	// 	return (ft_create_light(scene, list, error));
+	// else if (ptype == PLANE)
+	// 	scene->figure = ft_push_back_obj(scene->figure, new_figure(scene->figure, ptype))
+	// else if (ptype == P_CYLINDER)
+	// 	scene->figure = ft_push_back_obj(scene->figure, new_figure(, ptype))
+	// else if (ptype == P_SPHERE)
+	// 	scene->figure = ft_push_back_obj(scene->figure, new_figure(, ptype))
+	// else if (ptype == P_CONE)
+	// 	scene->figure = ft_push_back_obj(scene->figure, new_figure(, ptype))
+	
+	
 	return (true);
 }
 

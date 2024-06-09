@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:47:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 19:03:44 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:02:21 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ bool ft_parse_dir(t_token *start, t_vector *dir, char **error)
 	dir->y = ft_atof(tmp->token);
 	tmp = ft_jump(tmp, 2);
 	dir->z = ft_atof(tmp->token);
+	if (!ft_is_within_range(dir->x, -1.0, 1.0) || !ft_is_within_range(dir->y, -1.0, 1.0) || !ft_is_within_range(dir->z, -1.0, 1.0))
+        return (set_error(error, ft_format_error(__func__, "")));
     normalize_vector(dir);
 	if (isnan(dir->x) || isnan(dir->y) || isnan(dir->z))
 		return (set_error(error, ft_format_error(__func__, "")));
