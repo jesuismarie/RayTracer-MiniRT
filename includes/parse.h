@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/09 21:15:21 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 01:24:18 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ typedef enum s_check_type			t_check_type;
 #define LIGHT_MAX_COLONS 4
 #define PLANE_MAX_COLONS 6
 #define SPHERE_MAX_COLONS 4
+#define CYLINDER_MAX_COLONS 6
+#define CONE_MAX_COLONS 6
 
 #define PLANE_MAX_ARGS 9
 #define SPHERE_MAX_ARGS 7
+#define CYLINDER_MAX_ARGS 11
+#define CONE_MAX_ARGS 11
 // #define PLANE_MAX_ARGS_OPS 10
 
 
@@ -124,7 +128,7 @@ enum s_check_type
  * PATH: ft_pars_error.c
 */
 bool 			set_error(char **error, char *new_error);
-char   		 	*ft_format_error(const char *format, char *msg);
+char			*ft_format_error(const char *format, const char *msg);
 
 /**
  * PATH: ft_comment.c
@@ -264,5 +268,11 @@ bool		ft_skip_optional_arg(t_list_token *list, t_token **start, char **error, in
 
 bool ft_validate_sphere(t_list_token *list, char **error);
 bool ft_create_sphere(t_scene *scene, t_list_token	*list, char **error);
+
+bool ft_validate_cylinder(t_list_token *list, char **error);
+bool ft_create_cylinder(t_scene *scene, t_list_token	*list, char **error);
+
+bool ft_validate_cone(t_list_token *list, char **error);
+bool ft_create_cone(t_scene *scene, t_list_token	*list, char **error);
 // bool ft_parse_optional_arg(t_plane *plane, t_list_token *list, t_token **start, char **error);
 #endif

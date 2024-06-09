@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:23:20 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/09 20:31:09 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 01:09:51 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ bool ft_create_light(t_scene *scene, t_list_token *list, char **error)
     light = ft_parse_light(list);
     if (!ft_validate_color(light.color, error))
         return (set_error(error, ft_format_error(__func__, "1")));
+     if (scene->light)
+		return (set_error(error, ft_format_error(__func__, "")));
     scene->light = new_light(light.coordinate, light.color, light.brightness);
     scene->figure = ft_push_back_obj(scene->figure, new_figure(new_light(light.coordinate, light.color, light.brightness), LIGHT));
-    return false;
+    return true;
 }
 
 bool ft_validate_light(t_list_token *list, char **error)

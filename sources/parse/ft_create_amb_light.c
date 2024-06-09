@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:46:32 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/09 20:30:59 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 01:09:33 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ bool ft_create_amb_light(t_scene *scene, t_list_token *list, char **error)
     amb_obj = ft_parse_amb(list);
     if (!ft_validate_color(amb_obj.light, error))
         return (set_error(error, ft_format_error(__func__, "")));
+    if (scene->amb)
+		return (set_error(error, ft_format_error(__func__, "")));
     scene->amb = new_amb_light(amb_obj.light, amb_obj.ratio);
     return (true);
 }

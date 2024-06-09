@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:54:13 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/08 14:39:01 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 01:25:44 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool set_error(char **error, char *new_error)
     return (false);
 }
 
-char    *ft_format_error(const char *format, char *msg)
+char    *ft_format_error(const char *format, const char *msg)
 {
     char    *res = 0;
 

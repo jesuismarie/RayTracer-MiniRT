@@ -15,7 +15,7 @@ OBJS			= $(foreach dir, $(SRCSDIRS), \
 INCS			= -I./includes -I./lib/libft/includes -I./lib/ft_printf/includes \
 				-I./lib/minilibx_opengl
 
-HEADER			= ./includes/minirt.h ./includes/defines.h ./includes/structures.h
+HEADER			= ./includes/minirt.h ./includes/defines.h ./includes/structures.h ./includes/parse.h
 
 FLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
 
