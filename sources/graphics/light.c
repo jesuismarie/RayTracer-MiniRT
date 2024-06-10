@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/03 17:26:48 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:12:16 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_color	compute_light(t_scene *scene, t_figure *obj, \
 	t_light	*tmp;
 
 	col = calc_rgb_light(scene->amb->light, scene->amb->ratio);
+	if (obj->point.is_inside)
+		return (col);
 	tmp = scene->light;
 	while (tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/09 20:09:12 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:01:15 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef enum e_figure_type	t_figure_type;
 typedef struct s_img		t_img;
 typedef struct s_mlx		t_mlx;
-typedef struct s_equition	t_equition;
+typedef struct s_equation	t_equation;
 typedef struct s_vector		t_vector;
 typedef struct s_color		t_color;
 typedef struct s_amb_light	t_amb_light;
@@ -62,7 +62,7 @@ struct s_mlx // don't touch
 	t_img	data;
 };
 
-struct s_equition // don't touch
+struct s_equation // don't touch
 {
 	double	a;
 	double	b;
@@ -141,6 +141,7 @@ struct s_cylinder
 	int			cap;
 	int			flag;
 	t_vector	center;
+	t_vector	center1;
 	t_vector	axis;
 	double		radius;
 	double		height;
@@ -153,6 +154,7 @@ struct s_cone
 	int			cap;
 	t_vector	apex;
 	t_vector	axis;
+	t_vector	center;
 	double		radius;
 	double		height;
 	double		cos;

@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:53:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/20 20:40:53 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:18:02 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vector	look_at(t_scene	*scene, double ray_x, double ray_y)
 	right = vector_cross(scene->cam->norm, up);
 	normalize_vector(&right);
 	new = vector_cross(right, scene->cam->norm);
+	normalize_vector(&new);
 	ray_dir = vector_sum(vector_sum(vector_prod(right, ray_x), \
 		vector_prod(new, ray_y)), scene->cam->norm);
 	normalize_vector(&ray_dir);

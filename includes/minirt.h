@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/05 19:09:36 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:01:07 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				close_win(t_scene *scene);
 /*---------------------------------- UTILS -----------------------------------*/
 /*----------------------------------------------------------------------------*/
 t_vector		reflect_ray(t_vector ray, t_vector norm);
-void			find_hit_distance(t_figure **obj, t_equition dot);
+void			find_hit_distance(t_figure **obj, t_equation dot);
 double			caps_intersection(t_vector pos, t_vector ray, t_vector norm, \
 					t_vector center);
 void			set_hit_normal(t_figure **obj, t_vector ray);

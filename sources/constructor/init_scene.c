@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 18:02:22 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:10:08 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_scene(t_scene **scene)
 	col1 = new_color(0, 255, 255);
 	col2 = new_color(0, 255, 0);
 	col3 = new_color(255, 0, 0);
-	norm = new_vector(0, -1, 0);
+	norm = new_vector(0, 1, 0);
 	normalize_vector(&norm);
 	(*scene)->texture = get_pattern(*scene, "./resources/textures/texture.xpm", 0);
 	(*scene)->bump = get_pattern(*scene, "./resources/textures/bump.xpm", 1);
@@ -58,7 +58,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->spec = 100;
 	(*scene)->figure->next->color = col3;
 	(*scene)->figure->next->type = SPHERE;
-	(*scene)->figure->next->sph = new_sphere(new_vector(2, 1, -20), 2);
+	(*scene)->figure->next->sph = new_sphere(new_vector(2, 1, -30), 2);
 	(*scene)->figure->next->sph->bump = 1;
 	(*scene)->figure->next->sph->texture = 1;
 	// -------------- Sphere 2 --------------
@@ -66,7 +66,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->next->spec = 500;
 	(*scene)->figure->next->next->color = col2;
 	(*scene)->figure->next->next->type = SPHERE;
-	(*scene)->figure->next->next->sph = new_sphere(new_vector(7, 0, -25), 1);
+	(*scene)->figure->next->next->sph = new_sphere(new_vector(7, 0, -30), 1);
 	(*scene)->figure->next->next->sph->checkerboard = 1;
 	// -------------- Plane ---------------
 	(*scene)->figure->next->next->next = ft_calloc(1, sizeof(t_figure));
@@ -81,7 +81,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->next->next->next->color = col3;
 	(*scene)->figure->next->next->next->next->type = CYLINDER;
 	(*scene)->figure->next->next->next->next->cyl = \
-		new_cylinder(new_vector(-10, 4, -27), norm, 2, 5);
+		new_cylinder(new_vector(-8, -1, -20), norm, 2, 5);
 	// -------------- Cone ----------------
 	(*scene)->figure->next->next->next->next->next = ft_calloc(1, \
 		sizeof(t_figure));
@@ -89,7 +89,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->figure->next->next->next->next->next->color = col1;
 	(*scene)->figure->next->next->next->next->next->type = CONE;
 	(*scene)->figure->next->next->next->next->next->cone = \
-		new_cone(new_vector(8, 4, -20), norm, 2, 5);
+		new_cone(new_vector(9, -1, -17), norm, 2, 5);
 	// -------------- replace !!!!!!!!!
 	(*scene)->width = WIDTH;
 	(*scene)->height = HEIGHT;

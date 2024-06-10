@@ -52,6 +52,14 @@ all:			mlx lib $(BUILD) $(NAME)
 ${NAME}:		${OBJS}
 	@$(CC) $(FLAGS) $(OBJS) $(INCS) $(LIB) $(FMS) -o ${NAME}
 	@echo "${ORANGE}Ray Tracer created 🧩${RESET}"
+	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
+	@echo "$(ORANGE)| Usage               | ./miniRT <path/to/scene.rt>    |$(RESET)"
+	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
+	@echo "$(ORANGE)| Recommended Scenes  | scenes/white.rt                |$(RESET)"
+	@echo "$(ORANGE)|                     | scenes/complex.rt              |$(RESET)"
+	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
+	@echo "$(ORANGE)| Help                | make help                      |$(RESET)"
+	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
 
 $(BUILD):
 	@mkdir -p $(BUILD)
@@ -74,6 +82,17 @@ lib:
 		sleep 0.3; \
 	done
 	@echo "${YELLOW} Done 🧩${RESET}"
+
+help:
+	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
+	@echo "$(ORANGE)| Controls    | ←/→   - Walk left/right                |$(RESET)"
+	@echo "$(ORANGE)|             | ↑/↓   - Walk forward/backward          |$(RESET)"
+	@echo "$(ORANGE)|             | W/S   - Rotate camera up/down          |$(RESET)"
+	@echo "$(ORANGE)|             | A/D   - Rotate camera left/right       |$(RESET)"
+	@echo "$(ORANGE)|             | T     - Apply texture                  |$(RESET)"
+	@echo "$(ORANGE)|             | B     - Apply bump map                 |$(RESET)"
+	@echo "$(ORANGE)|             | C     - Apply checkerboard             |$(RESET)"
+	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
 
 clean:
 	@make clean -C lib/ft_printf
