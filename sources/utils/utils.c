@@ -6,13 +6,13 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:21:41 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/07 17:46:06 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:56:16 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	find_hit_distance(t_figure **obj, t_equition dot)
+void	find_hit_distance(t_figure **obj, t_equation dot)
 {
 	(*obj)->point.is_inside = 1;
 	if (dot.x1 > __FLT_EPSILON__ || dot.x2 > __FLT_EPSILON__)
@@ -36,16 +36,14 @@ double	caps_intersection(t_vector pos, t_vector ray, t_vector norm, \
 	double		dot;
 	t_vector	vec;
 
+	dist = 0;
 	dot = vector_scalar_prod(norm, ray);
 	if (fabs(dot) < __FLT_EPSILON__)
-		return (-1);
+		return (INFINITY);
 	vec = vector_sub(center, pos);
 	dist = vector_scalar_prod(norm, vec) / dot;
-	if (dist < 0)
-	{
-		dist = 0;
-		return (-1);
-	}
+	if (dist < __FLT_EPSILON__)
+		return (INFINITY);
 	return (dist);
 }
 
