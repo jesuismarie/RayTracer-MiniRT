@@ -6,13 +6,13 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:38:50 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/09 17:40:30 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:38:26 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_ptoken_type ft_get_ptype(char *type)
+t_ptoken_type	ft_get_ptype(char *type)
 {
 	if (!ft_strcmp_std(type, P_CAMERA_D))
 		return (P_CAMERA);
@@ -30,22 +30,3 @@ t_ptoken_type ft_get_ptype(char *type)
 		return (P_CONE);
 	return (P_UNKNOWN);
 }
-
-// char *ft_get_ptype_(t_ptoken_type ptoken)
-// {
-// 	if (ptoken == P_CAMERA)
-// 		return P_CAMERA;
-// 	if (ptoken == P_LIGHT)
-// 		return P_LIGHT;
-// 	if (ptoken == P_SPHERE)
-// 		return P_SPHERE;
-// 	if (ptoken == P_AMB_LIGHT)
-// 		return P_AMB_LIGHT;
-// 	if (ptoken == P_PLANE)
-// 		return P_PLANE;
-// 	if (ptoken == P_CYLINDER)
-// 		return ft_strdup();
-// 	if (ptoken == P_CONE_D)
-// 		return P_CONE;
-// 	return P_UNKNOWN;
-// }

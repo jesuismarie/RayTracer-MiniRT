@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 21:15:30 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:39 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:40:03 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_tokenize_space_helper(t_tokenize_space_helper *wrapper)
 char	*ft_tokenize_with_space(char *expr)
 {
 	t_tokenize_space_helper	wrapper;
-	static char		*next_token;
+	static char				*next_token;
 
 	if (expr)
 		next_token = expr;
@@ -72,10 +72,10 @@ t_list_token	*ft_tokenize_space(char *input)
 	return (list);
 }
 
-
 void	ft_tokenize_helper(t_tokenize_wrapper *wrapper)
 {
-	wrapper->token = ft_tokenize_with_delims(wrapper->head->token, &wrapper->type);
+	wrapper->token = ft_tokenize_with_delims(wrapper->head->token, \
+		&wrapper->type);
 	while (wrapper->token)
 	{
 		if (wrapper->type == P_SEMI)
@@ -109,8 +109,7 @@ t_list_token	*ft_tokenize(char *input)
 		wrapper.head = wrapper.tmp;
 	}
 	free(wrapper.space_list);
-	if (wrapper.list->head) {
+	if (wrapper.list->head)
 		wrapper.list->head->type = ft_get_ptype(wrapper.list->head->token);
-	}
 	return (wrapper.list);
 }

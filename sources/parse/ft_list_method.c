@@ -6,13 +6,13 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:55:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:21 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:07:40 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void    ft_init_token(t_token *node, int type, char *elem)
+void	ft_init_token(t_token *node, int type, char *elem)
 {
 	node->type = type;
 	node->token = elem;
@@ -68,20 +68,22 @@ void	ft_print_list(t_token *list)
 	current = list;
 	while (current)
 	{
-		printf("Type: %u, Token: %s\n", current->type, current->token);
+		ft_printf("Type: %u, Token: %s\n", current->type, current->token);
 		current = current->next;
 	}
 }
 
-t_token *ft_jump(t_token *list, int step)
+t_token	*ft_jump(t_token *list, int step)
 {
-    if (!list)
-        return (NULL);
-    int i = 0;
-    while (list && i < step)
-    {
-        list = list->next;
-        ++i;
-    }
-    return (list);
+	int	i;
+
+	i = 0;
+	if (!list)
+		return (NULL);
+	while (list && i < step)
+	{
+		list = list->next;
+		++i;
+	}
+	return (list);
 }

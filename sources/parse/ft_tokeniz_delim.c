@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:26:33 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/07 22:43:35 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:39:08 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	ft_tokenize_delim_helper(t_tokenize_wrap *wrap, t_ptoken_type *type)
 {
-    char delim;
+	char	delim;
 
-    delim = ',';
+	delim = ',';
 	wrap->is_one_sym = 0;
 	while (wrap->token_start[wrap->index])
 	{
 		if (delim == wrap->token_start[wrap->index])
 		{
-            wrap->is_one_sym = 1;
-	        *type = P_SEMI;
-	        wrap->token_start[wrap->index] = '\0';
-	        wrap->next_token = wrap->token_start + wrap->index + 1;
+			wrap->is_one_sym = 1;
+			*type = P_SEMI;
+			wrap->token_start[wrap->index] = '\0';
+			wrap->next_token = wrap->token_start + wrap->index + 1;
 			return (1);
 		}
 		else

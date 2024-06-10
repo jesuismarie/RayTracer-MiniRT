@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:42:40 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/14 20:12:43 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:13:50 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ scene example with all options - > scenes->all.rt
 // 	double		width;
 // };
 
-t_scene	*ft_init_scene(){
-	t_scene	*scene = (t_scene *)malloc(sizeof(t_scene));
+t_scene	*ft_init_scene(void)
+{
+	t_scene	*scene;
+
+	scene = (t_scene *)malloc(sizeof(t_scene));
 	if (!scene)
 		return (NULL);
-	
 	scene->light = NULL;
 	scene->figure = NULL;
 	scene->cam = NULL;
@@ -52,10 +54,10 @@ t_scene	*ft_init_scene(){
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
 	char	*error;
 	t_scene	*scene;
 
+	(void)argc;
 	scene = ft_init_scene();
 	error_exit(argc != 2, "Wrong count of arguments");
 	error = ft_parse(scene, argv);
