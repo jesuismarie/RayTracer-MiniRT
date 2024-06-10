@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:27:27 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 20:21:25 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 23:52:00 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	ft_create_object(t_scene *scene, t_list_token	*list, char **error)
 {
+	printf("hhhhhh\n");
+
 	t_ptoken_type	ptype;
 
 	ptype = ft_get_ptype(list->head->token);

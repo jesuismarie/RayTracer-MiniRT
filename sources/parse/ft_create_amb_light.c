@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:46:32 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 15:20:12 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 23:51:52 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ bool	ft_create_amb_light(t_scene *scene, t_list_token *list, char **error)
 
 bool	ft_validate_amb_light(t_list_token	*list, char **error)
 {
+
 	t_token	*tmp;
 	t_token	*prev;
 	double	ratio;

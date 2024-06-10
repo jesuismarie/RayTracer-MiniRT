@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 21:15:04 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/14 17:45:51 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 23:56:16 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	win_init(t_scene *scene)
 	scene->mlx = ft_calloc(1, sizeof(t_mlx));
 	error_exit(!scene->mlx, MALLOC_ERR);
 	scene->mlx->mlx = mlx_init();
+	error_exit(!scene->mlx->mlx, MALLOC_ERR);
 }
 
 void	img_init(t_scene *scene)
@@ -26,7 +27,7 @@ void	img_init(t_scene *scene)
 
 	if (scene->mlx->data.img)
 		mlx_destroy_image(scene->mlx, scene->mlx->data.img);
-	init_scene(&scene);
+	init_scene(scene);
 	scene->mlx->data.img = mlx_new_image(scene->mlx->mlx, WIDTH, HEIGHT);
 	scene->mlx->data.addr = mlx_get_data_addr(scene->mlx->data.img, \
 		&scene->mlx->data.bpp, &scene->mlx->data.l, &scene->mlx->data.end);

@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:47:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 18:31:14 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 01:19:33 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ bool	ft_parse_sphere(t_list_token *list, \
 	sphere->center = ft_parse_pos(tmp);
 	tmp = ft_jump(tmp, 5);
 	sphere->radius = ft_atof(tmp->token);
+	printf("%lf\n", sphere->radius);
 	if (sphere->radius < 0)
 		return (set_error(error, ft_format_error(__func__, "")));
 	sphere->radius /= 2;

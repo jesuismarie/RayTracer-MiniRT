@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:14:21 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 18:28:37 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 01:05:21 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,26 @@ t_figure	*new_figure(void *obj, t_figure_type type)
 	figure = ft_calloc(1, sizeof(t_figure));
 	figure->type = type;
 	if (type == LIGHT)
+	{
 		figure->sph = obj;
+		figure->color = ((t_sphere *)obj)->color_p;
+	}
 	else if (type == SPHERE)
 	{
 		figure->sph = obj;
+		figure->spec = ((t_sphere *)obj)->spec_p;
 		figure->color = ((t_sphere *)obj)->color_p;
 	}
 	else if (type == PLANE)
 	{
 		figure->pln = obj;
+		figure->spec = ((t_plane *)obj)->spec_p;
 		figure->color = ((t_plane *)obj)->color_p;
 	}
 	else if (type == CONE)
 	{
 		figure->cone = obj;
+		figure->spec = ((t_cone *)obj)->spec_p;
 		figure->color = ((t_cone *)obj)->color_p;
 	}
 	else

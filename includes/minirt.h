@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 21:01:07 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/10 23:43:02 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /*----------------------------------------------------------------------------*/
 /*---------------------------- INIT & CONSTRUCTOR ----------------------------*/
 /*----------------------------------------------------------------------------*/
-void			init_scene(t_scene **scene);
+void			init_scene(t_scene *scene);
 void			win_init(t_scene *scene);
 void			img_init(t_scene *scene);
 t_camera		*new_camera(t_vector pos, t_vector dir, int fov);

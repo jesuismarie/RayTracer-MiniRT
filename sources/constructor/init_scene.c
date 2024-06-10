@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:33:17 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 13:10:08 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/11 01:17:49 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,17 @@ t_vplane	*get_view_plane(t_scene *scene)
 	return (view_plane);
 }
 
-void	init_scene(t_scene **scene)
+void	init_scene(t_scene *scene)
 {
 	t_vector	norm;
 	t_color		col;
 	t_color		col1;
 	t_color		col2;
 	t_color		col3;
+	t_figure*	figure = NULL;
+	scene->texture = get_pattern(scene, "./resources/textures/texture.xpm", 0);
+	scene->bump = get_pattern(scene, "./resources/textures/bump.xpm", 1);
+	
 	// -------------- replace !!!!!!!!!
 	col = new_color(255, 255, 255);
 	col1 = new_color(0, 255, 255);
@@ -43,55 +47,55 @@ void	init_scene(t_scene **scene)
 	col3 = new_color(255, 0, 0);
 	norm = new_vector(0, 1, 0);
 	normalize_vector(&norm);
-	(*scene)->texture = get_pattern(*scene, "./resources/textures/texture.xpm", 0);
-	(*scene)->bump = get_pattern(*scene, "./resources/textures/bump.xpm", 1);
-	(*scene)->cam = new_camera(new_vector(0, 0, 0), new_vector(0, 0, -1), 70);
-	(*scene)->amb = new_amb_light(col, 0.2);
+	// scene->cam = new_camera(new_vector(0, 0, 0), new_vector(0, 0, -1), 70);
+	// (scene)->amb = new_amb_light(col, 0.2);
 	// -------------- Light --------------
-	(*scene)->light = new_light(new_vector(20, 5, -10), col, 0.6);
-	(*scene)->figure = ft_calloc(1, sizeof(t_figure));
-	(*scene)->figure->type = LIGHT;
-	(*scene)->figure->color = col;
-	(*scene)->figure->sph = new_sphere(new_vector(20, 5, -10), 0.6);
+	// (scene)->light = new_light(new_vector(20, 5, -10), col, 0.6);
+	// (scene)->figure = ft_calloc(1, sizeof(t_figure));
+	// (scene)->figure->type = LIGHT;
+	// (scene)->figure->color = col;
+	// (scene)->figure->sph = new_sphere(new_vector(20, 5, -10), 0.6);
 	// -------------- Sphere 1 --------------
-	(*scene)->figure->next = ft_calloc(1, sizeof(t_figure));
-	(*scene)->figure->next->spec = 100;
-	(*scene)->figure->next->color = col3;
-	(*scene)->figure->next->type = SPHERE;
-	(*scene)->figure->next->sph = new_sphere(new_vector(2, 1, -30), 2);
-	(*scene)->figure->next->sph->bump = 1;
-	(*scene)->figure->next->sph->texture = 1;
-	// -------------- Sphere 2 --------------
-	(*scene)->figure->next->next = ft_calloc(1, sizeof(t_figure));
-	(*scene)->figure->next->next->spec = 500;
-	(*scene)->figure->next->next->color = col2;
-	(*scene)->figure->next->next->type = SPHERE;
-	(*scene)->figure->next->next->sph = new_sphere(new_vector(7, 0, -30), 1);
-	(*scene)->figure->next->next->sph->checkerboard = 1;
-	// -------------- Plane ---------------
-	(*scene)->figure->next->next->next = ft_calloc(1, sizeof(t_figure));
-	(*scene)->figure->next->next->next->spec = 500;
-	(*scene)->figure->next->next->next->color = col;
-	(*scene)->figure->next->next->next->type = PLANE;
-	(*scene)->figure->next->next->next->pln = new_plane(new_vector(0, -1, 0), \
+	// figure = ft_calloc(1, sizeof(t_figure));
+	// figure->spec = 100;
+	// figure->color = col3;
+	// figure->type = SPHERE;
+	// figure->sph = new_sphere(new_vector(2, 1, -30), 2);
+	// figure->sph->bump = 1;
+	// figure->sph->texture = 1;
+	// // -------------- Sphere 2 --------------
+	// figure = ft_calloc(1, sizeof(t_figure));
+	// figure->spec = 500;
+	// figure->color = col2;
+	// figure->type = SPHERE;
+	// figure->sph = new_sphere(new_vector(7, 0, -30), 1);
+	// figure->sph->checkerboard = 1;
+	// // -------------- Plane ---------------
+	figure = ft_calloc(1, sizeof(t_figure));
+	figure->spec = 500;
+	figure->color = col;
+	figure->type = PLANE;
+	figure->pln = new_plane(new_vector(0, -1, 0), \
 		new_vector(0, 1, 0));
-	//--------------- Cylinder ------------
-	(*scene)->figure->next->next->next->next = ft_calloc(1, sizeof(t_figure));
-	(*scene)->figure->next->next->next->next->spec = 200;
-	(*scene)->figure->next->next->next->next->color = col3;
-	(*scene)->figure->next->next->next->next->type = CYLINDER;
-	(*scene)->figure->next->next->next->next->cyl = \
+	// //--------------- Cylinder ------------
+	figure->next = ft_calloc(1, sizeof(t_figure));
+	figure->next->spec = 200;
+	figure->next->color = col3;
+	figure->next->type = CYLINDER;
+	figure->next->cyl = \
 		new_cylinder(new_vector(-8, -1, -20), norm, 2, 5);
-	// -------------- Cone ----------------
-	(*scene)->figure->next->next->next->next->next = ft_calloc(1, \
+	// // -------------- Cone ----------------
+	figure->next->next = ft_calloc(1, \
 		sizeof(t_figure));
-	(*scene)->figure->next->next->next->next->next->spec = 200;
-	(*scene)->figure->next->next->next->next->next->color = col1;
-	(*scene)->figure->next->next->next->next->next->type = CONE;
-	(*scene)->figure->next->next->next->next->next->cone = \
+	figure->next->next->spec = 200;
+	figure->next->next->color = col1;
+	figure->next->next->type = CONE;
+	figure->next->next->cone = \
 		new_cone(new_vector(9, -1, -17), norm, 2, 5);
+	scene->figure = ft_push_back_obj(scene->figure, figure);
+	
 	// -------------- replace !!!!!!!!!
-	(*scene)->width = WIDTH;
-	(*scene)->height = HEIGHT;
-	(*scene)->view = get_view_plane(*scene);
+	scene->width = WIDTH;
+	scene->height = HEIGHT;
+	scene->view = get_view_plane(scene);
 }
