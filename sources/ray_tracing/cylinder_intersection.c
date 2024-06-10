@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/09 18:47:04 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:23:08 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,18 @@ static double	check_caps(t_vector pos, t_vector ray, t_figure **obj, \
 static int	solve_caps(t_vector pos, t_vector ray, t_figure **obj)
 {
 	t_vector	surf;
-	t_equation	dot;
+	t_equation	p;
 
-	dot.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, \
-		(*obj)->cyl->center);
-	dot.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, \
-		(*obj)->cyl->center1);
-	if (dot.x1 == INFINITY && dot.x2 == INFINITY)
+	p.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, (*obj)->cyl->center);
+	p.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, (*obj)->cyl->center1);
+	if (p.x1 == INFINITY && p.x2 == INFINITY)
 		return (0);
-	if (dot.x1 > dot.x2)
+	(*obj)->point.dist = p.x1;
+	if (p.x1 > p.x2)
+	{
 		(*obj)->cyl->flag = 1;
-	find_hit_distance(obj, dot);
+		(*obj)->point.dist = p.x2;
+	}
 	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
 		(*obj)->point.dist));
 	surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center);
