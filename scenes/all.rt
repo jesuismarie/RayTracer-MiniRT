@@ -17,12 +17,12 @@ A      0.2                            255,255,255
 
 # Plane (can be more than 1)
 # pl  pos          normal (in range [-1,1] for each x,y,z)      color (in range [0,255] for each r,g,b)
-# pl    0,-1, 0      0, 1, 0                 500                   255,255, 255
+pl    0,-1, 0      0, 1, 0                 500                   255,255, 255
 # pl    0,-1, 0      0, 1, 0                 500                   255,255, 255
 
 # Cylinder (can be more than 1)
 # cy   pos          axis (in range [-1,1] for each x,y,z axis)    d (divide by 2 to init radius)   height   color (in range [0,255] for each r,g,b)
-# cy   -8,-1,-20    0,1,0               200                4                               5       255,0,0 
+cy   -8,-1,-20    0,1,0                               4                               5    200    255,0,0 
 
 # cy   -0.5,1,-33    0.75,0.25,-0.75                               12                               20       64,126,250
 
@@ -34,7 +34,7 @@ sp    2.0, 1.0,-30.0     4.0             100                 255, 0,0
 
 # Cone (can be more than 1)
 # co    pos         axis (in range [-1,1] for each x,y,z axis)    d (divide by 2 to init radius)    height    color (in range [0,255] for each r,g,b)
-# co      9,-1,-17    0,1,0                                         4                                         5        0,255, 255
+co      9,-1,-17    0,1,0                                         4                                         5        0,255, 255
 
 # Can be additional option in shpere, cone, plane and cylinder speculiar (if not given, then 100)
 # example:

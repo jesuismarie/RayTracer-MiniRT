@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:23:20 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/11 01:15:21 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:58:09 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_light	ft_parse_light(t_list_token *list)
 	t_light	light;
 	t_token	*tmp;
 
-	tmp = ft_jump(list->head, 1);
+	tmp = list->head;
 	light.coordinate = ft_parse_pos(tmp);
-	tmp = ft_jump(tmp, 5);
+	tmp = ft_jump(tmp, 6);
 	light.brightness = ft_atof(tmp->token);
 	light.color = ft_parse_color(tmp);
 	return (light);
@@ -28,13 +28,14 @@ t_light	ft_parse_light(t_list_token *list)
 bool	ft_create_light(t_scene *scene, t_list_token *list, char **error)
 {
 	t_light		light;
+	t_sphere	*sphere;
 
 	light = ft_parse_light(list);
 	if (!ft_validate_color(light.color, error))
 		return (set_error(error, ft_format_error(__func__, "")));
 	scene->light = ft_light_push_back(scene->light, \
 		new_light(light.coordinate, light.color, light.brightness));
-	t_sphere *sphere = new_sphere(light.coordinate, light.brightness);
+	sphere = new_sphere(light.coordinate, light.brightness);
 	sphere->color_p = light.color;
 	scene->figure = ft_push_back_obj(scene->figure, \
 		new_figure(sphere, LIGHT));

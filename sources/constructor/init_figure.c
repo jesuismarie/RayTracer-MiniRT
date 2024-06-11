@@ -6,11 +6,39 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:14:21 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/11 01:05:21 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 21:12:23 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+static void	new_figure_helper(void *obj, t_figure_type type, \
+	t_figure **figure)
+{
+	if (type == PLANE)
+	{
+		(*figure)->pln = obj;
+		(*figure)->spec = ((t_plane *)obj)->spec_p;
+		(*figure)->color = ((t_plane *)obj)->color_p;
+	}
+	else if (type == CYLINDER)
+	{
+		(*figure)->cyl = obj;
+		(*figure)->spec = ((t_cylinder *)obj)->spec_p;
+		(*figure)->color = ((t_cylinder *)obj)->color_p;
+	}
+	else if (type == CONE)
+	{
+		(*figure)->cone = obj;
+		(*figure)->spec = ((t_cone *)obj)->spec_p;
+		(*figure)->color = ((t_cone *)obj)->color_p;
+	}
+	else
+	{
+		free(*figure);
+		*figure = NULL;
+	}
+}
 
 t_figure	*new_figure(void *obj, t_figure_type type)
 {
@@ -29,23 +57,10 @@ t_figure	*new_figure(void *obj, t_figure_type type)
 		figure->spec = ((t_sphere *)obj)->spec_p;
 		figure->color = ((t_sphere *)obj)->color_p;
 	}
-	else if (type == PLANE)
-	{
-		figure->pln = obj;
-		figure->spec = ((t_plane *)obj)->spec_p;
-		figure->color = ((t_plane *)obj)->color_p;
-	}
-	else if (type == CONE)
-	{
-		figure->cone = obj;
-		figure->spec = ((t_cone *)obj)->spec_p;
-		figure->color = ((t_cone *)obj)->color_p;
-	}
 	else
-	{
-		free(figure);
-		figure = NULL;
-	}
+		new_figure_helper(obj, type, &figure);
+	if (figure && ft_is_near_equal(figure->spec, 0))
+		figure->spec = 100;
 	return (figure);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:47:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 15:34:51 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:52:37 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ bool	ft_parse_cylinder(t_list_token *list, \
 {
 	t_token		*tmp;
 
-	tmp = ft_jump(list->head, 1);
+	tmp = list->head;
 	cylinder->center = ft_parse_pos(tmp);
-	tmp = ft_jump(tmp, 5);
+	tmp = ft_jump(tmp, 6);
 	if (!ft_parse_dir(tmp, &cylinder->axis, error))
 		return (set_error(error, ft_format_error(__func__, "")));
 	tmp = ft_jump(tmp, 5);
@@ -66,14 +66,18 @@ bool	ft_parse_cylinder(t_list_token *list, \
 
 bool	ft_create_cylinder(t_scene *scene, t_list_token	*list, char **error)
 {
-	t_cylinder	*cylinder;
+	t_cylinder	cylinder;
+	t_cylinder	*new_obj;
 
-	cylinder = ft_calloc(1, sizeof(t_cylinder));
-	if (!ft_parse_cylinder(list, cylinder, error))
+	if (!ft_parse_cylinder(list, &cylinder, error))
 		return (set_error(error, ft_format_error(__func__, "")));
-	if (!ft_validate_cylinder_args(*cylinder, error))
+	if (!ft_validate_cylinder_args(cylinder, error))
 		return (set_error(error, ft_format_error(__func__, "")));
+	new_obj = new_cylinder(cylinder.center, cylinder.axis, cylinder.radius, \
+		cylinder.height);
+	new_obj->color_p = cylinder.color_p;
+	new_obj->spec_p = cylinder.spec_p;
 	scene->figure = ft_push_back_obj(scene->figure, \
-		new_figure(cylinder, CYLINDER));
+		new_figure(new_obj, CYLINDER));
 	return (true);
 }

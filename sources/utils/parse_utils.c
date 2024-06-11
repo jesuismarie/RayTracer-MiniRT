@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:58:48 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 18:25:58 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 21:07:23 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,43 @@ int	ft_strcmp_std(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-double	ft_atof(char *str)
+static void	check_dot(char *str, double *decimal_part)
 {
-	int		whole_part;
-	double	decimal_part;
-	int		neg;
-	bool	has_decimal;
+	double	divisor;
 
-	whole_part = 0;
-	decimal_part = 0.0;
-	neg = 1;
-	has_decimal = false;
-	if (*str == '-')
-	{
-		neg = -1;
-		str++;
-	} 
-	else if (*str == '+')
-		str++;
-	while (ft_isdigit(*str))
-		whole_part = whole_part * 10 + (*(str++) - '0');
 	if (*str == '.')
 	{
-		has_decimal = true;
 		str++;
-		double divisor = 10.0;
+		divisor = 10.0;
 		while (ft_isdigit(*str))
 		{
-			decimal_part += (*str - '0') / divisor;
+			*decimal_part += (*str - '0') / divisor;
 			divisor *= 10.0;
 			str++;
 		}
 	}
-	return ((double)(whole_part + decimal_part) * neg);
+}
+
+double	ft_atof(char *str)
+{
+	int		whole_part;
+	int		neg;
+	double	decimal_part;
+
+	whole_part = 0;
+	decimal_part = 0.0;
+	neg = 1;
+	if (*str == '-')
+	{
+		neg = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	while (ft_isdigit(*str))
+		whole_part = whole_part * 10 + (*(str++) - '0');
+	check_dot(str, &decimal_part);
+	return (neg * (double)(whole_part + decimal_part));
 }
 
 bool	is_digit_float(char *str)

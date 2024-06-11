@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:47:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/11 01:19:33 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:52:49 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	ft_parse_sp_optional_arg(t_sphere *sphere, \
 	if (count == SPHERE_MAX_ARGS + 1)
 	{
 		*start = ft_jump(*start, 1);
-		printf("%s\n", (*start)->token);
 		sphere->spec_p = ft_atof((*start)->token);
 		if (ft_is_near_equal(sphere->spec_p, 0) || sphere->spec_p < 0)
 			return (set_error(error, ft_format_error(__func__, "")));
@@ -43,11 +42,10 @@ bool	ft_parse_sphere(t_list_token *list, \
 {
 	t_token		*tmp;
 
-	tmp = ft_jump(list->head, 1);
+	tmp = list->head;
 	sphere->center = ft_parse_pos(tmp);
-	tmp = ft_jump(tmp, 5);
+	tmp = ft_jump(tmp, 6);
 	sphere->radius = ft_atof(tmp->token);
-	printf("%lf\n", sphere->radius);
 	if (sphere->radius < 0)
 		return (set_error(error, ft_format_error(__func__, "")));
 	sphere->radius /= 2;
@@ -59,13 +57,17 @@ bool	ft_parse_sphere(t_list_token *list, \
 
 bool	ft_create_sphere(t_scene *scene, t_list_token	*list, char **error)
 {
-	t_sphere	*sphere;
+	t_sphere	sphere;
+	t_sphere	*new_obj;
 
-	sphere = ft_calloc(1, sizeof(t_sphere));
-	if (!ft_parse_sphere(list, sphere, error))
+	if (!ft_parse_sphere(list, &sphere, error))
 		return (set_error(error, ft_format_error(__func__, "")));
-	if (!ft_validate_sphere_args(*sphere, error))
+	if (!ft_validate_sphere_args(sphere, error))
 		return (set_error(error, ft_format_error(__func__, "")));
-	scene->figure = ft_push_back_obj(scene->figure, new_figure(sphere, SPHERE));
+	new_obj = new_sphere(sphere.center, sphere.radius);
+	new_obj->color_p = sphere.color_p;
+	new_obj->spec_p = sphere.spec_p;
+	scene->figure = ft_push_back_obj(scene->figure, \
+		new_figure(new_obj, SPHERE));
 	return (true);
 }

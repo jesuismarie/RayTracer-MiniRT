@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:26:16 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 15:29:52 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:35:17 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ bool	ft_parse_camera(t_list_token *list, t_camera *camera, char **error)
 {
 	t_token		*tmp;
 
-	tmp = ft_jump(list->head, 1);
+	tmp = list->head;
 	camera->pos = ft_parse_pos(tmp);
-	tmp = ft_jump(tmp, 5);
+	tmp = ft_jump(tmp, 6);
 	if (!ft_parse_dir(tmp, &camera->norm, error))
 		return (set_error(error, ft_format_error(__func__, "")));
 	tmp = ft_jump(tmp, 5);

@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:47:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/11 00:22:57 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:05:57 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ bool	ft_create_camera(t_scene *scene, t_list_token	*list, char **error)
 		return (set_error(error, ft_format_error(__func__, "")));
 	if (scene->cam)
 		return (set_error(error, ft_format_error(__func__, "")));
-	printf("%lf %lf %lf\n", camera.norm.x, camera.norm.y, camera.norm.z);
 	scene->cam = new_camera(camera.pos, camera.norm, camera.fov);
 	return (true);
 }

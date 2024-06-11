@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:47:04 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 15:40:50 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:05:37 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ bool	ft_parse_plane(t_list_token *list, \
 {
 	t_token		*tmp;
 
-	tmp = ft_jump(list->head, 1);
+	tmp = list->head;
 	plane->pos = ft_parse_pos(tmp);
-	tmp = ft_jump(tmp, 5);
+	tmp = ft_jump(tmp, 6);
 	if (!ft_parse_dir(tmp, &plane->norm, error))
 		return (set_error(error, ft_format_error(__func__, "")));
 	tmp = ft_jump(tmp, 4);
@@ -58,13 +58,16 @@ bool	ft_parse_plane(t_list_token *list, \
 
 bool	ft_create_plane(t_scene *scene, t_list_token	*list, char **error)
 {
-	t_plane	*plane;
+	t_plane	plane;
+	t_plane	*new_obj;
 
-	plane = ft_calloc(1, sizeof(t_plane));
-	if (!ft_parse_plane(list, plane, error))
+	if (!ft_parse_plane(list, &plane, error))
 		return (set_error(error, ft_format_error(__func__, "")));
-	if (!ft_validate_plane_args(*plane, error))
+	if (!ft_validate_plane_args(plane, error))
 		return (set_error(error, ft_format_error(__func__, "")));
-	scene->figure = ft_push_back_obj(scene->figure, new_figure(plane, PLANE));
+	new_obj = new_plane(plane.pos, plane.norm);
+	new_obj->color_p = plane.color_p;
+	new_obj->spec_p = plane.spec_p;
+	scene->figure = ft_push_back_obj(scene->figure, new_figure(new_obj, PLANE));
 	return (true);
 }
