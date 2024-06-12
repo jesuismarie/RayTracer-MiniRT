@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_control.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:30:15 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/11 23:30:42 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:11:51 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,35 @@ void	clear_window(t_scene *scene)
 	}
 }
 
+static void	check_bump_texture(int keycode, t_scene *scene)
+{
+	t_figure	*start;
+
+	start = NULL;
+	if (keycode == KEY_B)
+	{
+		start = scene->figure;
+		while (start)
+		{
+			if (start->type == SPHERE)
+				start->sph->bump = !start->sph->bump;
+			start = start->next;
+		}
+		event_thread(scene, 'b');
+	}
+	else if (keycode == KEY_T)
+	{
+		start = scene->figure;
+		while (start)
+		{
+			if (start->type == SPHERE)
+				start->sph->texture = !start->sph->texture;
+			start = start->next;
+		}
+		event_thread(scene, 't');
+	}
+}
+
 int	key_press(int keycode, t_scene *scene)
 {
 	t_figure	*start;
@@ -46,45 +75,10 @@ int	key_press(int keycode, t_scene *scene)
 				start->sph->checkerboard = !start->sph->checkerboard;
 			start = start->next;
 		}
-		if (pthread_create(&scene->tid, NULL, \
-			(void *(*)(void *))trace_ray_thread, scene) != 0)
-			error_exit(1, "Failed to create ray tracing thread");
-		pthread_join(scene->tid, NULL);
-		mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
-			scene->mlx->data.img, 0, 0);
+		event_thread(scene, 'c');
 	}
-	// else if (keycode == KEY_B)
-	// {
-	// 	start = scene->figure;
-	// 	while (start)
-	// 	{
-	// 		if (start->type == SPHERE)
-	// 			start->sph->bump = !start->sph->bump;
-	// 		start = start->next;
-	// 	}
-	// 	if (pthread_create(&scene->tid, NULL, \
-	// 		(void *(*)(void *))trace_ray_thread, scene) != 0)
-	// 		error_exit(1, "Failed to create ray tracing thread");
-	// 	pthread_join(scene->tid, NULL);
-	// 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
-	// 		scene->mlx->data.img, 0, 0);
-	// }
-	// else if (keycode == KEY_T)
-	// {
-	// 	start = scene->figure;
-	// 	while (start)
-	// 	{
-	// 		if (start->type == SPHERE)
-	// 			start->sph->texture = !start->sph->texture;
-	// 		start = start->next;
-	// 	}
-	// 	if (pthread_create(&scene->tid, NULL, \
-	// 		(void *(*)(void *))trace_ray_thread, scene) != 0)
-	// 		error_exit(1, "Failed to create ray tracing thread");
-	// 	pthread_join(scene->tid, NULL);
-	// 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
-	// 		scene->mlx->data.img, 0, 0);
-	// }
+	else
+		check_bump_texture(keycode, scene);
 	return (0);
 }
 

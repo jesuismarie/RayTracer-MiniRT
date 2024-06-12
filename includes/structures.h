@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/11 23:32:28 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:18:51 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,10 +212,12 @@ struct s_scene
 	t_vplane		view;
 	double			height;
 	double			width;
-	pthread_mutex_t	checker_mutex;
 	pthread_mutex_t	bump_mutex;
+	pthread_mutex_t	checker_mutex;
 	pthread_mutex_t	texture_mutex;
-	pthread_t		tid;
+	pthread_t		bump_tid;
+	pthread_t		checker_tid;
+	pthread_t		texture_tid;
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/11 23:30:05 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:53:50 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ void			object_intersection(t_scene *scene, t_vector ray, int *color);
 /*----------------------------------------------------------------------------*/
 int				key_press(int keycode, t_scene *scene);
 void			clear_window(t_scene *scene);
-void			*trace_ray_thread(t_scene *scene);
+void			event_thread(t_scene *scene, char idx);
+void			*checkerboard_thread(t_scene *scene);
+void			*bump_map_thread(t_scene *scene);
+void			*texture_thread(t_scene *scene);
 int				close_win(t_scene *scene);
 
 /*----------------------------------------------------------------------------*/

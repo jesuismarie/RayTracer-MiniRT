@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/11 23:36:23 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:02:26 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ char	*ft_parse(t_scene *scene, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_strdup("error fd"));
+	if (!ft_strrchr(argv[1], '.') \
+		|| ft_strcmp_std(ft_strrchr(argv[1], '.'), ".rt"))
+		return (ft_strdup("Wrong file type"));
 	line = NULL;
 	while (ft_getline(fd, &line) > 0)
 	{
