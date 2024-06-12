@@ -85,11 +85,7 @@ lib:
 
 help:
 	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
-	@echo "$(ORANGE)| Controls    | ←/→   - Walk left/right                |$(RESET)"
-	@echo "$(ORANGE)|             | ↑/↓   - Walk forward/backward          |$(RESET)"
-	@echo "$(ORANGE)|             | W/S   - Rotate camera up/down          |$(RESET)"
-	@echo "$(ORANGE)|             | A/D   - Rotate camera left/right       |$(RESET)"
-	@echo "$(ORANGE)|             | T     - Apply texture                  |$(RESET)"
+	@echo "$(ORANGE)| Controls    | T     - Apply texture                  |$(RESET)"
 	@echo "$(ORANGE)|             | B     - Apply bump map                 |$(RESET)"
 	@echo "$(ORANGE)|             | C     - Apply checkerboard             |$(RESET)"
 	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
