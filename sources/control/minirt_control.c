@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:30:15 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/12 22:38:45 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:18:37 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ int	key_press(int keycode, t_scene *scene)
 
 int	close_win(t_scene *scene)
 {
+	if (scene->mlx && scene->mlx->mlx && scene->texture.img)
+		mlx_destroy_image(scene->mlx->mlx, scene->texture.img);
+	if (scene->mlx && scene->mlx->mlx && scene->bump.img)
+		mlx_destroy_image(scene->mlx->mlx, scene->bump.img);
 	if (scene->mlx && scene->mlx->mlx && scene->mlx->data.img)
 		mlx_destroy_image(scene->mlx->mlx, scene->mlx->data.img);
 	if (scene->mlx && scene->mlx->mlx && scene->mlx->mlx_win)
