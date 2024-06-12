@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:28:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/12 19:18:14 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:07:19 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	ft_getline(int fd, char **line)
 // 			break ;
 // 		buffer[read_return] = '\0';
 // 		fd_buffer[fd] = ft_gnl_strjoin(fd_buffer[fd], buffer);
-// 		if (ft_gnl_strchr(fd_buffer[fd], '\n') \
+// 		if (ft_gnl_strchr(fd_buffer[fd], '\n') 
 // 			|| ft_gnl_strchr(fd_buffer[fd], '\0'))
 // 			break ;
 // 	}

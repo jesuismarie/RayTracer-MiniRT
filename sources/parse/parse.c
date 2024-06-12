@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/12 19:31:16 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:23:06 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	ft_execute(t_scene *scene, char *line, char **error)
 	return (true);
 }
 
-char	*ft_parse(t_scene *scene, char **argv)
+char	*ft_parse(t_scene *, char **argv)
 {
 	int				fd;
 	char			*line;
@@ -62,18 +62,21 @@ char	*ft_parse(t_scene *scene, char **argv)
 	{
 		if (!line)
 			return (ft_strdup("false"));
-		line = ft_ignore_comment(line);
-		if (line && !line[0])
-		{
-			free(line);	
-			continue ;
-		}
-		if (!ft_execute(scene, line, &error))
-		{
-			free(line);
-			break ;
-		}
+		// line = ft_ignore_comment(line);
+		// if (line && !line[0])
+		// {
+		// 	free(line);	
+		// 	continue ;
+		// }
+		// if (!ft_execute(scene, line, &error))
+		// {
+		// 	free(line);
+		// 	break ;
+		// }
+		// free(line);
 		free(line);
 	}
+	// if (line)
+	// 	free(line);
 	return (error);
 }
