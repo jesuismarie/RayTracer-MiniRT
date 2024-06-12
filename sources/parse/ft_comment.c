@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_comment.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 21:23:49 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 15:10:31 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:02:29 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 char	*ft_ignore_comment(char *line)
 {
 	size_t	len;
+	char	*no_comment;
 
 	len = 0;
+	while (line && ft_isspace(line[len]))
+		++len;
+	if (!line || !line[len])
+		return (ft_strdup(""));
 	while (line && line[len] && line[len] != '#')
 		++len;
-	return (ft_substr(line, 0, len));
+	no_comment = ft_substr(line, 0, len);
+	free(line);
+	return (no_comment);
 }

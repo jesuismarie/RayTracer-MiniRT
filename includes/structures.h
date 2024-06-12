@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:40:42 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 21:01:15 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:18:51 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+# include <pthread.h>
 
 typedef enum e_figure_type	t_figure_type;
 typedef struct s_img		t_img;
@@ -44,7 +46,7 @@ enum e_figure_type
 	CONE
 };
 
-struct s_img // don't touch
+struct s_img
 {
 	int		width;
 	int		height;
@@ -55,14 +57,14 @@ struct s_img // don't touch
 	int		end;
 };
 
-struct s_mlx // don't touch
+struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_img	data;
 };
 
-struct s_equation // don't touch
+struct s_equation
 {
 	double	a;
 	double	b;
@@ -162,7 +164,7 @@ struct s_cone
 	t_color		color_p;
 };
 
-struct s_intersect // don't touch
+struct s_intersect
 {
 	int			is_inside;
 	double		dist;
@@ -173,18 +175,18 @@ struct s_intersect // don't touch
 
 struct s_figure
 {
-	double			spec; // additional
+	double			spec;
 	t_color			color;
 	t_sphere		*sph;
 	t_plane			*pln;
 	t_cylinder		*cyl;
 	t_cone			*cone;
-	t_intersect		point; // don't touch
+	t_intersect		point;
 	t_figure_type	type;
 	t_figure		*next;
 };
 
-struct s_vplane // don't touch
+struct s_vplane
 {
 	int		mlx_x;
 	int		mlx_y;
@@ -198,18 +200,24 @@ struct s_vplane // don't touch
 
 struct s_scene
 {
-	int			f_texture;
-	int			f_bump;
-	t_img		texture;
-	t_img		bump;
-	t_light		*light;
-	t_figure	*figure;
-	t_camera	*cam;
-	t_amb_light	*amb;
-	t_mlx		*mlx; // don't touch
-	t_vplane	*view;
-	double		height;
-	double		width;
+	int				f_texture;
+	int				f_bump;
+	t_img			texture;
+	t_img			bump;
+	t_light			*light;
+	t_figure		*figure;
+	t_camera		*cam;
+	t_amb_light		*amb;
+	t_mlx			*mlx;
+	t_vplane		view;
+	double			height;
+	double			width;
+	pthread_mutex_t	bump_mutex;
+	pthread_mutex_t	checker_mutex;
+	pthread_mutex_t	texture_mutex;
+	pthread_t		bump_tid;
+	pthread_t		checker_tid;
+	pthread_t		texture_tid;
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:19:19 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/11 01:10:42 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:16:27 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,4 +194,7 @@ bool			ft_validate_cone(t_list_token *list, char **error);
 bool			ft_create_cone(t_scene *scene, t_list_token	*list, \
 													char **error);
 t_light			*ft_light_push_back(t_light *start, t_light *obj);
+void			ft_free_list(t_list_token *list);
+void			error_exit_allocated(int condition, char *err);
+
 #endif

@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_tokenize_cleanup.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 20:04:25 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/12 18:06:38 by mnazarya         ###   ########.fr       */
+/*   Created: 2024/06/12 19:25:17 by gehovhan          #+#    #+#             */
+/*   Updated: 2024/06/12 21:45:27 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <minirt.h>
 
-int	ft_isspace(int arg)
+void	ft_free_list(t_list_token *list)
 {
-	return (arg == 32 || (arg >= 9 && arg <= 13));
+	t_token	*tmp;
+	t_token	*next;
+
+	if (list == NULL)
+		return ;
+	if (list->head == NULL)
+	{
+		free(list);
+		return ;
+	}
+	tmp = list->head;
+	while (tmp != NULL)
+	{
+		next = tmp->next;
+		free(tmp->token);
+		free(tmp);
+		tmp = next;
+	}
+	list->head = NULL;
+	list->size = 0;
+	free(list);
 }

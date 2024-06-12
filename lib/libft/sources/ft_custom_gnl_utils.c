@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_custom_gnl_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:28:05 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/05/14 22:56:25 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:18:31 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_gnl_strlen(const char *s)
 {
-	size_t index;
+	size_t	index;
 
 	index = 0;
 	if (!s)
@@ -30,10 +30,11 @@ char	*ft_gnl_strjoin(char *s1, const char *s2)
 	size_t		f_index;
 	size_t		s_index;
 
-	if (!(new_str = malloc(sizeof(char) *
-					(ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1))))
+	new_str = malloc(sizeof(char) \
+		* (ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1));
+	if (!new_str)
 		return (NULL);
-	f_index = 0; 
+	f_index = 0;
 	s_index = 0;
 	if (s1)
 		while (s1[f_index])
@@ -43,12 +44,11 @@ char	*ft_gnl_strjoin(char *s1, const char *s2)
 		while (s2[f_index])
 			new_str[s_index++] = s2[f_index++];
 	new_str[s_index] = '\0';
-	if (s1)
-		free(s1);
+	free(s1);
 	return (new_str);
 }
 
-int		ft_gnl_strchr(const char *s, int c)
+int	ft_gnl_strchr(const char *s, int c)
 {
 	size_t	index;
 
@@ -61,4 +61,3 @@ int		ft_gnl_strchr(const char *s, int c)
 	}
 	return (0);
 }
-

@@ -21,11 +21,13 @@
 # include <unistd.h>
 # include <stdint.h>
 
-typedef struct s_list
+typedef struct s_list			t_list;
+
+struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}		t_list;
+};
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -54,7 +56,6 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 void	ft_free_2d(char **str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-// char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_join_free(char *s1, char *s2);
 void	ft_append(char **str, char c);
@@ -82,14 +83,12 @@ char	*ft_find(char *s);
 char	*ft_remainder(char *s);
 char	*get_next_line(int fd);
 int		ft_isspace(int arg);
-
-
-char				*gnl_get_line(char *buffer);
-char				*gnl_get_buffer(char *buffer);
-int					ft_gnl_strchr(const char *s, int c);
-size_t				ft_gnl_strlen(const char *s1);
-char				*ft_gnl_strjoin(char *s1, const char *s2);
-char				*get_gnl_line(char *memory);
-char				*get_gnl_buffer(char *s);
-int					ft_getline(int fd, char **line);
+char	*gnl_get_line(char *buffer);
+char	*gnl_get_buffer(char *buffer);
+int		ft_gnl_strchr(const char *s, int c);
+size_t	ft_gnl_strlen(const char *s1);
+char	*ft_gnl_strjoin(char *s1, const char *s2);
+char	*get_gnl_line(char *memory);
+char	*get_gnl_buffer(char *s);
+int		ft_getline(int fd, char **line);
 #endif
