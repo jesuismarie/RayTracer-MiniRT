@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/12 18:02:26 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:31:16 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ bool	ft_execute(t_scene *scene, char *line, char **error)
 		msg = ft_strjoin(__func__, ": ");
 		set_error(error, ft_format_error("Error", msg));
 		free(msg);
+		ft_free_list(list);
 		return (false);
 	}
+	ft_free_list(list);
 	return (true);
 }
 
@@ -62,9 +64,16 @@ char	*ft_parse(t_scene *scene, char **argv)
 			return (ft_strdup("false"));
 		line = ft_ignore_comment(line);
 		if (line && !line[0])
+		{
+			free(line);	
 			continue ;
+		}
 		if (!ft_execute(scene, line, &error))
+		{
+			free(line);
 			break ;
+		}
+		free(line);
 	}
 	return (error);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/12 15:53:50 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:42:21 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void			find_hit_distance(t_figure **obj, t_equation dot);
 double			caps_intersection(t_vector pos, t_vector ray, t_vector norm, \
 					t_vector center);
 void			set_hit_normal(t_figure **obj, t_vector ray);
-void			clear_scene(t_scene **scene);
+void			clear_scene(t_scene *scene);
 void			error_exit(int condition, char *err);
 
 #endif

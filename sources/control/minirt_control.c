@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_control.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:30:15 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/12 16:11:51 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:42:57 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int	close_win(t_scene *scene)
 {
 	mlx_clear_window(scene->mlx->mlx, scene->mlx->mlx_win);
 	mlx_destroy_window(scene->mlx->mlx, scene->mlx->mlx_win);
+	clear_scene(scene);
 	exit(0);
 }
