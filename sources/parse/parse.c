@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 23:53:05 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:36:23 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool	ft_execute(t_scene *scene, char *line, char **error)
 
 	msg = NULL;
 	list = ft_tokenize(line);
-	ft_print_list(list->head);
 	if (!ft_parse_object(scene, list, error))
 	{
 		msg = ft_strjoin(__func__, ": ");

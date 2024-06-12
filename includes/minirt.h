@@ -6,7 +6,7 @@
 /*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:05:56 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 23:43:02 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:30:05 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@
 # include <ft_printf.h>
 # include <structures.h>
 # include <parse.h>
-
-/*----------------------------------------------------------------------------*/
-/*---------------------------------- PARSER ----------------------------------*/
-/*----------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------*/
 /*---------------------------- INIT & CONSTRUCTOR ----------------------------*/
@@ -85,7 +81,7 @@ unsigned int	my_mlx_pixel_get(t_img img, int x, int y);
 /*----------------------------------------------------------------------------*/
 /*------------------------------- RAY TRACING --------------------------------*/
 /*----------------------------------------------------------------------------*/
-t_vplane		*get_view_plane(t_scene *scene);
+t_vplane		get_view_plane(t_scene *scene);
 t_vector		look_at(t_scene	*scene, double ray_x, double ray_y);
 void			trace_ray(t_scene *scene);
 double			sphere_intersection(t_vector pos, t_vector ray, \
@@ -101,7 +97,9 @@ void			object_intersection(t_scene *scene, t_vector ray, int *color);
 /*----------------------------------------------------------------------------*/
 /*--------------------------------- CONTROL ----------------------------------*/
 /*----------------------------------------------------------------------------*/
-int				keys(int keycode, t_scene *scene);
+int				key_press(int keycode, t_scene *scene);
+void			clear_window(t_scene *scene);
+void			*trace_ray_thread(t_scene *scene);
 int				close_win(t_scene *scene);
 
 /*----------------------------------------------------------------------------*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:44:49 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/03/31 19:23:23 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:35:24 by gehovhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ static void	clean_figures(t_scene **scene)
 
 void	clear_scene(t_scene **scene)
 {
-	t_light		*tmp;
+	t_light	*tmp;
 
+	pthread_mutex_destroy(&(*scene)->checker_mutex);
+	pthread_mutex_destroy(&(*scene)->bump_mutex);
+	pthread_mutex_destroy(&(*scene)->texture_mutex);
 	free((*scene)->amb);
 	while ((*scene)->light)
 	{
@@ -46,6 +49,5 @@ void	clear_scene(t_scene **scene)
 	free((*scene)->cam);
 	clean_figures(scene);
 	free((*scene)->mlx);
-	free((*scene)->view);
 	free(*scene);
 }
