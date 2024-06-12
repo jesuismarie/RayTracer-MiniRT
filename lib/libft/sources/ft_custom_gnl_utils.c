@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:28:05 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/12 18:06:29 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:59:22 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ char	*ft_gnl_strjoin(char *s1, const char *s2)
 			new_str[s_index++] = s2[f_index++];
 	new_str[s_index] = '\0';
 	if (s1)
+	{
 		free(s1);
+		s1 = NULL;
+	}
 	return (new_str);
 }
 

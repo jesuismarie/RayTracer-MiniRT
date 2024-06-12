@@ -21,20 +21,12 @@
 # include <unistd.h>
 # include <stdint.h>
 
-typedef struct s_getline_helper	t_getline_helper;
 typedef struct s_list			t_list;
 
 struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-};
-
-struct s_getline_helper
-{
-	int		fd;
-	int		read_return;
-	char	**current;
 };
 
 int		ft_isalpha(int c);
