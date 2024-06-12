@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_control.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:30:15 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/12 19:42:57 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 22:38:45 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,12 @@ int	key_press(int keycode, t_scene *scene)
 
 int	close_win(t_scene *scene)
 {
-	mlx_clear_window(scene->mlx->mlx, scene->mlx->mlx_win);
-	mlx_destroy_window(scene->mlx->mlx, scene->mlx->mlx_win);
+	if (scene->mlx && scene->mlx->mlx && scene->mlx->data.img)
+		mlx_destroy_image(scene->mlx->mlx, scene->mlx->data.img);
+	if (scene->mlx && scene->mlx->mlx && scene->mlx->mlx_win)
+		mlx_clear_window(scene->mlx->mlx, scene->mlx->mlx_win);
+	if (scene->mlx && scene->mlx->mlx && scene->mlx->mlx_win)
+		mlx_destroy_window(scene->mlx->mlx, scene->mlx->mlx_win);
 	clear_scene(scene);
 	exit(0);
 }

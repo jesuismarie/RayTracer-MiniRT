@@ -17,7 +17,7 @@ INCS			= -I./includes -I./lib/libft/includes -I./lib/ft_printf/includes \
 
 HEADER			= ./includes/minirt.h ./includes/defines.h ./includes/structures.h ./includes/parse.h
 
-FLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=leak
+FLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIB				= -L./lib/libft -lft -L./lib/ft_printf -lftprintf -L $(MINILIBX) -lmlx
 

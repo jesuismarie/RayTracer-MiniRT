@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pars_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 21:54:13 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 18:37:56 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:27:27 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ bool	set_error(char **error, char *new_error)
 
 	if (!error)
 		return (true);
-	str = NULL;
-	if (new_error)
-		str = ft_strdup(new_error);
 	str = ft_gnl_strjoin(new_error, *error);
 	if (*error)
 	{

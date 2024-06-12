@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:44:49 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/12 19:51:16 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:42:52 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
- void	clean_figures(t_scene *scene)
+void	clean_figures(t_scene *scene)
 {
 	t_figure	*obj_tmp;
 

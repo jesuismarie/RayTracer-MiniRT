@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:13:37 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/12 20:23:06 by mnazarya         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:19:21 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ bool	ft_parse_object(t_scene *scene, t_list_token *list, char **error)
 	return (true);
 }
 
-/**
- * 
- * TODO: cleanup the list
-*/
 bool	ft_execute(t_scene *scene, char *line, char **error)
 {
 	t_list_token	*list;
@@ -44,39 +40,41 @@ bool	ft_execute(t_scene *scene, char *line, char **error)
 	return (true);
 }
 
-char	*ft_parse(t_scene *, char **argv)
+int	open_file(char *path, char **error)
 {
-	int				fd;
-	char			*line;
-	char			*error;
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		set_error(error, ft_strdup("error fd"));
+	return (fd);
+}
+
+char	*ft_parse(t_scene *scene, char **argv)
+{
+	int		fd;
+	char	*line;
+	char	*error;
 
 	error = NULL;
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (ft_strdup("error fd"));
-	if (!ft_strrchr(argv[1], '.') \
-		|| ft_strcmp_std(ft_strrchr(argv[1], '.'), ".rt"))
-		return (ft_strdup("Wrong file type"));
+	fd = open_file(argv[1], &error);
 	line = NULL;
 	while (ft_getline(fd, &line) > 0)
 	{
 		if (!line)
-			return (ft_strdup("false"));
-		// line = ft_ignore_comment(line);
-		// if (line && !line[0])
-		// {
-		// 	free(line);	
-		// 	continue ;
-		// }
-		// if (!ft_execute(scene, line, &error))
-		// {
-		// 	free(line);
-		// 	break ;
-		// }
-		// free(line);
+			return (NULL);
+		line = ft_ignore_comment(line);
+		if (line && !line[0])
+		{
+			free(line);
+			continue ;
+		}
+		if (!ft_execute(scene, line, &error))
+		{
+			free(line);
+			break ;
+		}
 		free(line);
 	}
-	// if (line)
-	// 	free(line);
-	return (error);
+	return (close(fd), error);
 }

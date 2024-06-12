@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validate_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gehovhan <gehovhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:36:34 by gehovhan          #+#    #+#             */
-/*   Updated: 2024/06/10 18:42:16 by gehovhan         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:50:46 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ bool	ft_pars_args(t_list_token *list, char **error, \
 
 	count = ft_args_count(list, error);
 	if (count == -1)
-		return (set_error(error, ft_format_error(__func__, "2")));
+		return (set_error(error, ft_format_error(__func__, "")));
 	if (count < min_count || count > max_count)
-		return (set_error(error, ft_format_error(__func__, "3")));
+		return (set_error(error, ft_format_error(__func__, "")));
 	return (true);
 }
 
