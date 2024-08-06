@@ -35,7 +35,6 @@ MiniRT is compatible with:
    ```bash
    sudo apt-get update
    sudo apt-get install build-essential -y
-   sudo apt-get install libreadline-dev -y
    sudo apt-get install xorg -y
    sudo apt-get install libxext-dev -y
    ```
