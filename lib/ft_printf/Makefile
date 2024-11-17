@@ -18,7 +18,7 @@ AR				= ar rcs
 
 CC				= cc
 
-FLAGS 			= -Wall -Wextra -Werror
+FLAGS			= -Wall -Wextra -Werror
 
 $(BUILD)/%.o:	$(SRC)/%.c $(HEADER) Makefile
 		@$(CC) $(FLAGS) $(INCS) -c $< -o $@
@@ -38,6 +38,6 @@ fclean:
 		@rm -rf $(BUILD)
 		@$(RM) $(NAME)
 
-re: 			fclean all
+re:				fclean all
 
 .PHONY:			all clean fclean bonus re

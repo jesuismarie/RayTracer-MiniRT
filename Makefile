@@ -94,13 +94,13 @@ clean:
 	@make clean -C lib/ft_printf
 	@make clean -C lib/libft
 	@make clean -C $(MINILIBX) > /dev/null
-	@rm -rf $(BUILD) > /dev/null
+	@rm -rf $(BUILD)
 
 fclean:
 	@make fclean -C lib/ft_printf
 	@make fclean -C lib/libft
 	@make clean -C $(MINILIBX) > /dev/null
-	@rm -rf $(BUILD) > /dev/null
+	@rm -rf $(BUILD)
 	@rm -f ${NAME}
 	@echo "${YELLOW} Everything is cleared ✅${RESET}"
 
