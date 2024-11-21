@@ -11,8 +11,8 @@ MiniRT provides the following features:
 
 - **Scene Rendering**: MiniRT can render 3D scenes composed of various geometric objects such as spheres, planes, cylinders, and cones.
 
-   <img src="./pictures/complex.png" alt="Scene Rendering Example" width="340">
-   <img src="./pictures/spheres.png" alt="Scene Rendering Example" width="340">
+   <img src="./pictures/complex.png" alt="Scene Rendering Example" width="49%">
+   <img src="./pictures/spheres.png" alt="Scene Rendering Example" width="49%">
 
 - **Camera Control**: Users can specify camera parameters including position, orientation, field of view, and aspect ratio to define the viewpoint for rendering.
 
@@ -30,7 +30,8 @@ MiniRT provides the following features:
 
    <img src="./pictures/white.png" alt="Lighting Models Example" width="100%">
 
-- **Bump Mapping**: MiniRT can handle bump map textures for enhanced surface detail.  
+- **Bump Mapping**: MiniRT can handle bump map textures for enhanced surface detail.
+
    <img src="./pictures/bump3.png" alt="Sphere with Bump Mapping" width="100%">
 
 - **Scene Parsing**: Users can define scenes using a simple scene description language.
@@ -126,18 +127,22 @@ To further test the capabilities of MiniRT, you can use the provided scene files
 Below are example renderings of various scenes:
 
 - **Sphere with Textures**:
+
    <img src="./pictures/texture.png" alt="Sphere with Texture" width="100%">
+
 - **Sphere with Bump Map**:
-   <br>
-   <img src="./pictures/bump3.png" alt="Sphere with Texture" width="340">
-   <img src="./pictures/bump1.png" alt="Sphere with Texture" width="340">
+
+   <img src="./pictures/bump3.png" alt="Sphere with Texture" width="49%">
+   <img src="./pictures/bump1.png" alt="Sphere with Texture" width="49%">
+
 - **Sphere with Textures and Bump Map**:
+
    <img src="./pictures/bump+texture1.png" alt="Sphere with Texture" width="100%">
 
 - **Spere with Checkerboard**:
-   <br>
-   <img src="./pictures/checkerboard spheres.png" alt="Checkerboard Example" width="340">
-   <img src="./pictures/checkerboard3.png" alt="Checkerboard Example" width="340">
+
+   <img src="./pictures/checkerboard spheres.png" alt="Checkerboard Example" width="49%">
+   <img src="./pictures/checkerboard3.png" alt="Checkerboard Example" width="49%">
 
 ## .rt File Specification
 
