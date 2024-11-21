@@ -10,13 +10,29 @@
 MiniRT provides the following features:
 
 - **Scene Rendering**: MiniRT can render 3D scenes composed of various geometric objects such as spheres, planes, cylinders, and cones.
+
+   <img src="./pictures/complex.png" alt="Scene Rendering Example" width="340">
+   <img src="./pictures/spheres.png" alt="Scene Rendering Example" width="340">
+
 - **Camera Control**: Users can specify camera parameters including position, orientation, field of view, and aspect ratio to define the viewpoint for rendering.
+
 - **Lighting Models**: MiniRT supports different lighting models including ambient, point, and directional lighting, allowing users to control the illumination of the scene.
+
 - **Shading**: MiniRT implements shading models such as Phong shading to calculate the color of each pixel in the rendered image based on lighting conditions and surface properties.
+
 - **Shadows**: MiniRT simulates shadows cast by objects in the scene, adding realism to the rendered images.
+
+   <img src="./pictures/shpere.png" alt="Shadows Example" width="100%">
+
 - **Specular Reflection**: MiniRT supports specular reflection effects for shiny surfaces.
-- **Colored and Multi-Spot Lights**: Support multiple light sources with different colors.
-- **Bump Mapping**: MiniRT can handle bump map textures for enhanced surface detail.
+
+- **Colored and Multi-Spot Lights**: Support for multiple light sources with different colors.
+
+   <img src="./pictures/white.png" alt="Lighting Models Example" width="100%">
+
+- **Bump Mapping**: MiniRT can handle bump map textures for enhanced surface detail.  
+   <img src="./pictures/bump3.png" alt="Sphere with Bump Mapping" width="100%">
+
 - **Scene Parsing**: Users can define scenes using a simple scene description language.
 
 ## Compatibility
@@ -104,6 +120,24 @@ For more information on available options and scene description syntax, please r
 ## Additional Test Cases
 
 To further test the capabilities of MiniRT, you can use the provided scene files in the `scenes/` directory. These files contain various scenes with different geometries, lighting setups, and rendering parameters to showcase the capabilities of MiniRT.
+
+## Example Scenes
+
+Below are example renderings of various scenes:
+
+- **Sphere with Textures**:
+   <img src="./pictures/texture.png" alt="Sphere with Texture" width="100%">
+- **Sphere with Bump Map**:
+   <br>
+   <img src="./pictures/bump3.png" alt="Sphere with Texture" width="340">
+   <img src="./pictures/bump1.png" alt="Sphere with Texture" width="340">
+- **Sphere with Textures and Bump Map**:
+   <img src="./pictures/bump+texture1.png" alt="Sphere with Texture" width="100%">
+
+- **Spere with Checkerboard**:
+   <br>
+   <img src="./pictures/checkerboard spheres.png" alt="Checkerboard Example" width="340">
+   <img src="./pictures/checkerboard3.png" alt="Checkerboard Example" width="340">
 
 ## .rt File Specification
 
