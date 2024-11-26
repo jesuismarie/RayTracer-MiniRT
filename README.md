@@ -197,8 +197,12 @@ Defines the objects in the scene:
 - `identifier`: **sp**
 - `x,y,z coordinates` of the sphere center: **0.0,0.0,20.6**
 - `the sphere diameter`: **12.6**
+- `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0-255]: **10, 0, 255**
 
+    ```
+    sp 0.0,0.0,20.6     12.6  50   10,0,255
+    ```
     ```
     sp 0.0,0.0,20.6     12.6   10,0,255
     ```
@@ -208,8 +212,12 @@ Defines the objects in the scene:
 - `identifier`: **pl**
 - `x,y,z coordinates` of a point in the plane: **0.0,0.0,-10.0**
 - `3d normalized normal vector.` In range [-1,1] for each x,y,z axis: **0.0,1.0,0.0**
+- `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0-255]: **0,0,225**
 
+    ```
+    pl    0.0,0.0,-10.0    0.0,1.0,0.0     50  0,0,225
+    ```
     ```
     pl    0.0,0.0,-10.0    0.0,1.0,0.0   0,0,225
     ```
@@ -221,8 +229,12 @@ Defines the objects in the scene:
 - `3d normalized vector` of axis of cylinder. In range [-1,1] for each x,y,z axis: **0.0,0.0,1.0**
 - `the cylinder diameter`: **14.2**
 - `the cylinder height`: **21.42**
+- `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0,255]: **10, 0, 255**
 
+    ```
+    cy 50.0,0.0,20.6   0.0,0.0,1.0   14.2     21.42       50  10,0,255
+    ```
     ```
     cy 50.0,0.0,20.6   0.0,0.0,1.0   14.2     21.42  10,0,255
     ```
@@ -230,12 +242,16 @@ Defines the objects in the scene:
 **Cone**
 
 - `identifier`: **cy**
-- `x,y,z coordinates` of the center of the cylinder: **50.0,0.0,20.6**
-- `3d normalized vector` of axis of cylinder. In range [-1,1] for each x,y,z axis: **0.0,0.0,1.0**
-- `the cylinder diameter`: **14.2**
-- `the cylinder height`: **21.42**
+- `x,y,z coordinates` of the center of the cone: **50.0,0.0,20.6**
+- `3d normalized vector` of axis of cone. In range [-1,1] for each x,y,z axis: **0.0,0.0,1.0**
+- `the cone diameter`: **14.2**
+- `the cone height`: **21.42**
+- `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0,255]: **10, 0, 255**
 
+    ```
+    co      50.0,0.0,20.6   0.0,0.0,1.0   14.2 21.42    50   10,0,255
+    ```
     ```
     co      50.0,0.0,20.6   0.0,0.0,1.0   14.2 21.42  10,0,255
     ```
