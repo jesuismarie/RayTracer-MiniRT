@@ -4,6 +4,8 @@ BUILD			= build
 
 SRC				= sources
 
+MAKEFILEFLAGS	= --no-print-directory
+
 DIRS			= parse constructor vector graphics ray_tracing control utils
 
 SRCSDIRS		= $(foreach dir, $(DIRS), $(addprefix $(SRC)/, $(dir))) $(SRC)
@@ -17,7 +19,7 @@ INCS			= -I./includes -I./lib/libft/includes -I./lib/ft_printf/includes \
 
 HEADER			= ./includes/minirt.h ./includes/defines.h ./includes/structures.h ./includes/parse.h
 
-FLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS			= -Wall -Wextra -Werror -Wno-cast-function-type #-g3 -fsanitize=address
 
 LIB				= -L./lib/libft -lft -L./lib/ft_printf -lftprintf -L $(MINILIBX) -lmlx
 
@@ -75,8 +77,8 @@ mlx:
 
 lib:
 	@printf "${YELLOW}🧩 Compiling Libft Printf ${RESET}"
-	@make -C lib/ft_printf > /dev/null
-	@make -C lib/libft > /dev/null 2>&1 & i=0; \
+	@make $(MAKEFILEFLAGS) -C lib/ft_printf > /dev/null
+	@make $(MAKEFILEFLAGS) -C lib/libft > /dev/null 2>&1 & i=0; \
 	while ps -p $$! > /dev/null; do \
 		printf "${GREEN}✦ ${RESET}"; \
 		sleep 0.3; \
@@ -91,15 +93,15 @@ help:
 	@echo "$(ORANGE)--------------------------------------------------------$(RESET)"
 
 clean:
-	@make clean -C lib/ft_printf
-	@make clean -C lib/libft
-	@make clean -C $(MINILIBX) > /dev/null
+	@make $(MAKEFILEFLAGS) clean -C lib/ft_printf
+	@make $(MAKEFILEFLAGS) clean -C lib/libft
+	@make $(MAKEFILEFLAGS) clean -C $(MINILIBX) > /dev/null
 	@rm -rf $(BUILD)
 
 fclean:
-	@make fclean -C lib/ft_printf
-	@make fclean -C lib/libft
-	@make clean -C $(MINILIBX) > /dev/null
+	@make $(MAKEFILEFLAGS) fclean -C lib/ft_printf
+	@make $(MAKEFILEFLAGS) fclean -C lib/libft
+	@make $(MAKEFILEFLAGS) clean -C $(MINILIBX) > /dev/null
 	@rm -rf $(BUILD)
 	@rm -f ${NAME}
 	@echo "${YELLOW} Everything is cleared ✅${RESET}"
