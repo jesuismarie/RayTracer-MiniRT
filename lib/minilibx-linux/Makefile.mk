@@ -36,7 +36,7 @@ SRC	= mlx_init.c mlx_new_window.c mlx_pixel_put.c mlx_loop.c \
 
 OBJ_DIR = obj
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:%.c=%.o))
-CFLAGS	= -O3 -I$(INC)
+CFLAGS	= -std=gnu89 -O3 -Wno-strict-prototypes -Wno-implicit-function-declaration -I$(INC)
 
 all	: $(NAME)
 
