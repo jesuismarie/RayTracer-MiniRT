@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:42:40 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/13 00:20:01 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/03/04 15:31:42 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int argc, char **argv)
 	error = ft_check_minimum_requirements(&scene);
 	error_exit_allocated(error != NULL, error);
 	img_init(&scene);
-	mlx_hook(scene.mlx->mlx_win, 2, 1l << 0, &key_press, &scene);
-	mlx_hook(scene.mlx->mlx_win, 17, 1l << 15, &close_win, &scene);
+	mlx_hook(scene.mlx->mlx_win, 2, 1l << 0, (int (*)())&key_press, &scene);
+	mlx_hook(scene.mlx->mlx_win, 17, 1l << 15, (int (*)())&close_win, &scene);
 	mlx_loop(scene.mlx->mlx);
 	return (0);
 }
