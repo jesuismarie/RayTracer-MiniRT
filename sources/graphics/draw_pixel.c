@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 23:03:12 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/03/25 17:22:38 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_scene *scene, int x, int y, int color)
 {
 	char	*dst;
 
-	if (scene->mlx->data.addr && x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
+	if (scene->mlx->data.addr && x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 	{
 		dst = scene->mlx->data.addr + (y * scene->mlx->data.l + x * \
 			(scene->mlx->data.bpp / 8));

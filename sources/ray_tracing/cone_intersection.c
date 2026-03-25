@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 13:09:02 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:31:09 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	dist = check_caps(pos, ray, obj, &dot);
 	if (solve_caps(pos, ray, obj))
 	{
+		(*obj)->point.is_inside = 0;
 		if (dist && dist < (*obj)->point.dist && dot.m1 > 0 && dot.m2 < 0)
 		{
 			(*obj)->point.dist = dist;

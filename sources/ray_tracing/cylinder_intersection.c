@@ -6,7 +6,7 @@
 /*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 17:23:08 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:30:08 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static double	check_caps(t_vector pos, t_vector ray, t_figure **obj, \
 {
 	double	dist;
 
-	dist = 0;
+	dist = INFINITY;
 	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
 		(*obj)->point.dist));
 	dot->m1 = vector_scalar_prod((*obj)->cyl->axis, \
@@ -73,7 +73,7 @@ static int	solve_caps(t_vector pos, t_vector ray, t_figure **obj)
 	surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center);
 	if ((*obj)->cyl->flag)
 		surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center1);
-	if (vector_scalar_prod(surf, surf) < pow((*obj)->cyl->radius, 2))
+	if (vector_scalar_prod(surf, surf) <= pow((*obj)->cyl->radius, 2))
 	{
 		(*obj)->cyl->cap = 1;
 		return (1);
@@ -92,6 +92,7 @@ double	cylinder_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	dist = check_caps(pos, ray, obj, &dot);
 	if (solve_caps(pos, ray, obj))
 	{
+		(*obj)->point.is_inside = 0;
 		if (dist && dist < (*obj)->point.dist && dot.m1 > 0 && dot.m2 < 0)
 		{
 			(*obj)->point.dist = dist;
