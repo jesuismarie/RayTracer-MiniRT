@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_intersection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:42:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2026/03/23 18:31:09 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:43:42 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ static void	solve_cone(t_vector pos, t_vector ray, t_figure **obj, \
 	find_hit_distance(obj, *dot);
 }
 
+static int	check_cone_height(t_vector pos, t_vector ray, t_figure **obj, \
+	double t)
+{
+	double		m1;
+	double		m2;
+	t_vector	hit;
+
+	if (t <= __FLT_EPSILON__)
+		return (0);
+	hit = vector_sum(pos, vector_prod(ray, t));
+	m1 = vector_scalar_prod((*obj)->cone->axis, \
+		vector_sub(hit, (*obj)->cone->center));
+	m2 = vector_scalar_prod((*obj)->cone->axis, \
+		vector_sub(hit, (*obj)->cone->apex));
+	return (m1 > 0 && m2 < 0);
+}
+
 static double	check_caps(t_vector pos, t_vector ray, t_figure **obj, \
 	t_equation *dot)
 {
@@ -48,14 +65,17 @@ static double	check_caps(t_vector pos, t_vector ray, t_figure **obj, \
 
 	dist = INFINITY;
 	solve_cone(pos, ray, obj, dot);
-	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
-		(*obj)->point.dist));
-	dot->m1 = vector_scalar_prod((*obj)->cone->axis, \
-		vector_sub((*obj)->point.hit_pos, (*obj)->cone->center));
-	dot->m2 = vector_scalar_prod((*obj)->cone->axis, \
-		vector_sub((*obj)->point.hit_pos, (*obj)->cone->apex));
-	if (dot->m1 > 0 && dot->m2 < 0)
-		dist = (*obj)->point.dist;
+	if (dot->discr < 0)
+		return (dist);
+	if (check_cone_height(pos, ray, obj, dot->x1))
+		dist = dot->x1;
+	if (check_cone_height(pos, ray, obj, dot->x2) && dot->x2 < dist)
+		dist = dot->x2;
+	if (dist != INFINITY)
+	{
+		(*obj)->point.dist = dist;
+		(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, dist));
+	}
 	return (dist);
 }
 
@@ -90,18 +110,17 @@ double	cone_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	if (solve_caps(pos, ray, obj))
 	{
 		(*obj)->point.is_inside = 0;
-		if (dist && dist < (*obj)->point.dist && dot.m1 > 0 && dot.m2 < 0)
+		if (dist != INFINITY && dist < (*obj)->point.dist)
 		{
 			(*obj)->point.dist = dist;
 			(*obj)->cone->cap = 0;
 		}
 		return ((*obj)->point.dist);
 	}
-	if (dot.m1 > 0 && dot.m2 < 0)
+	if (dist != INFINITY)
 	{
 		(*obj)->point.dist = dist;
-		(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
-			(*obj)->point.dist));
+		(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, dist));
 		return ((*obj)->point.dist);
 	}
 	return (INFINITY);

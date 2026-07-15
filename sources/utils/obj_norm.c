@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_norm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:24:29 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/24 13:48:03 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:44:05 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ static t_vector	calculate_cyl_norm(t_figure *obj)
 static t_vector	calculate_cone_norm(t_figure *obj)
 {
 	double		proj_len;
+	double		cos2;
 	t_vector	vec;
 
 	vec = vector_sub(obj->point.hit_pos, obj->cone->apex);
 	proj_len = vector_scalar_prod(vec, obj->cone->axis);
-	return (vector_sub(vector_sub(obj->point.hit_pos, \
-		obj->cone->apex), vector_prod(obj->cone->axis, proj_len)));
+	cos2 = obj->cone->cos * obj->cone->cos;
+	return (vector_sub(vector_prod(vec, cos2), \
+		vector_prod(obj->cone->axis, proj_len)));
 }
 
 void	set_hit_normal(t_figure **obj, t_vector ray)
