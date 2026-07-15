@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_intersection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:03:16 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/09 17:28:54 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:43:54 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ double	sphere_intersection(t_vector pos, t_vector ray, t_figure **obj)
 	t_equation	dot;
 	t_vector	vec;
 
+	(*obj)->point.dist = 0;
 	vec = vector_sub(pos, (*obj)->sph->center);
 	dot.a = vector_len(ray) * vector_len(ray);
 	dot.b = 2 * vector_scalar_prod(vec, ray);

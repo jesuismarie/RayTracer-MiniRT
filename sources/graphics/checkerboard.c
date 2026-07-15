@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkerboard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:09:00 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/05/21 18:29:39 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:41:51 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_color	uv_pattern(t_vector pos, t_pattern pat, t_figure *obj)
 	double		u;
 	double		v;
 
-	u = ((atan2(pos.x, pos.z) + M_PI) / 2 * M_PI) * pat.width / pat.height;
+	u = ((atan2(pos.x, pos.z) + M_PI) / 2.0 * M_PI) * pat.width / pat.height;
 	v = (acos(pos.y) / M_PI);
 	u_check = (int)(u * pat.width);
 	v_check = (int)(v * pat.height);
