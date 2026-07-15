@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:11:59 by mnazarya          #+#    #+#             */
-/*   Updated: 2026/03/23 18:30:08 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:43:47 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,13 @@ static double	check_caps(t_vector pos, t_vector ray, t_figure **obj, \
 	return (dist);
 }
 
-static int	solve_caps(t_vector pos, t_vector ray, t_figure **obj)
+static int	check_cap_hit(t_vector pos, t_vector ray, t_figure **obj, \
+	double dist)
 {
 	t_vector	surf;
-	t_equation	p;
 
-	p.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, (*obj)->cyl->center);
-	p.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, (*obj)->cyl->center1);
-	if (p.x1 == INFINITY && p.x2 == INFINITY)
-		return (0);
-	(*obj)->point.dist = p.x1;
-	if (p.x1 > p.x2)
-	{
-		(*obj)->cyl->flag = 1;
-		(*obj)->point.dist = p.x2;
-	}
-	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, \
-		(*obj)->point.dist));
+	(*obj)->point.dist = dist;
+	(*obj)->point.hit_pos = vector_sum(pos, vector_prod(ray, dist));
 	surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center);
 	if ((*obj)->cyl->flag)
 		surf = vector_sub((*obj)->point.hit_pos, (*obj)->cyl->center1);
@@ -78,6 +68,33 @@ static int	solve_caps(t_vector pos, t_vector ray, t_figure **obj)
 		(*obj)->cyl->cap = 1;
 		return (1);
 	}
+	return (0);
+}
+
+static int	solve_caps(t_vector pos, t_vector ray, t_figure **obj)
+{
+	t_equation	p;
+	double		first;
+	double		second;
+
+	p.x1 = caps_intersection(pos, ray, (*obj)->cyl->axis, (*obj)->cyl->center);
+	p.x2 = caps_intersection(pos, ray, (*obj)->cyl->axis, (*obj)->cyl->center1);
+	if (p.x1 == INFINITY && p.x2 == INFINITY)
+		return (0);
+	first = p.x1;
+	second = p.x2;
+	(*obj)->cyl->flag = 0;
+	if (p.x1 > p.x2)
+	{
+		(*obj)->cyl->flag = 1;
+		first = p.x2;
+		second = p.x1;
+	}
+	if (first != INFINITY && check_cap_hit(pos, ray, obj, first))
+		return (1);
+	(*obj)->cyl->flag = !(*obj)->cyl->flag;
+	if (second != INFINITY && check_cap_hit(pos, ray, obj, second))
+		return (1);
 	return (0);
 }
 
