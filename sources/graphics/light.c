@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 20:57:22 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/10 17:12:16 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/05/13 17:42:02 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,23 @@ int	compute_shadow(t_scene *scene, t_figure **obj, t_light *light)
 t_color	compute_light(t_scene *scene, t_figure *obj, \
 	t_color *spec)
 {
-	t_color	col;
-	t_light	*tmp;
+	t_color		col;
+	t_light		*tmp;
+	t_intersect	saved;
 
 	col = calc_rgb_light(scene->amb->light, scene->amb->ratio);
 	if (obj->point.is_inside)
 		return (col);
+	saved = obj->point;
 	tmp = scene->light;
 	while (tmp)
 	{
+		obj->point = saved;
 		if (compute_shadow(scene, &obj, tmp))
 		{
+			obj->point = saved;
 			col = add_rgb_light(diffuse_light(tmp, obj->point), col);
-			*spec = specular_light(scene, tmp, obj);
+			*spec = add_rgb_light(*spec, specular_light(scene, tmp, obj));
 		}
 		tmp = tmp->next;
 	}
