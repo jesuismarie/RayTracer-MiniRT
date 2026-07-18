@@ -12,6 +12,19 @@
 
 #include <minirt.h>
 
+static void	free_sphere(t_scene *scene, t_sphere *sph)
+{
+	if (sph->texture_path)
+		free(sph->texture_path);
+	if (sph->bump_path)
+		free(sph->bump_path);
+	if (sph->texture_img.img && scene->mlx && scene->mlx->mlx)
+		mlx_destroy_image(scene->mlx->mlx, sph->texture_img.img);
+	if (sph->bump_img.img && scene->mlx && scene->mlx->mlx)
+		mlx_destroy_image(scene->mlx->mlx, sph->bump_img.img);
+	free(sph);
+}
+
 void	clean_figures(t_scene *scene)
 {
 	t_figure	*obj_tmp;
@@ -20,7 +33,7 @@ void	clean_figures(t_scene *scene)
 	{
 		obj_tmp = scene->figure->next;
 		if (scene->figure->type == SPHERE)
-			free(scene->figure->sph);
+			free_sphere(scene, scene->figure->sph);
 		else if (scene->figure->type == PLANE)
 			free(scene->figure->pln);
 		else if (scene->figure->type == CYLINDER)

@@ -64,6 +64,8 @@ t_color			calc_rgb_light(t_color col, double ratio);
 t_color			multiply_rgbs(t_color a, t_color b);
 t_color			add_rgb_light(t_color a, t_color b);
 t_img			get_pattern(t_scene *scene, char *filename, int flag);
+t_img			load_xpm_image(t_scene *scene, char *filename);
+void			load_sphere_textures(t_scene *scene);
 t_color			apply_checkerboard(t_figure *obj);
 t_color			apply_texture(t_scene *scene, t_figure *obj);
 t_vector		apply_bump(t_scene *scene, t_figure *obj);

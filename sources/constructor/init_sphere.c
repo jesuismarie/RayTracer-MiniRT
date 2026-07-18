@@ -21,6 +21,8 @@ t_sphere	*new_sphere(t_vector center, double r)
 	sph->checkerboard = 0;
 	sph->texture = 0;
 	sph->bump = 0;
+	sph->texture_path = NULL;
+	sph->bump_path = NULL;
 	sph->center = center;
 	sph->radius = r;
 	return (sph);

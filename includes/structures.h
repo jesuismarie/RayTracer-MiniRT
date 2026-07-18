@@ -124,6 +124,10 @@ struct s_sphere
 	int			checkerboard;
 	int			texture;
 	int			bump;
+	char		*texture_path;
+	char		*bump_path;
+	t_img		texture_img;
+	t_img		bump_img;
 	t_vector	center;
 	double		radius;
 	t_color		color_p;

@@ -40,7 +40,7 @@ static void	check_bump_texture(int keycode, t_scene *scene)
 		start = scene->figure;
 		while (start)
 		{
-			if (start->type == SPHERE)
+			if (start->type == SPHERE && start->sph->bump_path)
 				start->sph->bump = !start->sph->bump;
 			start = start->next;
 		}
@@ -51,7 +51,7 @@ static void	check_bump_texture(int keycode, t_scene *scene)
 		start = scene->figure;
 		while (start)
 		{
-			if (start->type == SPHERE)
+			if (start->type == SPHERE && start->sph->texture_path)
 				start->sph->texture = !start->sph->texture;
 			start = start->next;
 		}
