@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnazarya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:52:20 by mnazarya          #+#    #+#             */
-/*   Updated: 2024/06/04 23:50:27 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/07/19 12:08:58 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,25 @@ t_img	load_xpm_image(t_scene *scene, char *filename)
 		ft_printf("Failed to load: %s\n", filename);
 	return (img);
 }
+static void	get_sphere_uv(t_vector pos, t_img img, double *u, double *v)
+{
+	*u = (atan2(pos.z, pos.x) + M_PI) / (2 * M_PI) * img.width;
+	*v = acos(pos.y) / M_PI * img.height;
+	if (*u < 0)
+		*u = 0;
+	else if (*u >= img.width)
+		*u = img.width - 1;
+	if (*v < 0)
+		*v = 0;
+	else if (*v >= img.height)
+		*v = img.height - 1;
+}
 
 t_color	apply_texture(t_scene *scene, t_figure *obj)
 {
-	double		u;
-	double		v;
-	t_vector	pos;
-	t_img		tex;
+	double	u;
+	double	v;
+	t_img	tex;
 
 	tex = scene->texture;
 	if (obj->sph->texture_path && obj->sph->texture_img.img)
@@ -70,18 +82,14 @@ t_color	apply_texture(t_scene *scene, t_figure *obj)
 		return (obj->point.rgb);
 	if (!tex.img || !tex.addr)
 		return (obj->point.rgb);
-	pos = obj->point.hit_norm;
-	u = 150 * ((atan2(pos.x, pos.z) + M_PI) / 2 * M_PI) \
-		* tex.width / tex.height;
-	v = 300 * (acos(pos.y) / M_PI);
-	return (hex_to_rgb(my_mlx_pixel_get(tex, u, v)));
+	get_sphere_uv(obj->point.hit_norm, tex, &u, &v);
+	return (hex_to_rgb(my_mlx_pixel_get(tex, (int)u, (int)v)));
 }
 
 t_vector	apply_bump(t_scene *scene, t_figure *obj)
 {
 	double		u;
 	double		v;
-	t_vector	pos;
 	t_vector	bump;
 	t_img		bmp;
 
@@ -92,12 +100,9 @@ t_vector	apply_bump(t_scene *scene, t_figure *obj)
 		return (obj->point.hit_norm);
 	if (!bmp.img || !bmp.addr)
 		return (obj->point.hit_norm);
-	pos = obj->point.hit_norm;
-	u = 150 * ((atan2(pos.x, pos.z) + M_PI) / 2 * M_PI) \
-		* bmp.width / bmp.height;
-	v = 300 * (acos(pos.y) / M_PI);
-	bump = rgb_to_norm_vec(hex_to_rgb(my_mlx_pixel_get(bmp, u, v)));
-	bump = vector_sum(pos, bump);
+	get_sphere_uv(obj->point.hit_norm, bmp, &u, &v);
+	bump = rgb_to_norm_vec(hex_to_rgb(my_mlx_pixel_get(bmp, (int)u, (int)v)));
+	bump = vector_sum(obj->point.hit_norm, bump);
 	normalize_vector(&bump);
 	return (bump);
 }
