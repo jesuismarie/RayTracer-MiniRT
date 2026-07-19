@@ -1,0 +1,14 @@
+A  0.15  255,255,255    
+C  -1,1.5,2   0.6,-0.4,-0.55  70
+
+L  0,0,5   1.0     255,255,255
+
+sp  0,0,0       0.9     255,255,255   resources/textures/2k_sun.xpm
+sp  1,0,0       0.3     255,255,255   resources/textures/2k_mercury.xpm
+sp  1.7,0,0     0.4     255,255,255   resources/textures/2k_venus_atmosphere.xpm
+sp  2.3,0,0     0.4     255,255,255   resources/textures/2k_earth.xpm
+sp  3,0,0       0.32    255,255,255   resources/textures/2k_mars.xpm
+sp  5.2,0,0     0.7     255,255,255   resources/textures/2k_jupiter.xpm
+sp  9.5,0,0     0.6     255,255,255   resources/textures/2k_saturn.xpm
+sp  19.2,0,0    0.5     255,255,255   resources/textures/2k_uranus.xpm
+sp  30,0,0      0.5     255,255,255   resources/textures/2k_neptune.xpm
