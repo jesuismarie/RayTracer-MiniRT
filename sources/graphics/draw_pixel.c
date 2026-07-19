@@ -6,7 +6,7 @@
 /*   By: mnazarya <mnazarya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:03:07 by mnazarya          #+#    #+#             */
-/*   Updated: 2026/05/13 17:41:58 by mnazarya         ###   ########.fr       */
+/*   Updated: 2026/07/19 00:54:04 by mnazarya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ unsigned int	my_mlx_pixel_get(t_img img, int x, int y)
 {
 	char	*dst;
 
+	if (x < 0 || x >= img.width || y < 0 || y >= img.height)
+		return (0);
 	dst = img.addr + (y * img.l + x * (img.bpp / 8));
 	return (*(unsigned int *)dst);
 }
