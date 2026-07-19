@@ -272,7 +272,3 @@ MiniRT has the following dependencies:
 - C compiler (e.g., CC)
 - Make
 - miniLibX (for window management and image rendering)
-
-## License
-
-[**Apache 2.0 License**](./LICENSE)
