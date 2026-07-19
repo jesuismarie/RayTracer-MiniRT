@@ -22,13 +22,17 @@ MiniRT provides the following features:
 
 - **Shadows**: MiniRT simulates shadows cast by objects in the scene, adding realism to the rendered images.
 
-   <img src="./pictures/shpere.png" alt="Shadows Example" width="100%">
+   <img src="./pictures/room.png" alt="Shadows Example" width="100%">
 
 - **Specular Reflection**: MiniRT supports specular reflection effects for shiny surfaces.
 
 - **Colored and Multi-Spot Lights**: Support for multiple light sources with different colors.
 
    <img src="./pictures/white.png" alt="Lighting Models Example" width="100%">
+
+- **Textures**: MiniRT supports texture mapping for applying image-based surfaces to objects.
+
+   <img src="./pictures/billiard.png" alt="Texture Mapping Example" width="100%">
 
 - **Bump Mapping**: MiniRT can handle bump map textures for enhanced surface detail.
 
@@ -143,6 +147,16 @@ Below are example renderings of various scenes:
 
    <img src="./pictures/checkerboard spheres.png" alt="Checkerboard Example" width="49%">
    <img src="./pictures/checkerboard3.png" alt="Checkerboard Example" width="49%">
+
+- **Room Scene**:
+
+   <img src="./pictures/room1.png" alt="Room Scene" width="49%">
+   <img src="./pictures/room2.png" alt="Room Scene" width="49%">
+
+- **Billiard Scene**:
+
+   <img src="./pictures/billiard1.png" alt="Billiard Scene" width="49%">
+   <img src="./pictures/billiard2.png" alt="Billiard Scene" width="49%">
 
 ## .rt File Specification
 
