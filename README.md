@@ -11,8 +11,8 @@ MiniRT provides the following features:
 
 - **Scene Rendering**: MiniRT can render 3D scenes composed of various geometric objects such as spheres, planes, cylinders, and cones.
 
-   <img src="./pictures/complex.png" alt="Scene Rendering Example" width="49%">
-   <img src="./pictures/spheres.png" alt="Scene Rendering Example" width="49%">
+	<img src="./pictures/complex.png" alt="Scene Rendering Example" width="49%">
+	<img src="./pictures/spheres.png" alt="Scene Rendering Example" width="49%">
 
 - **Camera Control**: Users can specify camera parameters including position, orientation, field of view, and aspect ratio to define the viewpoint for rendering.
 
@@ -22,21 +22,21 @@ MiniRT provides the following features:
 
 - **Shadows**: MiniRT simulates shadows cast by objects in the scene, adding realism to the rendered images.
 
-   <img src="./pictures/room.png" alt="Shadows Example" width="100%">
+	<img src="./pictures/room.png" alt="Shadows Example" width="100%">
 
 - **Specular Reflection**: MiniRT supports specular reflection effects for shiny surfaces.
 
 - **Colored and Multi-Spot Lights**: Support for multiple light sources with different colors.
 
-   <img src="./pictures/white.png" alt="Lighting Models Example" width="100%">
+	<img src="./pictures/white.png" alt="Lighting Models Example" width="100%">
 
 - **Textures**: MiniRT supports texture mapping for applying image-based surfaces to objects.
 
-   <img src="./pictures/billiard.png" alt="Texture Mapping Example" width="100%">
+	<img src="./pictures/billiard.png" alt="Texture Mapping Example" width="100%">
 
 - **Bump Mapping**: MiniRT can handle bump map textures for enhanced surface detail.
 
-   <img src="./pictures/bump3.png" alt="Sphere with Bump Mapping" width="100%">
+	<img src="./pictures/bump3.png" alt="Sphere with Bump Mapping" width="100%">
 
 - **Scene Parsing**: Users can define scenes using a simple scene description language.
 
@@ -53,62 +53,62 @@ MiniRT is compatible with:
 
 1. Before running MiniRT on Linux, ensure that you have the necessary dependencies installed. You may need to install the following packages:
 
-   ```bash
-   sudo apt-get update
-   sudo apt-get install build-essential -y
-   sudo apt-get install xorg -y
-   sudo apt-get install libxext-dev -y
-   ```
+	```bash
+	sudo apt-get update
+	sudo apt-get install build-essential -y
+	sudo apt-get install xorg -y
+	sudo apt-get install libxext-dev -y
+	```
 
 2. Clone the repository:
 
-   ```bash
-   git clone https://github.com/jesuismarie/RayTracer-MiniRT.git
-   ```
+	```bash
+	git clone https://github.com/jesuismarie/RayTracer-MiniRT.git
+	```
 
 3. Change into the project directory:
 
-   ```bash
-   cd RayTracer-MiniRT
-   ```
+	```bash
+	cd RayTracer-MiniRT
+	```
 
 4. Compile the program:
 
-    ```bash
-    make
-    ```
+	```bash
+	make
+	```
 
 5. Run MiniRT with a scene file:
 
-    ```bash
-    ./minirt scenes/scene.rt
-    ```
+	```bash
+	./minirt scenes/scene.rt
+	```
 
 ### For MacOS
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/jesuismarie/RayTracer-MiniRT.git
-    ```
+	```bash
+	git clone https://github.com/jesuismarie/RayTracer-MiniRT.git
+	```
 
 2. Change into the project directory:
 
-    ```bash
-    cd RayTracer-MiniRT
-    ```
+	```bash
+	cd RayTracer-MiniRT
+	```
 
 3. Compile the program:
 
-    ```bash
-    make
-    ```
+	```bash
+	make
+	```
 
 4. Run MiniRT with a scene file:
 
-    ```bash
-    ./minirt scenes/scene.rt
-    ```
+	```bash
+	./minirt scenes/scene.rt
+	```
 
 ## Usage
 
@@ -116,9 +116,9 @@ MiniRT provides a command-line interface where users can specify scene parameter
 
 - Render a scene with default settings:
 
-    ```bash
-    ./minirt scenes/scene.rt
-    ```
+	```bash
+	./minirt scenes/scene.rt
+	```
 
 For more information on available options and scene description syntax, please refer to the project documentation.
 
@@ -132,31 +132,21 @@ Below are example renderings of various scenes:
 
 - **Sphere with Textures**:
 
-   <img src="./pictures/texture.png" alt="Sphere with Texture" width="100%">
+	<img src="./pictures/texture.png" alt="Sphere with Texture" width="100%">
 
 - **Sphere with Bump Map**:
 
-   <img src="./pictures/bump3.png" alt="Sphere with Texture" width="49%">
-   <img src="./pictures/bump1.png" alt="Sphere with Texture" width="49%">
+	<img src="./pictures/bump3.png" alt="Sphere with Texture" width="49%">
+	<img src="./pictures/bump1.png" alt="Sphere with Texture" width="49%">
 
 - **Sphere with Textures and Bump Map**:
 
-   <img src="./pictures/bump+texture1.png" alt="Sphere with Texture" width="100%">
+	<img src="./pictures/bump+texture1.png" alt="Sphere with Texture" width="100%">
 
-- **Spere with Checkerboard**:
+- **Sphere with Checkerboard**:
 
-   <img src="./pictures/checkerboard spheres.png" alt="Checkerboard Example" width="49%">
-   <img src="./pictures/checkerboard3.png" alt="Checkerboard Example" width="49%">
-
-- **Room Scene**:
-
-   <img src="./pictures/room1.png" alt="Room Scene" width="49%">
-   <img src="./pictures/room2.png" alt="Room Scene" width="49%">
-
-- **Billiard Scene**:
-
-   <img src="./pictures/billiard1.png" alt="Billiard Scene" width="49%">
-   <img src="./pictures/billiard2.png" alt="Billiard Scene" width="49%">
+	<img src="./pictures/checkerboard spheres.png" alt="Checkerboard Example" width="49%">
+	<img src="./pictures/checkerboard3.png" alt="Checkerboard Example" width="49%">
 
 ## .rt File Specification
 
@@ -172,9 +162,9 @@ Defines the ambient lighting in the scene:
 - `ambient lighting` ratio in range [0.0,1.0]: **0.2**
 - `R,G,B colors` in range [0-255]: **255, 255, 255**
 
-    ```
-    A      0.2   255,255,255
-    ```
+	```
+	A      0.2   255,255,255
+	```
 
 #### Camera
 
@@ -185,9 +175,9 @@ Specifies the camera parameters:
 - `3d normalized orientation vector.` In range [-1,1] for each x,y,z axis: **0.0,0.0,1.0**
 - `FOV`: Horizontal field of view in degrees in range [0,180]: **70**
 
-    ```
-    C  -50.0,0,20      0,0,1     70
-    ```
+	```
+	C  -50.0,0,20      0,0,1     70
+	```
 
 #### Lights
 
@@ -198,9 +188,9 @@ Defines the light sources in the scene:
 - `the light brightness` ratio in range [0.0,1.0]: **0.6**
 - `R,G,B colors` in range [0-255]: **10, 0, 255**
 
-    ```
-    L   -40.0,50.0,0.0    0.6   10,0,255
-    ```
+	```
+	L   -40.0,50.0,0.0    0.6   10,0,255
+	```
 
 #### Objects
 
@@ -214,12 +204,12 @@ Defines the objects in the scene:
 - `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0-255]: **10, 0, 255**
 
-    ```
-    sp 0.0,0.0,20.6     12.6  50   10,0,255
-    ```
-    ```
-    sp 0.0,0.0,20.6     12.6   10,0,255
-    ```
+	```
+	sp 0.0,0.0,20.6     12.6  50   10,0,255
+	```
+	```
+	sp 0.0,0.0,20.6     12.6   10,0,255
+	```
 
 **Plane**
 
@@ -229,12 +219,12 @@ Defines the objects in the scene:
 - `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0-255]: **0,0,225**
 
-    ```
-    pl    0.0,0.0,-10.0    0.0,1.0,0.0     50  0,0,225
-    ```
-    ```
-    pl    0.0,0.0,-10.0    0.0,1.0,0.0   0,0,225
-    ```
+	```
+	pl    0.0,0.0,-10.0    0.0,1.0,0.0     50  0,0,225
+	```
+	```
+	pl    0.0,0.0,-10.0    0.0,1.0,0.0   0,0,225
+	```
 
 **Cylinder**
 
@@ -246,12 +236,12 @@ Defines the objects in the scene:
 - `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0,255]: **10, 0, 255**
 
-    ```
-    cy 50.0,0.0,20.6   0.0,0.0,1.0   14.2     21.42       50  10,0,255
-    ```
-    ```
-    cy 50.0,0.0,20.6   0.0,0.0,1.0   14.2     21.42  10,0,255
-    ```
+	```
+	cy 50.0,0.0,20.6   0.0,0.0,1.0   14.2     21.42       50  10,0,255
+	```
+	```
+	cy 50.0,0.0,20.6   0.0,0.0,1.0   14.2     21.42  10,0,255
+	```
 
 **Cone**
 
@@ -263,12 +253,12 @@ Defines the objects in the scene:
 - `specularity (optional)` in range [1-∞]: 50 (default value is 100, if not set)
 - `R,G,B colors` in range [0,255]: **10, 0, 255**
 
-    ```
-    co      50.0,0.0,20.6   0.0,0.0,1.0   14.2 21.42    50   10,0,255
-    ```
-    ```
-    co      50.0,0.0,20.6   0.0,0.0,1.0   14.2 21.42  10,0,255
-    ```
+	```
+	co      50.0,0.0,20.6   0.0,0.0,1.0   14.2 21.42    50   10,0,255
+	```
+	```
+	co      50.0,0.0,20.6   0.0,0.0,1.0   14.2 21.42  10,0,255
+	```
 
 ## Project Structure
 
